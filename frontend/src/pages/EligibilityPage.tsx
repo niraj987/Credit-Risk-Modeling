@@ -85,7 +85,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 </div>
                 <div className="hero-metric">
                   <span className="metric-lbl">Basel Expected Loss</span>
-                  <span className="metric-val">${expectedLoss.toLocaleString()}</span>
+                  <span className="metric-val">₹{expectedLoss.toLocaleString('en-IN')}</span>
                   <span className="metric-sub">LGD = 45% Supervisory</span>
                 </div>
                 <div className="hero-metric">

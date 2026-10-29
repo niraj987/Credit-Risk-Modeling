@@ -126,7 +126,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                     <td className="font-mono text-cyan">{rec.id}</td>
                     <td>{new Date(rec.timestamp).toLocaleString()}</td>
                     <td><b>{rec.creditScore}</b></td>
-                    <td>${rec.loanAmount.toLocaleString()}</td>
+                    <td>₹{rec.loanAmount.toLocaleString('en-IN')}</td>
                     <td>{(rec.dtiRatio * 100).toFixed(0)}%</td>
                     <td className="font-mono">{rec.pdPercent}%</td>
                     <td>{rec.ratingGrade}</td>

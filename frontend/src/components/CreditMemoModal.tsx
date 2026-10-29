@@ -62,7 +62,7 @@ export const CreditMemoModal: React.FC<CreditMemoModalProps> = ({
             Status: {decision}
           </span>
           <span className="pill-badge">1-Yr PD: {pdPercent}%</span>
-          <span className="pill-badge">Basel EL: ${expectedLoss.toLocaleString()}</span>
+          <span className="pill-badge">Basel EL: ₹{expectedLoss.toLocaleString('en-IN')}</span>
           <span className="pill-badge">Recommended APR: {recommendedApr}%</span>
         </div>
 

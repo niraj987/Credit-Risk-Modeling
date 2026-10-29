@@ -19,9 +19,9 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
-  const [calcAmount, setCalcAmount] = useState<number>(20000);
+  const [calcAmount, setCalcAmount] = useState<number>(300000);
   const [calcTerm, setCalcTerm] = useState<number>(36);
-  const [calcRate, setCalcRate] = useState<number>(8.5);
+  const [calcRate, setCalcRate] = useState<number>(10.5);
 
   // EMI calculation: P * r * (1+r)^n / ((1+r)^n - 1)
   const r = calcRate / 100 / 12;
@@ -102,13 +102,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="calc-slider-group">
               <div className="calc-slider-label">
                 <span>Loan Amount</span>
-                <b>${calcAmount.toLocaleString()}</b>
+                <b>₹{calcAmount.toLocaleString('en-IN')}</b>
               </div>
               <input
                 type="range"
-                min={2000}
-                max={100000}
-                step={1000}
+                min={50000}
+                max={4000000}
+                step={25000}
                 value={calcAmount}
                 onChange={(e) => setCalcAmount(Number(e.target.value))}
                 className="slider"
@@ -133,12 +133,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
             <div className="calc-results-strip">
               <div className="result-item">
-                <span className="res-lbl">Monthly Payment</span>
-                <span className="res-val text-cyan">${emi.toLocaleString()}/mo</span>
+                <span className="res-lbl">Monthly EMI</span>
+                <span className="res-val text-cyan">₹{emi.toLocaleString('en-IN')}/mo</span>
               </div>
               <div className="result-item">
                 <span className="res-lbl">Total Interest</span>
-                <span className="res-val text-muted">${totalInterest.toLocaleString()}</span>
+                <span className="res-val text-muted">₹{totalInterest.toLocaleString('en-IN')}</span>
               </div>
             </div>
 

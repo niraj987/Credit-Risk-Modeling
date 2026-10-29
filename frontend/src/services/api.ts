@@ -195,7 +195,7 @@ function simulateClientUnderwriting(applicant: ApplicantInput): UnderwritingResp
     if (dti > 0.50) adverseReasons.push(`Total Debt-To-Income (${(dti * 100).toFixed(1)}%) exceeds institutional 50.0% ceiling.`);
     if (score < 580) adverseReasons.push(`Credit bureau score (${score}) below minimum threshold of 580.`);
     adverseReasons.push(`Model-calibrated default probability (${pdPct}%) exceeds maximum tolerance.`);
-    adverseReasons.push(`Elevated debt servicing burden relative to income ($${income.toLocaleString()}).`);
+    adverseReasons.push(`Elevated debt servicing burden relative to income (₹${income.toLocaleString()}).`);
   } else {
     grade = 'BB (Speculative)';
     decision = 'CONDITIONAL_APPROVAL';
@@ -275,7 +275,7 @@ function simulateClientUnderwriting(applicant: ApplicantInput): UnderwritingResp
         },
         {
           action: 'Loan Sizing Adjustment',
-          recommendation: `Reduce requested principal from $${loan.toLocaleString()} to $${(loan * 0.75).toLocaleString()}.`,
+          recommendation: `Reduce requested principal from ₹${loan.toLocaleString()} to ₹${(loan * 0.75).toLocaleString()}.`,
           impact: 'Lowers monthly debt service and Basel Exposure at Default.'
         }
       ],
@@ -285,7 +285,7 @@ function simulateClientUnderwriting(applicant: ApplicantInput): UnderwritingResp
         risk_spread: Number((apr - 6.5).toFixed(2)),
         covenants,
         adverse_action_reasons: adverseReasons,
-        credit_memo: `### EXECUTIVE CREDIT UNDERWRITING MEMORANDUM\n**Decision Status:** \`${decision}\`\n**Timestamp:** ${timestamp}\n**Borrower Grade:** ${grade} | **Estimated 1-Year PD:** ${pdPct}%\n**Exposure at Default:** $${loan.toLocaleString()} | **Basel Expected Loss:** $${expectedLoss.toLocaleString()}`,
+        credit_memo: `### EXECUTIVE CREDIT UNDERWRITING MEMORANDUM\n**Decision Status:** \`${decision}\`\n**Timestamp:** ${timestamp}\n**Borrower Grade:** ${grade} | **Estimated 1-Year PD:** ${pdPct}%\n**Exposure at Default:** ₹${loan.toLocaleString()} | **Basel Expected Loss:** ₹${expectedLoss.toLocaleString()}`,
         timestamp
       },
       agent_logs: [

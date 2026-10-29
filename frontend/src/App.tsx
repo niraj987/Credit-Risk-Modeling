@@ -35,13 +35,13 @@ export const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [applicant, setApplicant] = useState<ApplicantInput>({
-    Age: 35,
-    Income: 65000,
-    LoanAmount: 15000,
-    CreditScore: 660,
+    Age: 32,
+    Income: 850000,
+    LoanAmount: 300000,
+    CreditScore: 720,
     MonthsEmployed: 48,
-    NumCreditLines: 3,
-    InterestRate: 11.5,
+    NumCreditLines: 4,
+    InterestRate: 10.5,
     LoanTerm: 36,
     DTIRatio: 0.28,
     Education: "Bachelor's",

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Calculator, ArrowRight, DollarSign, Calendar, Percent, CheckCircle } from 'lucide-react';
+import { Calculator, ArrowRight, IndianRupee, Calendar, Percent, CheckCircle } from 'lucide-react';
 
 interface CalculatorPageProps {
   onNavigate: (page: string) => void;
 }
 
 export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) => {
-  const [loanAmount, setLoanAmount] = useState<number>(25000);
-  const [interestRate, setInterestRate] = useState<number>(9.5);
+  const [loanAmount, setLoanAmount] = useState<number>(500000);
+  const [interestRate, setInterestRate] = useState<number>(10.5);
   const [loanTerm, setLoanTerm] = useState<number>(36);
 
   // EMI Formula: P * r * (1+r)^n / ((1+r)^n - 1)
@@ -47,51 +47,51 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) =>
     );
   };
 
-  const primeEmi = computeTierEmi(6.5);
-  const nearPrimeEmi = computeTierEmi(11.5);
-  const subprimeEmi = computeTierEmi(19.0);
+  const primeEmi = computeTierEmi(9.25);
+  const nearPrimeEmi = computeTierEmi(13.5);
+  const subprimeEmi = computeTierEmi(21.0);
 
   const primeTotalInterest = Math.round(primeEmi * loanTerm - loanAmount);
   const subprimeTotalInterest = Math.round(subprimeEmi * loanTerm - loanAmount);
   const potentialSavings = Math.max(0, subprimeTotalInterest - primeTotalInterest);
 
   return (
-    <div className="calculator-page-container">
+    <div className="calculator-page-container slide-up-scroll">
       <div className="page-header-wrap">
         <div className="page-badge">
           <Calculator size={14} className="text-cyan-400" />
-          <span>Interactive Loan Estimator</span>
+          <span>Interactive Indian Rupee EMI Estimator</span>
         </div>
         <h1>Personal Loan EMI & Amortization Calculator</h1>
         <p>
-          Simulate monthly repayments, total interest obligations, and explore how your
+          Simulate monthly repayments in Indian Rupees (₹), total interest obligations, and explore how your
           underwriting tier directly impacts lifetime borrowing costs.
         </p>
       </div>
 
       <div className="calc-main-grid">
         {/* Left Inputs Card */}
-        <div className="calc-input-panel">
+        <div className="calc-input-panel glass-card">
           <h3 className="panel-title">Loan Parameters</h3>
 
           <div className="calc-field-group">
             <div className="field-top-row">
-              <label>Loan Amount</label>
-              <span className="field-val">${loanAmount.toLocaleString()}</span>
+              <label>Loan Amount (₹)</label>
+              <span className="field-val">₹{loanAmount.toLocaleString('en-IN')}</span>
             </div>
             <input
               type="range"
-              min={1000}
-              max={100000}
-              step={1000}
+              min={50000}
+              max={5000000}
+              step={25000}
               value={loanAmount}
               onChange={(e) => setLoanAmount(Number(e.target.value))}
               className="slider"
             />
             <div className="slider-ticks">
-              <span>$1,000</span>
-              <span>$50,000</span>
-              <span>$100,000</span>
+              <span>₹50,000</span>
+              <span>₹25,00,000</span>
+              <span>₹50,00,000</span>
             </div>
           </div>
 
@@ -102,17 +102,17 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) =>
             </div>
             <input
               type="range"
-              min={3.5}
-              max={32.0}
-              step={0.5}
+              min={8.0}
+              max={28.0}
+              step={0.25}
               value={interestRate}
               onChange={(e) => setInterestRate(Number(e.target.value))}
               className="slider"
             />
             <div className="slider-ticks">
-              <span>3.5% (Prime)</span>
+              <span>8.0% (Prime)</span>
               <span>15.0%</span>
-              <span>32.0% (Subprime)</span>
+              <span>28.0% (Subprime)</span>
             </div>
           </div>
 
@@ -144,27 +144,27 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) =>
         </div>
 
         {/* Right Summary Card */}
-        <div className="calc-summary-panel">
+        <div className="calc-summary-panel glass-card">
           <h3 className="panel-title">Repayment Summary</h3>
 
           <div className="big-emi-card">
-            <span className="emi-lbl">Estimated Monthly Repayment</span>
-            <div className="emi-val">${emi.toLocaleString()}</div>
+            <span className="emi-lbl">Estimated Monthly Repayment (EMI)</span>
+            <div className="emi-val">₹{emi.toLocaleString('en-IN')}</div>
             <span className="emi-sub">Due monthly over {loanTerm} installments</span>
           </div>
 
           <div className="breakdown-grid">
             <div className="breakdown-item">
               <span className="item-lbl">Principal Borrowed</span>
-              <span className="item-val">${loanAmount.toLocaleString()}</span>
+              <span className="item-val">₹{loanAmount.toLocaleString('en-IN')}</span>
             </div>
             <div className="breakdown-item">
               <span className="item-lbl">Total Interest Payable</span>
-              <span className="item-val text-amber">${totalInterest.toLocaleString()}</span>
+              <span className="item-val text-amber">₹{totalInterest.toLocaleString('en-IN')}</span>
             </div>
             <div className="breakdown-item">
               <span className="item-lbl">Total Lifetime Cost</span>
-              <span className="item-val text-cyan">${totalPayment.toLocaleString()}</span>
+              <span className="item-val text-cyan">₹{totalPayment.toLocaleString('en-IN')}</span>
             </div>
           </div>
 
@@ -173,7 +173,7 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) =>
             <h4>💡 Why Credit Tiers Matter</h4>
             <p>
               Qualifying for <b>Tier 1 (Prime)</b> instead of Tier 3/4 saves you up to{' '}
-              <b className="text-emerald-400">${potentialSavings.toLocaleString()}</b> in total interest
+              <b className="text-emerald-400">₹{potentialSavings.toLocaleString('en-IN')}</b> in total interest
               over the life of this loan!
             </p>
           </div>
@@ -181,37 +181,37 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) =>
       </div>
 
       {/* Credit Tier Comparison Matrix */}
-      <div className="tier-matrix-section">
+      <div className="tier-matrix-section glass-card">
         <h3>Rate Comparison Across Credit Underwriting Tiers</h3>
         <div className="tier-cards-row">
           <div className="tier-col-card tier-prime">
-            <span className="tier-tag">Prime (Score 720+)</span>
-            <div className="tier-rate">6.5% APR</div>
-            <div className="tier-monthly">${primeEmi.toLocaleString()}/mo</div>
-            <div className="tier-interest">Total Interest: ${primeTotalInterest.toLocaleString()}</div>
+            <span className="tier-tag">Prime (Score 750+)</span>
+            <div className="tier-rate">9.25% APR</div>
+            <div className="tier-monthly">₹{primeEmi.toLocaleString('en-IN')}/mo</div>
+            <div className="tier-interest">Total Interest: ₹{primeTotalInterest.toLocaleString('en-IN')}</div>
             <div className="tier-feat">✅ Instant Approval Corridor</div>
           </div>
 
           <div className="tier-col-card tier-near">
-            <span className="tier-tag">Near-Prime (Score 660-719)</span>
-            <div className="tier-rate">11.5% APR</div>
-            <div className="tier-monthly">${nearPrimeEmi.toLocaleString()}/mo</div>
-            <div className="tier-interest">Total Interest: ${Math.round(nearPrimeEmi * loanTerm - loanAmount).toLocaleString()}</div>
+            <span className="tier-tag">Near-Prime (Score 680-749)</span>
+            <div className="tier-rate">13.5% APR</div>
+            <div className="tier-monthly">₹{nearPrimeEmi.toLocaleString('en-IN')}/mo</div>
+            <div className="tier-interest">Total Interest: ₹{Math.round(nearPrimeEmi * loanTerm - loanAmount).toLocaleString('en-IN')}</div>
             <div className="tier-feat">⚡ Conditional Approval</div>
           </div>
 
           <div className="tier-col-card tier-sub">
-            <span className="tier-tag">Subprime (Score &lt;660)</span>
-            <div className="tier-rate">19.0% APR</div>
-            <div className="tier-monthly">${subprimeEmi.toLocaleString()}/mo</div>
-            <div className="tier-interest">Total Interest: ${subprimeTotalInterest.toLocaleString()}</div>
+            <span className="tier-tag">Subprime (Score &lt;680)</span>
+            <div className="tier-rate">21.0% APR</div>
+            <div className="tier-monthly">₹{subprimeEmi.toLocaleString('en-IN')}/mo</div>
+            <div className="tier-interest">Total Interest: ₹{subprimeTotalInterest.toLocaleString('en-IN')}</div>
             <div className="tier-feat">⚠️ Co-Signer Covenant Required</div>
           </div>
         </div>
       </div>
 
       {/* Amortization Schedule Preview */}
-      <div className="schedule-table-card">
+      <div className="schedule-table-card glass-card">
         <h3>First 12 Months Amortization Schedule</h3>
         <div className="table-responsive">
           <table className="schedule-table">
@@ -228,10 +228,10 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) =>
               {schedule.map((row) => (
                 <tr key={row.month}>
                   <td>Month {row.month}</td>
-                  <td>${row.startBalance.toLocaleString()}</td>
-                  <td className="text-emerald-400">+${row.principal.toLocaleString()}</td>
-                  <td className="text-amber-400">${row.interest.toLocaleString()}</td>
-                  <td>${row.endBalance.toLocaleString()}</td>
+                  <td>₹{row.startBalance.toLocaleString('en-IN')}</td>
+                  <td className="text-emerald-400">+₹{row.principal.toLocaleString('en-IN')}</td>
+                  <td className="text-amber-400">₹{row.interest.toLocaleString('en-IN')}</td>
+                  <td>₹{row.endBalance.toLocaleString('en-IN')}</td>
                 </tr>
               ))}
             </tbody>

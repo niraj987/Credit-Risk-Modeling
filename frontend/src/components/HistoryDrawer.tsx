@@ -52,7 +52,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                     </span>
                   </div>
                   <div className="item-meta">
-                    Score: <b>{r.creditScore}</b> • Loan: <b>${r.loanAmount.toLocaleString()}</b> • PD: <b>{r.pdPercent}%</b>
+                    Score: <b>{r.creditScore}</b> • Loan: <b>₹{r.loanAmount.toLocaleString('en-IN')}</b> • PD: <b>{r.pdPercent}%</b>
                   </div>
                   <div className="item-time">
                     {new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} • APR: {r.recommendedApr}%
