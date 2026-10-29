@@ -86,14 +86,49 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Launch the Interactive Dashboard
+### 2. Full-Stack Production Mode (React + TypeScript + Three.js + FastAPI)
+
+#### Start the FastAPI Backend Server
+```bash
+# Start backend API on port 8000
+python -m uvicorn backend.main:app --reload --port 8000
+```
+
+#### Start the React Frontend Web Application
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Navigate to `http://localhost:5173` to explore the **3D Three.js Risk Network**, live telemetry, and client-side **IndexedDB JS Database**.
+
+---
+
+## ☁️ 1-Click Cloud Deployment (Vercel & Render)
+
+### Deploying the Frontend to Vercel
+1. Import this repository into [Vercel](https://vercel.com).
+2. Set the Root Directory to `./` (Vercel automatically detects `vercel.json`).
+3. (Optional) Set `VITE_API_URL` environment variable pointing to your deployed FastAPI backend.
+4. Click **Deploy**!
+
+### Deploying the Backend to Render
+1. Create a new Web Service on [Render](https://render.com) linking this repository.
+2. Select **Python** runtime (or apply `render.yaml` blueprint).
+3. Set **Build Command**: `pip install -r backend/requirements.txt`
+4. Set **Start Command**: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+5. Click **Create Web Service**!
+
+---
+
+### 3. Streamlit Dashboard Mode (Alternative Quick Demo)
 
 ```bash
 streamlit run app.py
 ```
-Navigate to `http://localhost:8501` to test interactive borrower presets, inspect agent telemetry, and view real-time RAG retrievals.
+Navigate to `http://localhost:8501`.
 
-### 3. Run via Command Line Interface (CLI)
+### 4. Run via Command Line Interface (CLI)
 
 ```bash
 # Run multi-agent underwriting on an applicant profile
@@ -106,7 +141,7 @@ python -m credit_agents.cli rag "What are the adverse action notice requirements
 python -m credit_agents.cli train
 ```
 
-### 4. Run the Test Suite
+### 5. Run the Test Suite
 
 ```bash
 pytest tests/ -v

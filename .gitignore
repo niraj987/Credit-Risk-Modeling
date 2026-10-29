@@ -1,15 +1,24 @@
 # Dataset
 Loan_default.csv
 
-# Models
+# Models & Databases
 *.pkl
 lgb_model.pkl
+*.db
+backend/credit_audit.db
 
 # Virtual Environment
 .venv/
 venv/
 env/
 .env
+
+# Node & Frontend
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.vite/
 
 # Python Cache & Testing
 __pycache__/
