@@ -5,25 +5,35 @@ import {
   submitUnderwriting,
 } from './services/api';
 import { jsDatabase, SavedEvaluation } from './services/db';
-import { RiskGlobe3D } from './components/RiskGlobe3D';
-import { AgentTelemetry } from './components/AgentTelemetry';
-import { ApplicantForm } from './components/ApplicantForm';
+import { HomePage } from './pages/HomePage';
+import { EligibilityPage } from './pages/EligibilityPage';
+import { CalculatorPage } from './pages/CalculatorPage';
+import { RegulationsPage } from './pages/RegulationsPage';
+import { AboutPage } from './pages/AboutPage';
+import { HistoryPage } from './pages/HistoryPage';
 import { CreditMemoModal } from './components/CreditMemoModal';
 import { RAGExplorerModal } from './components/RAGExplorerModal';
-import { HistoryDrawer } from './components/HistoryDrawer';
 import {
-  ShieldAlert,
+  Home,
+  CheckCircle,
+  Calculator,
+  BookOpen,
+  Database,
+  Info,
   FileText,
   Search,
-  Database,
-  TrendingUp,
-  Scale,
+  Github,
   Sparkles,
-  ExternalLink,
+  ArrowRight,
+  Menu,
+  X,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export const App: React.FC = () => {
+  const [activePage, setActivePage] = useState<string>('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const [applicant, setApplicant] = useState<ApplicantInput>({
     Age: 35,
     Income: 65000,
@@ -45,12 +55,10 @@ export const App: React.FC = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<UnderwritingResponse['data'] | null>(null);
-  const [activeTab, setActiveTab] = useState<'xai' | 'stress' | 'counterfactual' | 'logs'>('xai');
 
-  // Modals & Drawers
+  // Modals
   const [isMemoOpen, setIsMemoOpen] = useState(false);
   const [isRAGOpen, setIsRAGOpen] = useState(false);
-  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [historyRecords, setHistoryRecords] = useState<SavedEvaluation[]>([]);
 
   // Load history from JS Database on mount
@@ -88,12 +96,12 @@ export const App: React.FC = () => {
       await jsDatabase.saveEvaluation(record);
       await loadHistory();
 
-      // Trigger confetti on approval
+      // Trigger celebration on approval
       if (resp.data.credit_committee_synthesis.final_decision === 'APPROVED') {
         confetti({
-          particleCount: 70,
-          spread: 60,
-          origin: { y: 0.7 },
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.65 },
         });
       }
     } catch (err) {
@@ -107,7 +115,7 @@ export const App: React.FC = () => {
     if (rec.state) {
       setResults(rec.state);
       setApplicant(rec.state.applicant_data);
-      setIsHistoryOpen(false);
+      setActivePage('eligibility');
     }
   };
 
@@ -116,280 +124,215 @@ export const App: React.FC = () => {
     await loadHistory();
   };
 
-  const decision = results?.credit_committee_synthesis?.final_decision || 'PENDING';
-  const pdPercent = results?.ml_risk_assessment?.pd_percent || 0;
-  const ratingGrade = results?.ml_risk_assessment?.rating_grade || 'Unassigned';
-  const expectedLoss = results?.ml_risk_assessment?.expected_loss_usd || 0;
-  const apr = results?.credit_committee_synthesis?.recommended_apr || 0;
+  const handleClearAllHistory = async () => {
+    if (window.confirm('Are you sure you want to clear all history records from IndexedDB?')) {
+      for (const rec of historyRecords) {
+        await jsDatabase.deleteEvaluation(rec.id);
+      }
+      await loadHistory();
+    }
+  };
+
+  const navItems = [
+    { id: 'home', label: 'Home', icon: <Home size={16} /> },
+    { id: 'eligibility', label: 'Eligibility Checker', icon: <CheckCircle size={16} /> },
+    { id: 'calculator', label: 'Loan Calculator', icon: <Calculator size={16} /> },
+    { id: 'regulations', label: 'RAG Knowledge Base', icon: <BookOpen size={16} /> },
+    { id: 'history', label: `Audit Database (${historyRecords.length})`, icon: <Database size={16} /> },
+    { id: 'about', label: 'About & Governance', icon: <Info size={16} /> },
+  ];
 
   return (
     <div className="app-layout">
-      {/* Top Navigation */}
+      {/* Top Header Navigation */}
       <header className="navbar">
         <div className="navbar-left">
-          <div className="brand-logo">
-            <span className="logo-icon">🏦</span>
+          <div className="brand-logo" onClick={() => setActivePage('home')} style={{ cursor: 'pointer' }}>
+            <span className="logo-icon">💳</span>
             <div className="brand-text">
-              <h1>FinRisk AI</h1>
-              <span className="brand-tag">Autonomous Multi-Agent Underwriting Engine</span>
+              <h1>Personal Loan Eligibility Checker</h1>
+              <span className="brand-tag">AI-Powered Multi-Agent Credit Underwriting Platform</span>
             </div>
           </div>
         </div>
 
+        {/* Desktop Nav Links */}
+        <nav className="navbar-center desktop-nav">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => {
+                setActivePage(item.id);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`nav-link ${activePage === item.id ? 'active' : ''}`}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </nav>
+
+        {/* Action Buttons */}
         <div className="navbar-right">
-          <button onClick={() => setIsRAGOpen(true)} className="nav-btn">
-            <Search size={16} /> RAG Policy Knowledge Base
-          </button>
           <button
-            onClick={() => setIsHistoryOpen(true)}
-            className="nav-btn btn-db"
-            title="Stored in Client-Side JS Database"
+            onClick={() => setIsRAGOpen(true)}
+            className="nav-btn btn-search-rag"
+            title="Search Regulatory RAG"
           >
-            <Database size={16} /> JS Database ({historyRecords.length})
+            <Search size={15} /> <span>Query Law</span>
           </button>
+
           {results && (
-            <button onClick={() => setIsMemoOpen(true)} className="nav-btn btn-primary">
-              <FileText size={16} /> Credit Memo
+            <button
+              onClick={() => setIsMemoOpen(true)}
+              className="nav-btn btn-memo"
+              title="View Credit Memo"
+            >
+              <FileText size={15} /> <span>Credit Memo</span>
             </button>
           )}
+
+          {activePage !== 'eligibility' && (
+            <button
+              onClick={() => {
+                setActivePage('eligibility');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="nav-btn btn-cta"
+            >
+              <Sparkles size={15} /> <span>Check Eligibility</span>
+            </button>
+          )}
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </header>
 
-      {/* Main Grid */}
-      <main className="main-content">
-        {/* Left Column: Applicant Form */}
-        <section className="column-left">
-          <div className="card-panel">
-            <div className="card-header-bar">
-              <h2>Borrower Assessment Form</h2>
-              <span className="badge-pill">Interactive Presets</span>
-            </div>
-            <ApplicantForm
-              input={applicant}
-              onChange={setApplicant}
-              onSubmit={handleUnderwrite}
-              isLoading={isLoading}
-            />
-          </div>
-        </section>
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="mobile-nav-drawer">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => {
+                setActivePage(item.id);
+                setMobileMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`mobile-nav-link ${activePage === item.id ? 'active' : ''}`}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
-        {/* Right Column: 3D Globe, Live Telemetry & Deep-Dive Tabs */}
-        <section className="column-right">
-          {/* Top Panel: 3D Risk Globe & Executive Decision Card */}
-          <div className="dashboard-hero-grid">
-            <div className="globe-card">
-              <RiskGlobe3D riskScore={pdPercent} decision={decision} />
-            </div>
+      {/* Main Multi-Page Switcher */}
+      <main className="page-body">
+        {activePage === 'home' && <HomePage onNavigate={(p) => setActivePage(p)} />}
 
-            <div className="decision-hero-card">
-              <div className="decision-header">
-                <span className="hero-eyebrow">Committee Synthesis</span>
-                <span className={`decision-badge badge-${decision.toLowerCase()}`}>
-                  {decision}
-                </span>
-              </div>
+        {activePage === 'eligibility' && (
+          <EligibilityPage
+            applicant={applicant}
+            setApplicant={setApplicant}
+            results={results}
+            isLoading={isLoading}
+            onUnderwrite={handleUnderwrite}
+            onOpenMemo={() => setIsMemoOpen(true)}
+          />
+        )}
 
-              <div className="hero-metrics-grid">
-                <div className="hero-metric">
-                  <span className="metric-lbl">Default Probability</span>
-                  <span className="metric-val text-primary">{pdPercent}%</span>
-                  <span className="metric-sub">1-Yr Calibrated PD</span>
-                </div>
-                <div className="hero-metric">
-                  <span className="metric-lbl">Basel Expected Loss</span>
-                  <span className="metric-val">${expectedLoss.toLocaleString()}</span>
-                  <span className="metric-sub">LGD = 45% Supervisory</span>
-                </div>
-                <div className="hero-metric">
-                  <span className="metric-lbl">Credit Tier Rating</span>
-                  <span className="metric-val">{ratingGrade}</span>
-                  <span className="metric-sub">FICO: {applicant.CreditScore}</span>
-                </div>
-                <div className="hero-metric">
-                  <span className="metric-lbl">Recommended APR</span>
-                  <span className="metric-val text-amber">{apr}%</span>
-                  <span className="metric-sub">Base + Risk Spread</span>
-                </div>
-              </div>
+        {activePage === 'calculator' && (
+          <CalculatorPage onNavigate={(p) => setActivePage(p)} />
+        )}
 
-              {results && (
-                <div className="hero-footer-actions">
-                  <button
-                    onClick={() => setIsMemoOpen(true)}
-                    className="memo-quick-btn"
-                  >
-                    <FileText size={16} /> View Executive Credit Memorandum & Citations
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+        {activePage === 'regulations' && <RegulationsPage />}
 
-          {/* 5-Layer Agent Telemetry Cards */}
-          <div className="telemetry-wrapper">
-            <div className="telemetry-title-bar">
-              <h3>Autonomous Working Layers (LangGraph Flow)</h3>
-              <span className="live-pulse-badge">
-                <span className="pulse-dot"></span> 5 Agents Active
-              </span>
-            </div>
-            <AgentTelemetry
-              logs={results?.agent_logs || []}
-              kyc={results?.fraud_kyc_findings}
-              ml={results?.ml_risk_assessment}
-              rag={results?.rag_regulatory_context}
-              fairness={results?.compliance_bias_audit}
-              committee={results?.credit_committee_synthesis}
-            />
-          </div>
+        {activePage === 'history' && (
+          <HistoryPage
+            records={historyRecords}
+            onSelectRecord={handleSelectHistory}
+            onDeleteRecord={handleDeleteHistory}
+            onClearAll={handleClearAllHistory}
+          />
+        )}
 
-          {/* Deep-Dive Analysis Tabs */}
-          <div className="tabs-container">
-            <div className="tabs-header">
-              <button
-                className={`tab-btn ${activeTab === 'xai' ? 'active' : ''}`}
-                onClick={() => setActiveTab('xai')}
-              >
-                🧠 SHAP Explainability & Risk Drivers
-              </button>
-              <button
-                className={`tab-btn ${activeTab === 'stress' ? 'active' : ''}`}
-                onClick={() => setActiveTab('stress')}
-              >
-                📉 CCAR Macro Stress Testing
-              </button>
-              <button
-                className={`tab-btn ${activeTab === 'counterfactual' ? 'active' : ''}`}
-                onClick={() => setActiveTab('counterfactual')}
-              >
-                💡 Counterfactual Action Plan
-              </button>
-              <button
-                className={`tab-btn ${activeTab === 'logs' ? 'active' : ''}`}
-                onClick={() => setActiveTab('logs')}
-              >
-                🕵️ LangGraph Audit Logs
-              </button>
-            </div>
-
-            <div className="tab-pane">
-              {activeTab === 'xai' && (
-                <div className="xai-pane">
-                  <h4>Granular Feature Attribution & Reason Codes</h4>
-                  <div className="feature-contribs-list">
-                    {results?.ml_risk_assessment?.feature_contributions?.map((fc, i) => (
-                      <div
-                        key={i}
-                        className={`contrib-card ${
-                          fc.impact === 'INCREASES_RISK' ? 'contrib-risk' : 'contrib-safe'
-                        }`}
-                      >
-                        <span className="contrib-feature">{fc.feature}</span>
-                        <span className="contrib-desc">{fc.description}</span>
-                        <span className="contrib-badge">
-                          {fc.impact === 'INCREASES_RISK' ? '+ Adds Risk' : '- Reduces Risk'}
-                        </span>
-                      </div>
-                    )) || (
-                      <div className="empty-tab-hint">
-                        Run an underwriting evaluation to generate SHAP risk feature attribution.
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'stress' && (
-                <div className="stress-pane">
-                  <h4>Federal Reserve CCAR & DFAST Stress Shock Simulation</h4>
-                  <div className="stress-scenarios-grid">
-                    <div className="scenario-card">
-                      <span className="scenario-badge">Scenario A</span>
-                      <h5>Baseline Macro</h5>
-                      <div className="scenario-pd">
-                        {results?.compliance_bias_audit?.stress_test_results?.baseline?.stressed_pd_pct || pdPercent}% PD
-                      </div>
-                      <span className="scenario-sub">Current Economic Conditions</span>
-                    </div>
-
-                    <div className="scenario-card scenario-adverse">
-                      <span className="scenario-badge">Scenario B</span>
-                      <h5>Adverse Shock (+150 bps)</h5>
-                      <div className="scenario-pd">
-                        {results?.compliance_bias_audit?.stress_test_results?.adverse?.stressed_pd_pct || (pdPercent * 1.35).toFixed(1)}% PD
-                      </div>
-                      <span className="scenario-sub">Inflation & Rate Pressure</span>
-                    </div>
-
-                    <div className="scenario-card scenario-severe">
-                      <span className="scenario-badge">Scenario C</span>
-                      <h5>Severely Adverse (+300 bps)</h5>
-                      <div className="scenario-pd">
-                        {results?.compliance_bias_audit?.stress_test_results?.severely_adverse?.stressed_pd_pct || (pdPercent * 1.8).toFixed(1)}% PD
-                      </div>
-                      <span className="scenario-sub">Recessionary Crash & 10% Unemp</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'counterfactual' && (
-                <div className="counterfactual-pane">
-                  <h4>Algorithmic Prescription to Optimize Approval Terms</h4>
-                  <div className="counterfactual-list">
-                    {results?.counterfactual_recommendations && results.counterfactual_recommendations.length > 0 ? (
-                      results.counterfactual_recommendations.map((cf, idx) => (
-                        <div key={idx} className="cf-card">
-                          <span className="cf-action">{cf.action}</span>
-                          <p className="cf-rec">{cf.recommendation}</p>
-                          <span className="cf-impact">Expected Impact: {cf.impact}</span>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="cf-clean">
-                        🎉 Applicant currently satisfies Prime Tier standards without requiring remedial covenants.
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'logs' && (
-                <div className="logs-pane">
-                  <h4>Autonomous Multi-Agent Thought & Action Trace</h4>
-                  <div className="logs-list">
-                    {results?.agent_logs?.map((log, i) => (
-                      <div key={i} className="log-row">
-                        <span className="log-layer">L{log.layer}</span>
-                        <div className="log-body">
-                          <div className="log-name-row">
-                            <b>{log.agent_name}</b>
-                            <span className="log-status">{log.status}</span>
-                            <span className="log-time">{log.timestamp.slice(11, 19)}</span>
-                          </div>
-                          <p className="log-summary">{log.summary}</p>
-                        </div>
-                      </div>
-                    )) || (
-                      <div className="empty-tab-hint">No active execution logs. Run an applicant evaluation above.</div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
+        {activePage === 'about' && <AboutPage />}
       </main>
 
-      {/* Modals & Drawers */}
+      {/* Institutional Footer */}
+      <footer className="site-footer">
+        <div className="footer-container">
+          <div className="footer-top-row">
+            <div className="footer-brand">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">💳</span>
+                <span className="footer-brand-title">Personal Loan Eligibility Checker</span>
+              </div>
+              <p className="footer-tagline">
+                Institutional-grade financial intelligence, LangGraph multi-agent underwriting,
+                and regulatory compliance governance.
+              </p>
+            </div>
+
+            <div className="footer-links-group">
+              <span className="footer-links-title">Platform</span>
+              <button onClick={() => setActivePage('home')}>Home Overview</button>
+              <button onClick={() => setActivePage('eligibility')}>Eligibility Engine</button>
+              <button onClick={() => setActivePage('calculator')}>EMI Calculator</button>
+            </div>
+
+            <div className="footer-links-group">
+              <span className="footer-links-title">Governance</span>
+              <button onClick={() => setActivePage('regulations')}>RAG Policy Hub</button>
+              <button onClick={() => setActivePage('about')}>Architecture & FAQ</button>
+              <button onClick={() => setActivePage('history')}>IndexedDB Audit Trail</button>
+            </div>
+
+            <div className="footer-links-group">
+              <span className="footer-links-title">Open Source</span>
+              <a
+                href="https://github.com/niraj987/Credit-Risk-Modeling"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub Repository
+              </a>
+              <span className="version-pill">Version 2.2.0 • Production</span>
+            </div>
+          </div>
+
+          <div className="footer-bottom-row">
+            <p className="disclaimer-text">
+              <b>Regulatory Disclaimer:</b> Personal Loan Eligibility Checker is an educational and
+              institutional simulation platform modeled after Basel III/IV Internal Ratings-Based (IRB)
+              accords, the Equal Credit Opportunity Act (ECOA 12 CFR § 1002.9), and the Fair Credit Reporting Act (FCRA).
+              Simulated default probabilities and eligibility verdicts do not constitute a formal commercial lending contract.
+            </p>
+            <p className="copyright-text">
+              © {new Date().getFullYear()} Personal Loan Eligibility Checker • MIT Licensed
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      {/* Modals */}
       <CreditMemoModal
         isOpen={isMemoOpen}
         onClose={() => setIsMemoOpen(false)}
         memo={results?.credit_committee_synthesis?.credit_memo || ''}
-        decision={decision}
-        pdPercent={pdPercent}
-        expectedLoss={expectedLoss}
-        recommendedApr={apr}
+        decision={results?.credit_committee_synthesis?.final_decision || 'PENDING'}
+        pdPercent={results?.ml_risk_assessment?.pd_percent || 0}
+        expectedLoss={results?.ml_risk_assessment?.expected_loss_usd || 0}
+        recommendedApr={results?.credit_committee_synthesis?.recommended_apr || 0}
         covenants={results?.credit_committee_synthesis?.covenants || []}
         adverseReasons={results?.credit_committee_synthesis?.adverse_action_reasons || []}
       />
@@ -397,14 +340,6 @@ export const App: React.FC = () => {
       <RAGExplorerModal
         isOpen={isRAGOpen}
         onClose={() => setIsRAGOpen(false)}
-      />
-
-      <HistoryDrawer
-        isOpen={isHistoryOpen}
-        onClose={() => setIsHistoryOpen(false)}
-        records={historyRecords}
-        onSelect={handleSelectHistory}
-        onDelete={handleDeleteHistory}
       />
     </div>
   );
