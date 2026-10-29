@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ApplicantInput, UnderwritingResponse } from '../services/api';
 import { RiskGlobe3D } from '../components/RiskGlobe3D';
+import { RiskSurface3D } from '../components/RiskSurface3D';
 import { AgentTelemetry } from '../components/AgentTelemetry';
 import { ApplicantForm } from '../components/ApplicantForm';
 import { FileText, Sparkles } from 'lucide-react';
@@ -63,11 +64,21 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
 
         {/* Right Column: 3D Visualization, Decision, and Telemetry */}
         <section className="dashboard-col">
-          {/* Top Panel: 3D Globe + Hero Decision */}
-          <div className="dashboard-hero-grid">
-            <div className="globe-card">
+          {/* Top Panel: 3D Globe + 3D Risk Topology Surface */}
+          <div className="dashboard-3d-models-row">
+            <div className="globe-card glass-card">
               <RiskGlobe3D riskScore={pdPercent} decision={decision} />
             </div>
+            <div className="surface-3d-card glass-card">
+              <RiskSurface3D
+                creditScore={applicant.CreditScore}
+                dtiRatio={applicant.DTIRatio}
+                pdPercent={pdPercent}
+              />
+            </div>
+          </div>
+
+          <div className="dashboard-hero-grid">
 
             <div className="decision-hero-card">
               <div className="decision-header">

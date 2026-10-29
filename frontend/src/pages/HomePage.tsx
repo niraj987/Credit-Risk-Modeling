@@ -13,6 +13,7 @@ import {
   Lock,
 } from 'lucide-react';
 import { RiskGlobe3D } from '../components/RiskGlobe3D';
+import { HeroGeometric3D } from '../components/HeroGeometric3D';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -87,11 +88,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Interactive 3D Globe + Quick Estimator Widget */}
-        <div className="hero-interactive-card">
-          <div className="mini-globe-wrap">
-            <RiskGlobe3D riskScore={12} decision="APPROVED" />
-          </div>
+        {/* Interactive 3D Geometric Manifold + Quick Estimator Widget */}
+        <div className="hero-interactive-card glass-card">
+          <HeroGeometric3D />
 
           <div className="quick-calculator-widget">
             <div className="calc-header">
