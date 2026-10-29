@@ -6,15 +6,21 @@ Loan_default.csv
 lgb_model.pkl
 
 # Virtual Environment
+.venv/
 venv/
 env/
 .env
 
-# Python Cache
+# Python Cache & Testing
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
 
 # IDE
 .vscode/
 .idea/
+
+# Local Interview & Notes
+INTERVIEW_PREP.md
+*interview*.md

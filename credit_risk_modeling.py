@@ -36,6 +36,14 @@ np.random.seed(42)
 # ## 1. Data Loading
 
 # %%
+import os
+from credit_agents.ml.trainer import generate_synthetic_credit_data
+
+if not os.path.exists('Loan_default.csv'):
+    print("Dataset 'Loan_default.csv' not found. Generating 15,000 synthetic banking records...")
+    benchmark_df = generate_synthetic_credit_data(n_samples=15000)
+    benchmark_df.to_csv('Loan_default.csv', index=False)
+
 data = pd.read_csv('Loan_default.csv')
 print(data.info())
 print(data.head())
