@@ -205,33 +205,88 @@ export const App: React.FC = () => {
             </button>
           )}
 
-          {/* Mobile Menu Toggle */}
+          {/* Professional Executive Menu Control Box */}
           <button
-            className="mobile-menu-btn"
+            className={`pro-menu-box ${mobileMenuOpen ? 'active' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Navigation Control Box"
+            title="Navigation Suite"
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            <div className="pro-menu-icon">
+              <span className="pro-bar pro-bar-1"></span>
+              <span className="pro-bar pro-bar-2"></span>
+              <span className="pro-bar pro-bar-3"></span>
+            </div>
+            <span className="pro-menu-label">{mobileMenuOpen ? 'Close' : 'Menu'}</span>
+            <span className="pro-menu-indicator"></span>
           </button>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Floating Executive Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="mobile-nav-drawer">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                setActivePage(item.id);
-                setMobileMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className={`mobile-nav-link ${activePage === item.id ? 'active' : ''}`}
-            >
-              {item.icon}
-              <span>{item.label}</span>
-            </button>
-          ))}
+        <div className="pro-nav-drawer-backdrop" onClick={() => setMobileMenuOpen(false)}>
+          <div className="pro-nav-drawer-card" onClick={(e) => e.stopPropagation()}>
+            <div className="drawer-header">
+              <div className="flex items-center gap-2">
+                <span className="drawer-logo">💳</span>
+                <div>
+                  <h4 className="drawer-title">FinRisk Underwriting Suite</h4>
+                  <span className="drawer-sub">Autonomous Multi-Agent Banking Platform</span>
+                </div>
+              </div>
+              <button
+                className="drawer-close-btn"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="drawer-section-label">Navigation Suite</div>
+            <div className="drawer-nav-links">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    setActivePage(item.id);
+                    setMobileMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className={`drawer-link ${activePage === item.id ? 'active' : ''}`}
+                >
+                  <div className="drawer-link-icon">{item.icon}</div>
+                  <span className="drawer-link-text">{item.label}</span>
+                  {activePage === item.id && <span className="drawer-active-dot"></span>}
+                </button>
+              ))}
+            </div>
+
+            <div className="drawer-section-label">Quick Action Hub</div>
+            <div className="drawer-actions-grid">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setIsRAGOpen(true);
+                }}
+                className="drawer-action-btn btn-action-rag"
+              >
+                <Search size={15} /> <span>Query Law RAG</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActivePage('eligibility');
+                  setMobileMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="drawer-action-btn btn-action-check"
+              >
+                <Sparkles size={15} /> <span>Instant Eligibility</span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

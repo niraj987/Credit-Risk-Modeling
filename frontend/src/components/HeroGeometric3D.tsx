@@ -15,56 +15,103 @@ export const HeroGeometric3D: React.FC = () => {
     const width = container.clientWidth || 480;
     const height = container.clientHeight || 360;
 
-    // Scene, Camera, Renderer
+    // 1. Scene, Camera, Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.set(0, 0, 7.5);
+    camera.position.set(0, 0, 7.8);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0); // Transparent canvas
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
     container.appendChild(renderer.domElement);
 
     // Group to hold all 3D geometric elements
     const mainGroup = new THREE.Group();
     scene.add(mainGroup);
 
-    // 1. Central Mathematical Geometric Polyhedron (Icosahedron / Risk Manifold)
-    const geometry = new THREE.IcosahedronGeometry(2.0, 1);
+    // 2. Multi-point Studio Lighting for Realistic Glass Caustics & Specular Shine
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+    scene.add(ambientLight);
+
+    // Bright Key Light for Specular Glass Glint
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
+    keyLight.position.set(5, 6, 5);
+    scene.add(keyLight);
+
+    // Website Sky Blue Rim Light
+    const skyRimLight = new THREE.DirectionalLight(0x38bdf8, 2.2);
+    skyRimLight.position.set(-6, -3, -4);
+    scene.add(skyRimLight);
+
+    // Internal Glow PointLight (Sky Blue)
+    const internalGlowLight = new THREE.PointLight(0x0284c7, 3.2, 9);
+    internalGlowLight.position.set(0, 0, 0);
+    mainGroup.add(internalGlowLight);
+
+    // 3. Realistic Glass Outer Shell (MeshPhysicalMaterial)
+    const glassSphereGeo = new THREE.SphereGeometry(2.35, 64, 64);
+    const glassMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xffffff,
+      transmission: 0.93,               // Realistic optical glass transparency
+      opacity: 1.0,
+      transparent: true,
+      roughness: 0.07,                  // Crystal smooth polish
+      metalness: 0.04,
+      ior: 1.52,                        // Glass refraction index
+      thickness: 1.6,                   // Volumetric depth
+      specularIntensity: 1.0,
+      specularColor: 0xffffff,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.05,
+      attenuationColor: new THREE.Color(0x0284c7), // Tinted sky blue absorption
+      attenuationDistance: 2.2,
+    });
+    const glassSphere = new THREE.Mesh(glassSphereGeo, glassMaterial);
+    mainGroup.add(glassSphere);
+
+    // 4. Central Mathematical Geodesic Manifold (Nested Inside Glass Orb)
+    const icosaGeometry = new THREE.IcosahedronGeometry(1.7, 1);
     
-    // Wireframe lattice in clean graphite / slate
-    const wireframeMat = new THREE.MeshBasicMaterial({
-      color: 0x94a3b8,
+    // Sleek electric sky wireframe lattice
+    const wireframeMat = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      emissive: 0x0284c7,
+      emissiveIntensity: 0.6,
       wireframe: true,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.55,
+      roughness: 0.2,
+      metalness: 0.8,
     });
-    const wireframeMesh = new THREE.Mesh(geometry, wireframeMat);
+    const wireframeMesh = new THREE.Mesh(icosaGeometry, wireframeMat);
     mainGroup.add(wireframeMesh);
 
-    // Inner translucent core with white/emerald glow
-    const innerGeo = new THREE.IcosahedronGeometry(1.6, 0);
-    const innerMat = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      emissive: 0x10b981,
-      emissiveIntensity: 0.15,
+    // Inner Faceted Core with Dynamic Emissive Shading
+    const innerGeo = new THREE.IcosahedronGeometry(1.2, 0);
+    const innerMat = new THREE.MeshStandardMaterial({
+      color: 0x0f172a,
+      emissive: 0x38bdf8,
+      emissiveIntensity: 0.35,
       transparent: true,
-      opacity: 0.25,
+      opacity: 0.45,
       flatShading: true,
+      roughness: 0.3,
+      metalness: 0.6,
     });
     const innerMesh = new THREE.Mesh(innerGeo, innerMat);
     mainGroup.add(innerMesh);
 
-    // 2. Vertex Nodes in IMC Colors: Red, Yellow, Green, White
+    // 5. Vertex Nodes in Institutional Financial Tiers (Green, Amber, Red, Sky Blue)
     const nodeColors = [
-      0x10b981, // Calming Green (Prime / Approved)
-      0xf59e0b, // Warm Yellow (Near-Prime / Warning)
-      0xe11d48, // Crimson Red (Subprime / Anomaly)
-      0xffffff, // Pure White (Baseline)
+      0x10b981, // Prime / Approval Green
+      0x0284c7, // Executive Sky Blue
+      0xf59e0b, // Warm Amber / Near-Prime
+      0xe11d48, // Alert / Subprime Shock
     ];
 
-    const posAttr = geometry.attributes.position;
+    const posAttr = icosaGeometry.attributes.position;
     const vertexCount = posAttr.count;
     const nodeGroup = new THREE.Group();
 
@@ -74,12 +121,13 @@ export const HeroGeometric3D: React.FC = () => {
       const z = posAttr.getZ(i);
 
       const color = nodeColors[(i / 3) % nodeColors.length];
-      const sphereGeo = new THREE.SphereGeometry(0.08, 16, 16);
+      const sphereGeo = new THREE.SphereGeometry(0.1, 16, 16);
       const sphereMat = new THREE.MeshStandardMaterial({
         color: color,
         emissive: color,
-        emissiveIntensity: 0.6,
-        roughness: 0.2,
+        emissiveIntensity: 0.8,
+        roughness: 0.15,
+        metalness: 0.7,
       });
 
       const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
@@ -88,22 +136,21 @@ export const HeroGeometric3D: React.FC = () => {
     }
     mainGroup.add(nodeGroup);
 
-    // 3. Floating Financial Particle Field (Red, Yellow, Green, White)
-    const particleCount = 180;
+    // 6. Floating Financial Particle Field with Brand Gradient
+    const particleCount = 160;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
 
     const cPalette = [
-      new THREE.Color(0x10b981), // Green
-      new THREE.Color(0xf59e0b), // Yellow
-      new THREE.Color(0xe11d48), // Red
-      new THREE.Color(0xffffff), // White
-      new THREE.Color(0x38bdf8), // Soft Cyan
+      new THREE.Color(0x38bdf8), // Electric Sky
+      new THREE.Color(0x0284c7), // Sky Blue
+      new THREE.Color(0x10b981), // Emerald
+      new THREE.Color(0xfbbf24), // Caramel
     ];
 
     for (let i = 0; i < particleCount; i++) {
-      const radius = 2.4 + Math.random() * 2.2;
+      const radius = 2.7 + Math.random() * 1.5;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(Math.random() * 2 - 1);
 
@@ -121,41 +168,46 @@ export const HeroGeometric3D: React.FC = () => {
     particleGeo.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
 
     const particleMat = new THREE.PointsMaterial({
-      size: 0.07,
+      size: 0.065,
       vertexColors: true,
       transparent: true,
       opacity: 0.85,
+      blending: THREE.AdditiveBlending,
     });
 
     const particles = new THREE.Points(particleGeo, particleMat);
     mainGroup.add(particles);
 
-    // 4. Orbiting Rings (Risk Boundaries)
-    const ringGeo1 = new THREE.TorusGeometry(3.1, 0.015, 16, 100);
-    const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.35 });
+    // 7. Luminous Gyroscopic Rings (Risk Boundaries)
+    const ringGeo1 = new THREE.TorusGeometry(2.95, 0.016, 16, 100);
+    const ringMat1 = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      emissive: 0x0284c7,
+      emissiveIntensity: 0.7,
+      roughness: 0.2,
+      metalness: 0.8,
+      transparent: true,
+      opacity: 0.55,
+    });
     const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
     ring1.rotation.x = Math.PI / 3;
     mainGroup.add(ring1);
 
-    const ringGeo2 = new THREE.TorusGeometry(3.6, 0.012, 16, 100);
-    const ringMat2 = new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.3 });
+    const ringGeo2 = new THREE.TorusGeometry(3.35, 0.012, 16, 100);
+    const ringMat2 = new THREE.MeshStandardMaterial({
+      color: 0x10b981,
+      emissive: 0x10b981,
+      emissiveIntensity: 0.5,
+      roughness: 0.2,
+      metalness: 0.8,
+      transparent: true,
+      opacity: 0.45,
+    });
     const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
     ring2.rotation.y = Math.PI / 4;
     mainGroup.add(ring2);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
-    scene.add(ambientLight);
-
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.5);
-    dirLight1.position.set(5, 5, 5);
-    scene.add(dirLight1);
-
-    const dirLight2 = new THREE.DirectionalLight(0x10b981, 0.8);
-    dirLight2.position.set(-5, -5, -2);
-    scene.add(dirLight2);
-
-    // Mouse Interaction
+    // 8. Mouse Interaction with Smooth Easing
     let targetX = 0;
     let targetY = 0;
     let mouseX = 0;
@@ -165,13 +217,13 @@ export const HeroGeometric3D: React.FC = () => {
       const rect = container.getBoundingClientRect();
       const x = event.clientX - rect.left - rect.width / 2;
       const y = event.clientY - rect.top - rect.height / 2;
-      targetX = (x / rect.width) * 1.5;
-      targetY = (y / rect.height) * 1.5;
+      targetX = (x / rect.width) * 1.6;
+      targetY = (y / rect.height) * 1.6;
     };
 
     container.addEventListener('mousemove', onMouseMove);
 
-    // Animation Loop
+    // 9. Animation Loop
     let animationFrameId: number;
     let clock = new THREE.Clock();
 
@@ -180,19 +232,27 @@ export const HeroGeometric3D: React.FC = () => {
 
       if (isPlayingRef.current) {
         const delta = clock.getDelta();
+        const elapsedTime = clock.getElapsedTime();
 
-        // Smooth rotation
-        mainGroup.rotation.y += delta * 0.45;
-        mainGroup.rotation.x += delta * 0.2;
-        ring1.rotation.z += delta * 0.15;
-        ring2.rotation.z -= delta * 0.12;
-        particles.rotation.y -= delta * 0.18;
+        // Smooth continuous rotation
+        mainGroup.rotation.y += delta * 0.35;
+        mainGroup.rotation.x += delta * 0.15;
+        ring1.rotation.z += delta * 0.2;
+        ring2.rotation.z -= delta * 0.15;
+        particles.rotation.y -= delta * 0.12;
+
+        // Counter-rotating inner components for visual depth
+        innerMesh.rotation.y -= delta * 0.4;
+        wireframeMesh.rotation.y += delta * 0.2;
+
+        // Subtle breathing light
+        internalGlowLight.intensity = 2.8 + Math.sin(elapsedTime * 2.5) * 0.7;
 
         // Smooth mouse lerp
-        mouseX += (targetX - mouseX) * 0.05;
-        mouseY += (targetY - mouseY) * 0.05;
-        mainGroup.position.x = mouseX * 0.5;
-        mainGroup.position.y = -mouseY * 0.5;
+        mouseX += (targetX - mouseX) * 0.06;
+        mouseY += (targetY - mouseY) * 0.06;
+        mainGroup.position.x = mouseX * 0.4;
+        mainGroup.position.y = -mouseY * 0.4;
       }
 
       renderer.render(scene, camera);
@@ -220,6 +280,18 @@ export const HeroGeometric3D: React.FC = () => {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
+      glassSphereGeo.dispose();
+      glassMaterial.dispose();
+      icosaGeometry.dispose();
+      wireframeMat.dispose();
+      innerGeo.dispose();
+      innerMat.dispose();
+      particleGeo.dispose();
+      particleMat.dispose();
+      ringGeo1.dispose();
+      ringMat1.dispose();
+      ringGeo2.dispose();
+      ringMat2.dispose();
     };
   }, []);
 
@@ -233,7 +305,7 @@ export const HeroGeometric3D: React.FC = () => {
       <div className="hero-3d-canvas-container" ref={mountRef} />
       <div className="hero-3d-overlay-badge">
         <span className="dot-live-green"></span>
-        <span>Three.js Quantitative Risk Manifold</span>
+        <span>Realistic Glass Risk Orb • Live Telemetry</span>
         <button
           onClick={togglePlay}
           className="hero-3d-play-btn"
@@ -243,9 +315,10 @@ export const HeroGeometric3D: React.FC = () => {
         </button>
       </div>
       <div className="hero-3d-legend">
-        <span className="legend-tag tag-green">● Prime (EL &lt; 2%)</span>
+        <span className="legend-tag tag-green">● Prime Tier (EL &lt; 2%)</span>
+        <span className="legend-tag tag-blue">● Sky Blue (Refraction)</span>
         <span className="legend-tag tag-yellow">● Near-Prime</span>
-        <span className="legend-tag tag-red">● Subprime Shock</span>
+        <span className="legend-tag tag-red">● Subprime</span>
       </div>
     </div>
   );
