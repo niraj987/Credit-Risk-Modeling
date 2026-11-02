@@ -5999,3 +5999,348 @@ body {
   font-weight: 800;
 }
 
+/* ============================================================
+   HIGH-CONTRAST TEXT & DARK GLASS VISIBILITY ENGINE
+   Guarantees 100% text readability across all pages & components
+   Eliminates all white-card & invisible-text contrast issues
+   ============================================================ */
+
+/* 1. All Cards, Panels & Containers: Dark Glass Surface */
+.card-panel,
+.panel-card,
+.glass-card,
+.calc-input-panel,
+.calc-summary-panel,
+.bento-stat-card,
+.audit-metric-card,
+.history-controls-card,
+.history-table-card,
+.executive-ledger-wrap,
+.borrower-empowerment-card,
+.how-it-works-guide-card,
+.executive-risk-dashboard-card,
+.decision-hero-card,
+.comparison-card,
+.traditional-bank-card,
+.faq-card,
+.mission-card,
+.github-card,
+.pop-tile-card,
+.rag-user-guide-banner,
+.reg-search-card-glass,
+.about-stat-card,
+.bento-card,
+.benefit-item,
+.mini-cap-card,
+.capacity-stat-row,
+.exec-gauge-panel,
+.sim-card,
+.modal-card,
+.rag-modal-glass,
+.telemetry-wrapper,
+.agent-telemetry-card,
+.glass-tabs-container {
+  background: rgba(26, 26, 26, 0.84) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f4f4f5 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 20px rgba(93, 214, 44, 0.04) !important;
+}
+
+/* 2. Headings & High-Emphasis Titles: Crisp Pure White (#FFFFFF) */
+h1, h2, h3, h4, h5, h6,
+.brand-text h1,
+.exec-dash-title,
+.empowerment-title,
+.bento-card h3,
+.legal-title-text,
+.box-agent-name,
+.panel-agent-headline,
+.applicant-name-bold,
+.card-applicant-title,
+.bento-title,
+.section-title-wrap h2,
+.section-title-wrap h3,
+.card-header-bar h2,
+.step-detail h5,
+.guide-card-header h4,
+.guide-text-content h3,
+.hero-headline,
+.sim-title,
+.comp-card-header h3 {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+/* 3. High-Contrast Body Text & Descriptions: Bright Silver-White (#E4E4E7) */
+p, span, li,
+.empowerment-text,
+.guide-text-content p,
+.bento-card p,
+.plain-english-body,
+.mandate-bullet-item span,
+.rights-bullet-item span,
+.io-list-item span,
+.topic-box-summary,
+.step-detail p,
+.callout-text,
+.detail-headline,
+.faq-card p,
+.mission-card p,
+.benefit-content span,
+.benefit-content b,
+.cap-hint,
+.structured-text,
+.sim-copy,
+.about-main-text {
+  color: #e4e4e7 !important;
+  line-height: 1.6 !important;
+}
+
+/* 4. Subtext, Minor Descriptions & Secondary Metrics: Crisp Light Zinc (#A1A1AA) */
+.text-muted,
+.subtext,
+.metric-sub,
+.c-m-label,
+.sim-m-sub,
+.bento-sub,
+.time-sub,
+.income-sub,
+.reading-lbl,
+.mini-sub,
+.topic-cat-tag,
+.box-role-tag,
+.box-latency-text,
+.citation-title,
+.stat-desc,
+.step-count-pill,
+.applicant-id-mono,
+.sim-ticks span {
+  color: #a1a1aa !important;
+}
+
+/* 5. Field Labels & Form Headers: Bold Crisp White (#F8F8F8) */
+label,
+.field-label,
+.label-row label,
+.sim-label-bar span,
+.metric-lbl,
+.gauge-lbl,
+.cap-label,
+.mini-lbl,
+.section-label,
+.io-card-title,
+.box-section-lbl {
+  color: #f8f8f8 !important;
+  font-weight: 700 !important;
+}
+
+/* 6. High-Impact Readouts, Values & Accents: Luminous Electric Lime (#5DD62C) */
+.value-badge,
+.metric-val,
+.bento-num,
+.sim-m-val,
+.reading-val,
+.loan-bold,
+.cap-value,
+.mini-val,
+.apr-value-bold,
+.fico-number,
+.stat-num,
+.highlight-val {
+  color: #5dd62c !important;
+  font-weight: 900 !important;
+  font-family: var(--font-mono);
+}
+
+/* 7. Form Controls, Text Inputs & Dropdown Selects */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select,
+textarea,
+.text-input,
+.select-input,
+.search-field,
+.audit-search-input,
+.rag-input {
+  background: rgba(14, 14, 14, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  padding: 10px 14px !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.text-input:focus,
+.select-input:focus,
+.search-field:focus {
+  border-color: #5dd62c !important;
+  box-shadow: 0 0 0 2px rgba(93, 214, 44, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  outline: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #71717a !important;
+}
+
+select option {
+  background: #18181b !important;
+  color: #ffffff !important;
+}
+
+/* 8. Sliders & Range Controls in Dark Theme */
+input[type="range"],
+.slider,
+.sim-range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.16) !important;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb,
+.slider::-webkit-slider-thumb,
+.sim-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #5dd62c !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 0 12px rgba(93, 214, 44, 0.85) !important;
+  cursor: pointer;
+}
+
+/* 9. Ledger & History Tables */
+.executive-ledger-table,
+.history-table {
+  width: 100%;
+  color: #ffffff !important;
+}
+
+.executive-ledger-table th,
+.history-table th {
+  background: rgba(14, 14, 14, 0.96) !important;
+  color: #a1a1aa !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+  font-weight: 800 !important;
+  font-size: 0.74rem !important;
+  letter-spacing: 0.05em !important;
+}
+
+.executive-ledger-row,
+.interactive-table-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.executive-ledger-row:hover,
+.interactive-table-row:hover {
+  background: rgba(93, 214, 44, 0.06) !important;
+}
+
+.executive-ledger-table td,
+.history-table td {
+  color: #ffffff !important;
+  padding: 14px 16px !important;
+}
+
+/* 10. Nav Links & Preset Controls */
+.nav-link {
+  color: #e4e4e7 !important;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+.nav-link.active {
+  background: rgba(93, 214, 44, 0.16) !important;
+  border-color: rgba(93, 214, 44, 0.4) !important;
+  color: #5dd62c !important;
+}
+
+.preset-btn {
+  background: rgba(18, 18, 18, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #f4f4f5 !important;
+  font-weight: 700;
+}
+
+.preset-btn:hover {
+  border-color: #5dd62c !important;
+  color: #5dd62c !important;
+  box-shadow: 0 0 12px rgba(93, 214, 44, 0.25) !important;
+}
+
+/* 11. Buttons & Calls-To-Action */
+.sim-verify-btn,
+.submit-btn,
+.btn-cta {
+  background: #5dd62c !important;
+  color: #0f0f0f !important;
+  font-weight: 900 !important;
+  box-shadow: 0 0 20px rgba(93, 214, 44, 0.4) !important;
+}
+
+.sim-verify-btn:hover,
+.submit-btn:hover,
+.btn-cta:hover {
+  background: #4ade80 !important;
+  box-shadow: 0 0 32px rgba(93, 214, 44, 0.65) !important;
+}
+
+.btn-secondary,
+.btn-ledger-load,
+.btn-ledger-del {
+  background: rgba(30, 30, 30, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #f4f4f5 !important;
+}
+
+.btn-secondary:hover,
+.btn-ledger-load:hover {
+  border-color: #5dd62c !important;
+  color: #5dd62c !important;
+}
+
+.btn-ledger-del:hover {
+  border-color: #f43f5e !important;
+  color: #f43f5e !important;
+}
+
+/* 12. Modal Backdrops & Dialogs */
+.modal-overlay,
+.pro-nav-drawer-backdrop {
+  background: rgba(0, 0, 0, 0.78) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.modal-card {
+  background: rgba(20, 20, 20, 0.97) !important;
+  border: 1px solid rgba(93, 214, 44, 0.35) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(93, 214, 44, 0.15) !important;
+  color: #f4f4f5 !important;
+}
+
+.modal-header h3,
+.modal-title {
+  color: #ffffff !important;
+}
+
+.modal-subtitle {
+  color: #a1a1aa !important;
+}
+
+

@@ -294,8 +294,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                       onClick={() => setSimTenure(t)}
                       className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all border ${
                         simTenure === t
-                          ? 'bg-sky-600 text-white border-sky-600 shadow-sm'
-                          : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                          ? 'bg-neonlime text-black border-neonlime shadow-sm font-extrabold'
+                          : 'bg-zinc-800/80 text-zinc-200 border-zinc-700 hover:border-neonlime/40 hover:bg-zinc-700'
                       }`}
                     >
                       {t}m
@@ -305,26 +305,26 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
 
               {/* Debt-to-Income Balance Meter */}
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 mt-1">
+              <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-700/80 mt-1">
                 <div className="flex items-center justify-between text-xs mb-1.5">
-                  <span className="font-bold text-slate-700">
+                  <span className="font-bold text-zinc-200">
                     Debt-to-Income (DTI) Capacity
                   </span>
                   <span className={`font-mono font-bold ${
-                    simDTI <= 0.35 ? 'text-emerald-600' : simDTI <= 0.45 ? 'text-amber-600' : 'text-rose-600'
+                    simDTI <= 0.35 ? 'text-neonlime' : simDTI <= 0.45 ? 'text-amber-400' : 'text-rose-400'
                   }`}>
                     {(simDTI * 100).toFixed(1)}% {simDTI <= 0.35 ? '(Healthy)' : simDTI <= 0.45 ? '(Moderate)' : '(Stretched)'}
                   </span>
                 </div>
-                <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-zinc-700 rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all duration-300 ${
-                      simDTI <= 0.35 ? 'bg-emerald-500' : simDTI <= 0.45 ? 'bg-amber-500' : 'bg-rose-500'
+                      simDTI <= 0.35 ? 'bg-neonlime' : simDTI <= 0.45 ? 'bg-amber-400' : 'bg-rose-500'
                     }`}
                     style={{ width: `${Math.min(100, (simDTI / 0.65) * 100)}%` }}
                   />
                 </div>
-                <span className="text-[11px] text-slate-500 mt-1 block">
+                <span className="text-[11px] text-zinc-400 mt-1 block">
                   {simDTI <= 0.35
                     ? 'Healthy monthly cash flow enables instant Prime Tier approval with minimal interest.'
                     : simDTI <= 0.45
@@ -389,7 +389,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="bento-stat-card border-navy">
-            <span className="bento-num text-navy">100%</span>
+            <span className="bento-num text-neonlime">100%</span>
             <span className="bento-title">Fair Lending Audit</span>
             <span className="bento-sub">Four-Fifths Rule compliance guarantee</span>
           </div>

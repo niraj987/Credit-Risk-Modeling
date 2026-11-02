@@ -45,3 +45,4 @@ export function useScrollProgress() {
 
   return { scrollProgress, scrollY };
 }
+

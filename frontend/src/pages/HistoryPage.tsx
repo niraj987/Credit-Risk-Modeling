@@ -180,9 +180,9 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
         <div className="audit-metric-card">
           <div className="metric-header-row">
             <span className="metric-title">Total Applications</span>
-            <Database size={16} className="text-sky" />
+            <Database size={16} className="text-neonlime" />
           </div>
-          <div className="metric-big-num text-navy">{totalCount}</div>
+          <div className="metric-big-num text-neonlime">{totalCount}</div>
           <span className="metric-footer-text">IndexedDB Verified Records</span>
         </div>
 
@@ -328,7 +328,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                   <div className="card-metrics-grid">
                     <div className="card-metric-item">
                       <span className="c-m-label">Loan Amount</span>
-                      <span className="c-m-val text-navy">₹{rec.loanAmount.toLocaleString('en-IN')}</span>
+                      <span className="c-m-val text-white">₹{rec.loanAmount.toLocaleString('en-IN')}</span>
                     </div>
 
                     <div className="card-metric-item">
