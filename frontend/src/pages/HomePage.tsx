@@ -113,7 +113,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       icon: <Award size={20} />,
       headline: 'Final Pricing & Executive Memorandum',
       bullets: [
-        'Fuses telemetry across all 4 upstream working layers via LangGraph state',
+        'Fuses telemetry across all upstream working layers into a unified decision',
         'Calculates Risk-Adjusted Return on Capital (RAROC) for fair interest pricing',
         'Generates human-readable, downloadable Credit Memorandum in Markdown',
       ],
@@ -396,12 +396,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Autonomous Multi-Agent Architecture (LangGraph Flow) */}
+      {/* Autonomous Multi-Agent Architecture */}
       <section className="architecture-showcase-section">
         <AgentArchitectureFlow />
       </section>
 
-      {/* Comparison: Traditional Bank vs. Our Modern AI Committee */}
+      {/* Comparison: Traditional Bank vs. Our Modern Autonomous Committee */}
       <section className="comparison-section">
         <div className="section-title-wrap">
           <div className="section-badge-sky">The Difference</div>
@@ -445,12 +445,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* AI Committee Card (Highlighted) */}
+          {/* Autonomous Committee Card (Highlighted) */}
           <div className="comparison-card ai-committee-card">
             <div className="comp-highlight-tag">Modern Standard</div>
             <div className="comp-card-header">
               <span className="comp-badge-ai">Autonomous Multi-Agent</span>
-              <h3>Our AI Underwriting Committee</h3>
+              <h3>Our Autonomous Credit Committee</h3>
               <p>Instant, transparent, and mathematically calibrated</p>
             </div>
 

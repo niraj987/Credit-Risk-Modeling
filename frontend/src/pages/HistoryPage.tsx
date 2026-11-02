@@ -531,7 +531,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                 <div>
                   <h3 className="modal-title">Autonomous Credit Audit Certificate</h3>
                   <span className="modal-subtitle">
-                    Cryptographic State Hash • 5-Agent LangGraph Verification
+                    Cryptographic State Hash • 5-Agent Pipeline Verification
                   </span>
                 </div>
               </div>

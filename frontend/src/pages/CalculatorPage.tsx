@@ -58,10 +58,6 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) =>
   return (
     <div className="calculator-page-container slide-up-scroll">
       <div className="page-header-wrap">
-        <div className="page-badge">
-          <Calculator size={14} className="text-cyan-400" />
-          <span>Interactive Indian Rupee EMI Estimator</span>
-        </div>
         <h1>Personal Loan EMI & Amortization Calculator</h1>
         <p>
           Simulate monthly repayments in Indian Rupees (₹), total interest obligations, and explore how your

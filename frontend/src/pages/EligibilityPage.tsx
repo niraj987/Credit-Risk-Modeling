@@ -90,10 +90,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
   return (
     <div className="eligibility-page-container">
       <div className="page-header-wrap">
-        <div className="page-badge badge-emerald">
-          <Sparkles size={14} className="text-emerald-400" />
-          <span>Real-Time Multi-Agent Underwriting</span>
-        </div>
         <h1>Personal Loan Eligibility Checker</h1>
         <p>
           Simulate a tier-1 banking credit committee. Our 5 autonomous agent working layers inspect
@@ -222,10 +218,8 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 <Gauge size={20} className="text-sky" />
                 <div>
                   <h3 className="exec-dash-title">Executive Credit Health & Capacity Dashboard</h3>
-                  <p className="exec-dash-subtitle">Actuarially calibrated default probability & prudential solvency metrics</p>
                 </div>
               </div>
-              <span className="badge-pill-cyan">Real-Time Risk Calibration</span>
             </div>
 
             <div className="exec-metrics-composite-grid">
@@ -411,7 +405,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             <div className="telemetry-title-bar">
               <div className="flex items-center gap-2">
                 <Activity size={18} className="text-sky" />
-                <h3>Autonomous Working Layers (LangGraph State Flow)</h3>
+                <h3>Autonomous Working Layers</h3>
               </div>
               <span className="live-pulse-badge">
                 <span className="pulse-dot"></span> 5 Agents Active
@@ -477,7 +471,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 <div className="tab-btn-inner">
                   <Terminal size={18} className="tab-icon-purple" />
                   <div className="tab-text-group">
-                    <span className="tab-main-label">LangGraph Audit</span>
+                    <span className="tab-main-label">Audit Logs</span>
                     <span className="tab-sub-label">5-Agent Live Trace</span>
                   </div>
                 </div>
@@ -707,7 +701,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 </div>
               )}
 
-              {/* Tab Pane 4: LangGraph Audit Logs */}
+              {/* Tab Pane 4: Audit Logs */}
               {activeTab === 'logs' && (
                 <div className="logs-pane-enhanced">
                   <div className="pane-intro-card glass-banner">
@@ -715,7 +709,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                       <Terminal size={22} className="text-purple-400" />
                     </div>
                     <div className="pane-intro-copy">
-                      <h4>Autonomous Multi-Agent Execution Trace (LangGraph)</h4>
+                      <h4>Autonomous Multi-Agent Execution Trace</h4>
                       <p>
                         Immutable audit trail showing how each specialized banking agent processed inputs, verified regulations,
                         and contributed to the final credit memo.
@@ -730,7 +724,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                         <span className="dot dot-yellow"></span>
                         <span className="dot dot-green"></span>
                       </div>
-                      <span className="terminal-console-title">langgraph_underwriting_orchestrator.log</span>
+                      <span className="terminal-console-title">underwriting_orchestrator.log</span>
                       <span className="terminal-live-tag">LIVE TRACE</span>
                     </div>
 

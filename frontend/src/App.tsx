@@ -151,9 +151,6 @@ export const App: React.FC = () => {
       {/* Scroll Progress Bar at Very Top of Screen */}
       <div className="scroll-progress-line" style={{ width: `${scrollProgress}%` }} />
 
-      {/* Sinuous Glowing Ambient Background Track (Inspired by Reference Design) */}
-      <div className="ambient-glow-mesh" />
-
       {/* Top Header Navigation with Ultra-Glass Effect */}
       <header className="navbar glass-header">
         <div className="navbar-left">
@@ -169,11 +166,8 @@ export const App: React.FC = () => {
               <ShieldCheck size={22} className="text-neonlime" />
             </div>
             <div className="brand-text">
-              <div className="flex items-center gap-1.5">
-                <h1>FinRisk</h1>
-                <span className="brand-badge-pill">AI Underwriting</span>
-              </div>
-              <span className="brand-tag">Intelligent Pre-Qualification & Fair Lending Analytics</span>
+              <h1>FinRisk</h1>
+              <span className="brand-tag">Credit Intelligence</span>
             </div>
           </div>
         </div>
@@ -253,11 +247,11 @@ export const App: React.FC = () => {
             <div className="drawer-header">
               <div className="flex items-center gap-2.5">
                 <div className="brand-crest-box-sm">
-                  <ShieldCheck size={20} className="text-sky-600" />
+                  <ShieldCheck size={20} className="text-neonlime" />
                 </div>
                 <div>
-                  <h4 className="drawer-title">FinRisk AI</h4>
-                  <span className="drawer-sub">Autonomous Credit Analytics Platform</span>
+                  <h4 className="drawer-title">FinRisk</h4>
+                  <span className="drawer-sub">Credit Intelligence Suite</span>
                 </div>
               </div>
               <button
@@ -355,9 +349,9 @@ export const App: React.FC = () => {
             <div className="footer-brand">
               <div className="flex items-center gap-2">
                 <div className="brand-crest-box-sm">
-                  <ShieldCheck size={18} className="text-sky-600" />
+                  <ShieldCheck size={18} className="text-neonlime" />
                 </div>
-                <span className="footer-brand-title">FinRisk AI Underwriting</span>
+                <span className="footer-brand-title">FinRisk Intelligence</span>
               </div>
               <p className="footer-tagline">
                 Empowering borrowers with transparent pre-qualification, unbiased AI risk assessment,

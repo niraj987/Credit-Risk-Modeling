@@ -6,7 +6,6 @@ import {
   BookOpen,
   Scale,
   Award,
-  Code,
   Github,
   Terminal,
   CheckCircle2,
@@ -16,26 +15,58 @@ import {
   ArrowRight,
   Database,
   Layers,
-  HeartHandshake,
+  ChevronRight,
 } from 'lucide-react';
 
 export const AboutPage: React.FC = () => {
-  const faqs = [
+  const deepDives = [
     {
-      q: 'Why was this system designed with 5 Multi-Agent layers rather than a single model?',
-      a: 'In modern banking, credit underwriting is never a single score. It requires independent separation of duties: identity verification (KYC), quantitative credit risk modeling, regulatory policy reconciliation, fair lending disparate impact auditing, and senior credit committee sign-off. A multi-agent DAG (orchestrated with LangGraph) provides full state immutability, audit logging, and regulatory compliance at every step.',
+      category: 'GOVERNANCE & AUDITABILITY',
+      stat: '5 Independent Stages',
+      statColor: 'text-neonlime',
+      q: 'Why deploy 5 autonomous agent layers rather than a single black-box score?',
+      takeaway: 'Separation of duties prevents single points of failure and establishes complete deterministic auditability.',
+      points: [
+        { label: 'Role Segregation', desc: 'Identity verification, quantitative risk modeling, statutory policy reconciliation, and fairness auditing operate as isolated verification nodes.' },
+        { label: 'Audit Trail', desc: 'Every decision produces an immutable execution trace citing exact borrower data points, feature weights, and regulatory articles.' },
+        { label: 'Deterministic Consensus', desc: 'The credit committee cannot issue approvals without unanimous validation from all preceding compliance agents.' },
+      ],
     },
     {
-      q: 'How does the platform ensure compliance with Equal Credit Opportunity Act (ECOA)?',
-      a: 'Under 12 CFR § 1002.9, whenever a loan is denied or conditionally modified, lenders must state the top 4 principal reasons. Our Layer 3 Regulatory RAG Agent indexes the statutory handbook, while Layer 2 extracts SHAP feature attribution vectors to generate auditable reason codes automatically.',
+      category: 'STATUTORY DISCLOSURE',
+      stat: '12 CFR § 1002.9',
+      statColor: 'text-sky',
+      q: 'How does the platform ensure statutory compliance with Equal Credit Opportunity Act (ECOA)?',
+      takeaway: 'Every non-prime verdict automatically extracts and translates adverse factors into official reason codes.',
+      points: [
+        { label: 'Mandatory Top-4 Factors', desc: 'Statute requires lenders to disclose the exact principal drivers behind any modified or adverse credit verdict.' },
+        { label: 'SHAP Feature Mapping', desc: 'Mathematical negative contribution vectors are indexed directly against regulatory compliance codes.' },
+        { label: 'Borrower Recourse Rights', desc: 'Provides immediate counterfactual steps and dispute filing rights under FCRA § 615.' },
+      ],
     },
     {
-      q: 'What is the Four-Fifths (80%) Rule tested in Layer 4?',
-      a: 'The Four-Fifths Rule is an established regulatory standard under ECOA and EEOC. It mandates that the selection/approval rate for any demographic cohort cannot fall below 80% of the highest-performing reference cohort: AIR = Rate(Protected) / Rate(Reference) >= 0.80. If an underwriting model violates this threshold, it triggers mandatory algorithmic review.',
+      category: 'FAIR LENDING DIRECTIVE',
+      stat: '80% Parity Standard',
+      statColor: 'text-amber',
+      q: 'What is the Four-Fifths (80%) Disparate Impact Rule and how is it audited?',
+      takeaway: 'Mathematical algorithmic auditing guarantees approval rates never fall below regulatory demographic parity.',
+      points: [
+        { label: 'Four-Fifths Ratio', desc: 'The selection rate for any protected demographic cohort must exceed 80% of the reference demographic benchmark.' },
+        { label: 'Macro Stress Testing', desc: 'Injects simulated macroeconomic shocks (+300 bps interest rate hikes and unemployment spikes) to verify portfolio resilience.' },
+        { label: 'Automated Circuit Breaker', desc: 'Models that fail the Adverse Impact Ratio (AIR < 0.80) are instantly flagged and quarantined for human committee review.' },
+      ],
     },
     {
-      q: 'What technologies power this platform end-to-end?',
-      a: 'The frontend is engineered with React 18, TypeScript, Tailwind CSS, executive glass risk telemetry, and client-side IndexedDB with dual-sync. The backend is built with Python, FastAPI, SQLite with WAL (Write-Ahead Logging) mode and PostgreSQL compatibility, LangGraph for stateful 5-layer agent orchestration, LightGBM with Optuna tuning for credit default prediction, and SHAP for explainable AI.',
+      category: 'ENTERPRISE ARCHITECTURE',
+      stat: 'Sub-2s Real-Time',
+      statColor: 'text-purple-400',
+      q: 'What architecture and technologies power this platform end-to-end?',
+      takeaway: 'High-throughput modern reactive stack engineered for sub-second risk intelligence and high client privacy.',
+      points: [
+        { label: 'Frontend Interface', desc: 'React 18, TypeScript, Tailwind CSS, high-contrast dark horizon lighting, and dual-sync local storage.' },
+        { label: 'Decision Engine', desc: 'Python, FastAPI, LightGBM calibrated with Optuna hyperparameter optimization, and TreeSHAP explainability.' },
+        { label: 'Database & Security', desc: 'High-speed relational storage with Write-Ahead Logging (WAL) and client-side cryptographic state verification.' },
+      ],
     },
   ];
 
@@ -46,7 +77,7 @@ export const AboutPage: React.FC = () => {
           <Terminal size={14} className="text-blue-400" />
           <span>System Architecture & Governance</span>
         </div>
-        <h1>About FinRisk AI Underwriting</h1>
+        <h1>About FinRisk</h1>
         <p>
           An enterprise-grade financial intelligence platform bridging quantitative machine learning,
           stateful multi-agent orchestration, and global banking regulatory compliance.
@@ -75,7 +106,7 @@ export const AboutPage: React.FC = () => {
 
         <div className="about-stat-card">
           <span className="stat-num text-purple-400">5 Autonomous Layers</span>
-          <span className="stat-label">LangGraph State Orchestration</span>
+          <span className="stat-label">Multi-Stage Agent Pipeline</span>
           <p className="stat-desc">Deterministic separation of duties across specialized financial AI agents.</p>
         </div>
       </div>
@@ -166,26 +197,58 @@ export const AboutPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Autonomous Multi-Agent Architecture (LangGraph Flow) */}
+      {/* Autonomous Multi-Agent Architecture */}
       <section className="architecture-showcase-section my-10">
         <AgentArchitectureFlow />
       </section>
 
-      {/* Technical FAQ Section */}
+      {/* Technical & Compliance Deep Dives: High-Hierarchy Modern Cards */}
       <div className="faq-section">
         <div className="section-title-wrap">
-          <h3>Technical & Compliance Deep Dives</h3>
-          <p>Detailed insights into our regulatory calibration, algorithmic auditing, and privacy standards.</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/60 text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+            <Sparkles size={13} className="text-neonlime" />
+            <span>Institutional Documentation</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            Technical & Compliance Deep Dives
+          </h2>
+          <p className="text-slate-300 text-base max-w-2xl mx-auto mt-2">
+            Detailed insights into our regulatory calibration, algorithmic auditing, and privacy standards.
+          </p>
         </div>
 
-        <div className="faq-grid">
-          {faqs.map((f, i) => (
-            <div key={i} className="faq-card">
-              <h4>
-                <CheckCircle2 size={16} className="text-emerald-400" />
-                {f.q}
-              </h4>
-              <p>{f.a}</p>
+        <div className="deep-dives-grid">
+          {deepDives.map((item, idx) => (
+            <div key={idx} className="deep-dive-card">
+              {/* Top Row: Category Tag & Huge Stat */}
+              <div className="deep-dive-top-bar">
+                <span className="deep-dive-category-chip">{item.category}</span>
+                <span className={`deep-dive-stat-badge ${item.statColor}`}>{item.stat}</span>
+              </div>
+
+              {/* Bold Question Header */}
+              <h3 className="deep-dive-question">{item.q}</h3>
+
+              {/* Executive Takeaway Box */}
+              <div className="deep-dive-takeaway-box">
+                <div className="takeaway-indicator" />
+                <p className="takeaway-text">{item.takeaway}</p>
+              </div>
+
+              {/* Structured Point Breakdown */}
+              <div className="deep-dive-points-list">
+                {item.points.map((pt, pIdx) => (
+                  <div key={pIdx} className="deep-dive-point-item">
+                    <div className="point-icon-col">
+                      <CheckCircle2 size={16} className="text-neonlime flex-shrink-0 mt-0.5" />
+                    </div>
+                    <div className="point-content-col">
+                      <span className="point-label">{pt.label}:</span>{' '}
+                      <span className="point-desc">{pt.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
