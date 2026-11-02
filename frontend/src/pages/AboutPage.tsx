@@ -17,7 +17,7 @@ export const AboutPage: React.FC = () => {
     },
     {
       q: 'What technologies power this platform end-to-end?',
-      a: 'The frontend is built with React 18, TypeScript, Three.js for 3D risk visualization, and client-side IndexedDB for offline persistence. The backend is built with FastAPI, LangGraph for stateful agent orchestration, LightGBM with Optuna tuning for credit default prediction, and SHAP for explainable AI.',
+      a: 'The frontend is engineered with React 18, TypeScript, Tailwind CSS, Three.js for 3D physical glass risk visualization, and client-side IndexedDB with dual-sync. The backend is built with Python, FastAPI, SQLite with WAL (Write-Ahead Logging) mode and PostgreSQL compatibility, LangGraph for stateful 5-layer agent orchestration, LightGBM with Optuna tuning for credit default prediction, and SHAP for explainable AI.',
     },
   ];
 

@@ -102,6 +102,14 @@ class JSDatabase {
   }
 
   async deleteEvaluation(id: string): Promise<void> {
+    // Attempt backend delete in background
+    try {
+      const { deleteBackendRecord } = await import('./api');
+      deleteBackendRecord(id);
+    } catch (e) {
+      // offline/silent
+    }
+
     const db = await this.init();
     if (db) {
       return new Promise((resolve) => {

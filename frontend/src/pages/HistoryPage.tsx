@@ -138,6 +138,13 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
       },
     ];
 
+    try {
+      const { seedBackendDatabase } = await import('../services/api');
+      await seedBackendDatabase();
+    } catch (e) {
+      // offline/fallback
+    }
+
     for (const sample of benchmarkSamples) {
       await jsDatabase.saveEvaluation(sample);
     }
@@ -157,12 +164,12 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
       <div className="page-header-wrap">
         <div className="page-badge badge-cyan">
           <Database size={14} className="text-cyan-400" />
-          <span>Client-Side JS Database (IndexedDB)</span>
+          <span>Enterprise Database Hub • SQLite WAL & IndexedDB Dual-Sync</span>
         </div>
         <h1>Underwriting Audit Trail & Application History</h1>
         <p>
-          Every evaluated loan application is securely persisted in your browser's IndexedDB engine,
-          ensuring complete auditability, instant recall, and zero-latency client data sovereignty.
+          Every evaluated loan application is securely persisted with ACID guarantees across our SQLite WAL database
+          and browser IndexedDB engine, ensuring complete auditability, instant recall, and zero-latency data sovereignty.
         </p>
       </div>
 

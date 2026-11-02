@@ -1,0 +1,77 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        nature: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
+          950: '#052e16',
+        },
+        sage: {
+          50: '#f4f7f5',
+          100: '#e5ebe6',
+          200: '#cbd8cd',
+          300: '#a7bda9',
+          400: '#809d84',
+          500: '#638067',
+          600: '#4d6650',
+          700: '#3f5242',
+          800: '#354337',
+          900: '#2c372e',
+        },
+        earth: {
+          50: '#fafaf9',
+          100: '#f5f5f4',
+          200: '#e7e5e4',
+          300: '#d6d3d1',
+          400: '#a8a29e',
+          500: '#78716c',
+          600: '#57534e',
+          700: '#44403c',
+          800: '#292524',
+          900: '#1c1917',
+          950: '#0c0a09',
+        },
+        skyfin: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+        },
+      },
+      fontFamily: {
+        sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+      },
+      boxShadow: {
+        'glass': '0 8px 32px 0 rgba(15, 23, 42, 0.08)',
+        'glass-lg': '0 20px 40px -10px rgba(15, 23, 42, 0.12)',
+        'nature-glow': '0 0 25px rgba(16, 185, 129, 0.25)',
+        'sky-glow': '0 0 25px rgba(2, 132, 199, 0.25)',
+      },
+      backdropBlur: {
+        'xs': '2px',
+      },
+    },
+  },
+  plugins: [],
+}

@@ -151,6 +151,62 @@ export async function searchRAG(query: string) {
   };
 }
 
+export async function fetchDatabaseStats() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/database/stats`);
+    if (res.ok) {
+      const data = await res.json();
+      return data.stats;
+    }
+  } catch (err) {
+    console.warn('[API] Failed to fetch server database statistics, using client analytics.', err);
+  }
+  return null;
+}
+
+export async function seedBackendDatabase() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/database/seed`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('[API] Backend seeding offline, using client IndexedDB seeding.', err);
+  }
+  return null;
+}
+
+export async function deleteBackendRecord(appId: string) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/history/${appId}`, {
+      method: 'DELETE'
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('[API] Backend record delete offline.', err);
+  }
+  return null;
+}
+
+export async function clearBackendHistory() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/history`, {
+      method: 'DELETE'
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('[API] Backend clear offline.', err);
+  }
+  return null;
+}
+
 function simulateClientUnderwriting(applicant: ApplicantInput): UnderwritingResponse {
   const score = applicant.CreditScore;
   const dti = applicant.DTIRatio;

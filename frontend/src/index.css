@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ============================================================
    PERSONAL LOAN ELIGIBILITY CHECKER - EXECUTIVE MODERN THEME
    Palette: Sky Blue, Deep Blue, White, Black, Coffee/Mocha, Gray

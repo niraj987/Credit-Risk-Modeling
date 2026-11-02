@@ -5,13 +5,22 @@ from typing import Dict, Any, Optional
 # Add parent directory to sys.path so credit_agents can be imported
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from credit_agents.workflow import run_underwriting_pipeline
 from credit_agents.rag.policy_retriever import PolicyRAGRetriever
-from backend.db import init_db, save_application_record, get_recent_applications, get_application_by_id
+from backend.db import (
+    init_db,
+    save_application_record,
+    get_recent_applications,
+    get_application_by_id,
+    delete_application,
+    clear_all_applications,
+    get_database_stats,
+    seed_benchmark_records,
+)
 
 # Initialize SQLite database
 init_db()
@@ -21,7 +30,7 @@ rag_retriever = PolicyRAGRetriever()
 
 app = FastAPI(
     title="FinRisk AI - Multi-Agent Credit Risk API",
-    description="Enterprise Multi-Agent Credit Underwriting & Basel III/IV RAG Engine",
+    description="Enterprise Multi-Agent Credit Underwriting & Basel III/IV RAG Engine with SQLite WAL Persistence",
     version="2.0.0"
 )
 
@@ -62,10 +71,13 @@ class RAGSearchRequest(BaseModel):
 
 @app.get("/api/health")
 def health_check():
+    stats = get_database_stats()
     return {
         "status": "healthy",
         "service": "FinRisk AI Multi-Agent Underwriting Engine",
+        "database": "SQLite 3 (WAL Mode Active)",
         "version": "2.0.0",
+        "total_evaluations_in_db": stats["total_applications"],
         "rag_indexed_chunks": len(rag_retriever.chunks)
     }
 
@@ -113,9 +125,19 @@ def search_regulatory_knowledge_base(request: RAGSearchRequest):
 
 
 @app.get("/api/history")
-def list_history(limit: int = 15):
+def list_history(
+    limit: int = Query(default=50, ge=1, le=200),
+    offset: int = Query(default=0, ge=0),
+    filter_decision: Optional[str] = None,
+    search: Optional[str] = None
+):
     try:
-        records = get_recent_applications(limit=limit)
+        records = get_recent_applications(
+            limit=limit,
+            offset=offset,
+            filter_decision=filter_decision,
+            search_term=search
+        )
         return {"count": len(records), "records": records}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database query error: {str(e)}")
@@ -127,6 +149,38 @@ def get_history_detail(app_id: str):
     if not record:
         raise HTTPException(status_code=404, detail="Application record not found")
     return record
+
+
+@app.delete("/api/history/{app_id}")
+def delete_history_record(app_id: str):
+    success = delete_application(app_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Record not found")
+    return {"success": True, "deleted_id": app_id}
+
+
+@app.delete("/api/history")
+def clear_history():
+    count = clear_all_applications()
+    return {"success": True, "deleted_count": count}
+
+
+@app.get("/api/database/stats")
+def database_statistics():
+    try:
+        stats = get_database_stats()
+        return {"success": True, "stats": stats}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Statistics calculation error: {str(e)}")
+
+
+@app.post("/api/database/seed")
+def seed_database():
+    try:
+        count = seed_benchmark_records()
+        return {"success": True, "seeded_records": count, "message": f"Successfully injected {count} benchmark credit cases into SQLite."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Database seeding error: {str(e)}")
 
 
 if __name__ == "__main__":

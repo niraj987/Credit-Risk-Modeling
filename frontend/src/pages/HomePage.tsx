@@ -152,15 +152,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <div className="top-authority-strip">
         <div className="authority-pill">
           <Zap size={14} className="text-sky" />
-          <span>Autonomous Banking Intelligence</span>
+          <span>🌿 Ethical Banking Intelligence</span>
         </div>
         <span className="authority-divider">•</span>
         <span className="authority-text">
-          Calibrated to Basel III/IV Standards & 12 CFR § 1002.9 Guidelines
+          Calibrated to Basel III/IV Standards & 12 CFR § 1002.9 Fair Lending Directives
         </span>
         <div className="live-status-dot">
           <span className="pulse-indicator"></span>
-          <span>Committee Online</span>
+          <span>🌱 Committee Active</span>
         </div>
       </div>
 
@@ -324,6 +324,59 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     onChange={(e) => setSimLoan(Number(e.target.value))}
                     className="sim-range-slider range-coffee"
                   />
+                </div>
+
+                {/* Repayment Tenure Selector */}
+                <div className="sim-slider-row">
+                  <div className="sim-label-bar">
+                    <span>Repayment Tenure</span>
+                    <b className="text-sky font-mono">{simTenure} Months ({simTenure / 12} Yrs)</b>
+                  </div>
+                  <div className="flex gap-2 pt-1">
+                    {[12, 24, 36, 48, 60].map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => setSimTenure(t)}
+                        className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all border ${
+                          simTenure === t
+                            ? 'bg-sky-600 text-white border-sky-600 shadow-sm'
+                            : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                        }`}
+                      >
+                        {t}m
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Natural Organic DTI Ratio Indicator */}
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 mt-1">
+                  <div className="flex items-center justify-between text-xs mb-1.5">
+                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                      <span>🌿</span> Organic Debt-to-Income (DTI) Balance
+                    </span>
+                    <span className={`font-mono font-bold ${
+                      simDTI <= 0.35 ? 'text-emerald-600' : simDTI <= 0.45 ? 'text-amber-600' : 'text-rose-600'
+                    }`}>
+                      {(simDTI * 100).toFixed(1)}% {simDTI <= 0.35 ? '(Healthy)' : simDTI <= 0.45 ? '(Moderate)' : '(Stretched)'}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-300 ${
+                        simDTI <= 0.35 ? 'bg-emerald-500' : simDTI <= 0.45 ? 'bg-amber-500' : 'bg-rose-500'
+                      }`}
+                      style={{ width: `${Math.min(100, (simDTI / 0.65) * 100)}%` }}
+                    />
+                  </div>
+                  <span className="text-[11px] text-slate-500 mt-1 block">
+                    {simDTI <= 0.35
+                      ? '🌱 Healthy monthly cash flow enables instant Prime Tier approval with minimal interest.'
+                      : simDTI <= 0.45
+                      ? '🌾 Near-Prime debt service. Adding a co-signer or lengthening tenure can lower rates.'
+                      : '🍂 Debt obligation exceeds 45% ceiling. Consider reducing loan principal.'}
+                  </span>
                 </div>
               </div>
 

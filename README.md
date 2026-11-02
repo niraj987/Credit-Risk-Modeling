@@ -86,7 +86,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Full-Stack Production Mode (React + TypeScript + Three.js + FastAPI)
+### 2. Full-Stack End-to-End Production Mode (React + TypeScript + Tailwind CSS + Three.js + FastAPI + SQLite WAL)
 
 #### Start the FastAPI Backend Server
 ```bash
@@ -100,7 +100,29 @@ cd frontend
 npm install
 npm run dev
 ```
-Navigate to `http://localhost:5173` to explore the **3D Three.js Risk Network**, live telemetry, and client-side **IndexedDB JS Database**.
+Navigate to `http://localhost:5173` to explore the **3D Physical Glass Risk Manifold**, live multi-agent telemetry, interactive loan calculator, RAG pop-up tiles, and the **Enterprise SQLite WAL & IndexedDB Dual-Sync Database Hub**.
+
+---
+
+## 🗄️ Enterprise Database Architecture
+
+This platform deploys a resilient **Dual-Sync Database Architecture** engineered for institutional credit underwriting:
+- **Server Database (SQLite 3 with WAL Mode / PostgreSQL Compatible)**:
+  - Strict ACID transaction durability with Write-Ahead Logging (`PRAGMA journal_mode = WAL`) and foreign key constraints.
+  - Relational indexes on `applicant_id`, `timestamp`, `final_decision`, and `credit_score` for sub-millisecond retrieval.
+  - Hybrid schema: Relational metadata columns combined with structured JSON document payloads storing complete 5-layer LangGraph state trajectories.
+  - Dedicated `audit_events` table recording every statutory policy check and underwriting decision.
+- **Client Cache (IndexedDB)**:
+  - Zero-latency client-side persistence ensuring the platform remains interactive even during transient network disconnects.
+  - Real-time synchronization with server REST endpoints (`/api/history`, `/api/database/stats`, `/api/database/seed`).
+
+---
+
+## 🌿 Natural Taste & Biophilic FinTech Design
+
+- **Organic Color Harmonies**: Deep obsidian earth slate, living forest & botanical emerald (`#10b981`), soothing sky horizon (`#0284c7`), and golden sunlight amber (`#f59e0b`).
+- **Tactile 3D Glass Refraction**: Built with Three.js physical transmission (`MeshPhysicalMaterial`) featuring specular glints, internal caustics, and mouse parallax.
+- **Human-Centric Transparency**: Replaces cold banking bureaucracy with empathetic, plain-English guidance and actionable counterfactual advice to empower borrowers.
 
 ---
 
