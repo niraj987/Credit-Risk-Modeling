@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import {
-  BookOpen,
   Search,
-  ExternalLink,
+  BookOpen,
   ShieldCheck,
   Scale,
   FileText,
-  CheckCircle2,
-  Sparkles,
+  AlertTriangle,
   HelpCircle,
-  Lock,
-  DollarSign,
-  AlertCircle,
+  ExternalLink,
   ChevronRight,
-  X,
-  Compass,
+  Filter,
+  CheckCircle2,
+  DollarSign,
+  Lock,
+  Sparkles,
   ArrowRight,
-  Gavel,
+  X,
   Check,
   Zap,
   Info,
@@ -39,26 +38,24 @@ export const RegulationsPage: React.FC = () => {
       title: 'ECOA Regulation B (12 CFR § 1002.9)',
       badge: 'Adverse Action Protection',
       colorClass: 'tile-sky',
-      icon: <ShieldCheck size={26} className="text-neonlime" />,
-      simpleExplanation:
-        'Lenders cannot secretly deny your loan. They are legally mandated to provide the top 4 exact, plain-English reasons for any rejection or modified terms within 30 days.',
-      statutoryDetails:
-        'Prohibits discrimination based on race, color, religion, national origin, sex, marital status, or age. Imposes strict adverse action notice obligations requiring principal reasons derived from empirical scoring systems.',
-      keyCitations: ['12 CFR § 1002.9(a)(2)', 'CFPB Circular 2022-03', 'ECOA Section 701'],
+      icon: <ShieldCheck size={24} className="text-neonlime" />,
+      rule: 'Lenders cannot silently deny a credit application without formal notice.',
+      mandate: 'Mandatory disclosure of top 4 exact, plain-English reasons for any rejection or modified terms within 30 days.',
+      protection: 'Guarantees actionable feedback and prevents discriminatory credit denial based on protected demographics.',
+      citations: ['12 CFR § 1002.9(a)(2)', 'CFPB Circular 2022-03', 'ECOA Section 701'],
       userImpact: 'Guarantees you receive actionable feedback to fix your financial profile.',
     },
     {
       id: 'basel',
       category: 'SOLVENCY',
-      title: 'Basel III & IV Capital Adequacy Framework',
+      title: 'Basel III & IV Capital Framework',
       badge: 'Bank Safety & Solvency',
       colorClass: 'tile-emerald',
-      icon: <Scale size={26} className="text-neonlime" />,
-      simpleExplanation:
-        'Requires banks to calculate mathematically precise Expected Loss and maintain dedicated capital reserves for every loan, preventing financial system collapse.',
-      statutoryDetails:
-        'Internal Ratings-Based (IRB) approach governs Expected Loss: EL = PD × EAD × LGD. Mandates Tier-1 Common Equity cushions calibrated against portfolio tail-risk distributions.',
-      keyCitations: ['Basel Committee BCBS 128', 'Dodd-Frank Act Title I', 'CRR II Art. 158'],
+      icon: <Scale size={24} className="text-neonlime" />,
+      rule: 'Banks must calculate actuarially sound Expected Loss on all consumer loans.',
+      mandate: 'Internal Ratings-Based (IRB) approach governs Expected Loss: EL = PD × EAD × LGD with dedicated Tier-1 equity capital.',
+      protection: 'Ensures your loan interest rate reflects fair, actuarially sound risk pricing rather than predatory corporate profit markups.',
+      citations: ['Basel BCBS 128', 'Dodd-Frank Title I', 'CRR II Art. 158'],
       userImpact: 'Ensures your loan interest rate reflects fair, actuarially sound risk pricing.',
     },
     {
@@ -67,12 +64,11 @@ export const RegulationsPage: React.FC = () => {
       title: 'Fair Credit Reporting Act (FCRA § 615)',
       badge: 'Credit Bureau Accuracy',
       colorClass: 'tile-amber',
-      icon: <FileText size={26} className="text-neonlime" />,
-      simpleExplanation:
-        'Gives you the absolute right to know which credit bureau (CIBIL, Experian, Equifax) provided your data, and entitles you to free credit disclosure and dispute rights.',
-      statutoryDetails:
-        'Mandates that any user of a consumer report taking adverse action must notify the consumer, provide the contact details of the CRA, and disclose the credit score along with key factors adversely affecting it.',
-      keyCitations: ['15 U.S.C. § 1681m', 'CFPB Bulletin 2012-09', 'FCRA § 609'],
+      icon: <FileText size={24} className="text-neonlime" />,
+      rule: 'Lenders taking adverse action must disclose the consumer credit bureau used.',
+      mandate: 'Gives you the absolute right to know which bureau (CIBIL, Experian) provided your file, plus free credit disclosure and dispute rights.',
+      protection: 'Protects you from erroneous bureau entries and unauthorized credit inquiries that damage your score.',
+      citations: ['15 U.S.C. § 1681m', 'CFPB Bulletin 2012-09', 'FCRA § 609'],
       userImpact: 'Protects you from erroneous bureau entries and unauthorized credit checks.',
     },
     {
@@ -81,26 +77,24 @@ export const RegulationsPage: React.FC = () => {
       title: 'Four-Fifths Rule & Disparate Impact',
       badge: 'Algorithmic Non-Bias',
       colorClass: 'tile-rose',
-      icon: <Lock size={26} className="text-neonlime" />,
-      simpleExplanation:
-        'Even if an AI credit model does not explicitly ask about protected traits, its approval rates across groups must pass the 80% (Four-Fifths) ratio test, guaranteeing algorithmic fairness.',
-      statutoryDetails:
-        '29 CFR § 1607.4(D) Uniform Guidelines on Employee Selection Procedures, adopted by CFPB and DOJ for credit scoring. Adverse Impact Ratio must meet or exceed 0.80 to rebut disparate impact presumptions.',
-      keyCitations: ['29 CFR § 1607.4(D)', 'CFPB Supervisory Highlights', 'DOJ Fair Lending Guidelines'],
+      icon: <Lock size={24} className="text-neonlime" />,
+      rule: 'AI credit algorithms must maintain demographic parity across all borrower cohorts.',
+      mandate: 'Approval rates across demographic cohorts must satisfy the 80% (Four-Fifths) ratio: AIR = Rate(Protected) / Rate(Reference) >= 0.80.',
+      protection: 'Guarantees automated credit models are statistically tested and prohibited from exhibiting indirect demographic bias.',
+      citations: ['29 CFR § 1607.4(D)', 'CFPB Supervisory Circular', 'DOJ Fair Lending Directives'],
       userImpact: 'Ensures AI algorithms never discriminate against protected demographics.',
     },
     {
       id: 'tila',
       category: 'APR_TRANSPARENCY',
-      title: 'Truth in Lending Act (TILA Regulation Z)',
+      title: 'Truth in Lending Act (TILA Reg Z)',
       badge: 'APR Disclosure & Transparency',
       colorClass: 'tile-purple',
-      icon: <DollarSign size={26} className="text-neonlime" />,
-      simpleExplanation:
-        'Lenders cannot hide fees, processing charges, or rate markups. They must state the all-inclusive Annual Percentage Rate (APR) and total finance charge upfront.',
-      statutoryDetails:
-        '12 CFR Part 1026 regulates consumer credit terms disclosure. Requires standard calculation of Annual Percentage Rate (APR), payment schedules, finance charges, and prepayment covenant terms.',
-      keyCitations: ['12 CFR § 1026.18', 'TILA 15 U.S.C. § 1601', 'CFPB Reg Z Handbook'],
+      icon: <DollarSign size={24} className="text-neonlime" />,
+      rule: 'Lenders are legally barred from concealing processing fees or compounding traps.',
+      mandate: 'Mandates standard upfront disclosure of Annual Percentage Rate (APR), payment schedule, finance charges, and prepayment terms.',
+      protection: 'Protects borrowers from hidden fees, surprise penalty rate hikes, or balloon payment covenants.',
+      citations: ['12 CFR § 1026.18', 'TILA 15 U.S.C. § 1601', 'CFPB Reg Z Handbook'],
       userImpact: 'Protects you from hidden fees, sudden balloon payments, or predatory interest.',
     },
     {
@@ -109,12 +103,11 @@ export const RegulationsPage: React.FC = () => {
       title: 'Gramm-Leach-Bliley Act (GLBA Safeguards)',
       badge: 'Financial Data Privacy',
       colorClass: 'tile-cyan',
-      icon: <Sparkles size={26} className="text-neonlime" />,
-      simpleExplanation:
-        'Guarantees your confidential financial data is encrypted and securely processed with client-side sovereignty, never leaked or sold to third-party telemarketers.',
-      statutoryDetails:
-        '16 CFR Part 314 Standards for Safeguarding Customer Information. Requires comprehensive administrative, technical, and physical safeguards for nonpublic personal financial information.',
-      keyCitations: ['16 CFR § 314.3', '15 U.S.C. § 6801', 'FTC Safeguards Rule 2023'],
+      icon: <Sparkles size={24} className="text-neonlime" />,
+      rule: 'Confidential borrower financial data must remain strictly encrypted and sovereign.',
+      mandate: '16 CFR Part 314 mandates comprehensive technical, administrative, and physical encryption safeguards for nonpublic personal financial data.',
+      protection: 'Guarantees your monthly salary and PAN/Aadhaar identity details are never monetized, leaked, or shared with third parties.',
+      citations: ['16 CFR § 314.3', '15 U.S.C. § 6801', 'FTC Safeguards Rule 2023'],
       userImpact: 'Guarantees your salary and PAN/Aadhaar data remains 100% private and encrypted.',
     },
   ];
@@ -150,10 +143,6 @@ export const RegulationsPage: React.FC = () => {
     <div className="regulations-page-container">
       {/* Top Header with Glass Effect */}
       <div className="page-header-wrap reveal-on-scroll">
-        <div className="page-badge badge-emerald">
-          <ShieldCheck size={14} className="text-neonlime" />
-          <span>Consumer Credit Protection & Legal Transparency</span>
-        </div>
         <h1>Borrower Rights & Credit Regulations</h1>
         <p>
           Empowering borrowers with real-time statutory intelligence. Discover how federal credit laws,
@@ -176,23 +165,23 @@ export const RegulationsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Spacious, Elegant Search Bar with Clear Inputs & Glass Effect */}
+      {/* Spacious, Elegant Search Bar: Perfectly Aligned Unified Pill */}
       <div className="reg-search-card-glass reveal-on-scroll">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSearch(searchQuery);
           }}
-          className="search-form"
+          className="search-form-unified"
         >
-          <div className="search-input-wrapper">
-            <Search className="search-icon text-slate-400" size={20} />
+          <div className="search-bar-inner">
+            <Search className="search-icon text-neonlime flex-shrink-0" size={20} />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search credit laws, adverse action rules, borrower rights, Basel formulas..."
-              className="search-field"
+              className="search-field-unified"
             />
             {searchQuery && (
               <button
@@ -204,17 +193,17 @@ export const RegulationsPage: React.FC = () => {
                 <X size={16} />
               </button>
             )}
+            <button type="submit" className="search-submit-btn-unified" disabled={isSearching}>
+              {isSearching ? (
+                <span className="flex items-center gap-2">
+                  <span className="animate-spin inline-block w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full" />
+                  Searching...
+                </span>
+              ) : (
+                'Search Knowledge Base'
+              )}
+            </button>
           </div>
-          <button type="submit" className="search-submit-btn-lime" disabled={isSearching}>
-            {isSearching ? (
-              <span className="flex items-center gap-2">
-                <span className="animate-spin inline-block w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full" />
-                Querying Law...
-              </span>
-            ) : (
-              'Search Knowledge Base'
-            )}
-          </button>
         </form>
       </div>
 
@@ -328,33 +317,6 @@ export const RegulationsPage: React.FC = () => {
                     </ul>
                   </div>
                 )}
-
-                {/* 5. Mathematical & Model Operational Standard */}
-                {hit.mathematical_formula && (
-                  <div className="legal-compartment math-compartment">
-                    <div className="compartment-title text-slate-200">
-                      <Zap size={15} className="text-amber-400" />
-                      <span>Mathematical & Model Operational Standard: {hit.formula_label || 'Standard'}</span>
-                    </div>
-                    <div className="formula-display-box">
-                      <code className="font-mono text-neonlime text-sm">{hit.mathematical_formula}</code>
-                    </div>
-                  </div>
-                )}
-
-                {/* 6. Official Citations & Reference Pills */}
-                {hit.regulatory_citations && hit.regulatory_citations.length > 0 && (
-                  <div className="legal-card-footer">
-                    <span className="citation-title">Official Legal Citations:</span>
-                    <div className="citation-tags">
-                      {hit.regulatory_citations.map((c: string, ci: number) => (
-                        <span key={ci} className="tag-pill-lime">
-                          <ExternalLink size={11} /> {c}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -389,28 +351,44 @@ export const RegulationsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Decorative Pop-Up Pillar Tiles Grid with Background Colors and Rich Shadows */}
+      {/* Decorative Pop-Up Pillar Tiles Grid with Structured Content & Stable Hover */}
       <div className="pop-tiles-grid reveal-on-scroll">
         {filteredPillars.map((pillar) => (
           <div
             key={pillar.id}
-            className={`pop-tile-card ${pillar.colorClass}`}
+            className="pop-tile-card"
             onClick={() => setSelectedPillar(pillar)}
           >
             <div className="tile-top-row">
-              <div className="tile-icon-box">{pillar.icon}</div>
               <span className="tile-badge">{pillar.badge}</span>
+              <div className="tile-icon-box">{pillar.icon}</div>
             </div>
+            
             <h3 className="tile-title">{pillar.title}</h3>
-            <p className="tile-summary">{pillar.simpleExplanation}</p>
 
-            <div className="tile-user-impact">
-              <span className="impact-tag">Your Protection:</span>
-              <p>{pillar.userImpact}</p>
+            <div className="tile-structured-box">
+              <div className="structured-row">
+                <span className="struct-tag text-neonlime">Statutory Rule:</span>
+                <p className="struct-desc">{pillar.rule}</p>
+              </div>
+              <div className="structured-row">
+                <span className="struct-tag text-sky">Mandate:</span>
+                <p className="struct-desc">{pillar.mandate}</p>
+              </div>
+              <div className="structured-row">
+                <span className="struct-tag text-amber">Borrower Shield:</span>
+                <p className="struct-desc">{pillar.protection}</p>
+              </div>
+            </div>
+
+            <div className="tile-bottom-citations">
+              {pillar.citations.map((c, ci) => (
+                <span key={ci} className="tile-cite-chip">{c}</span>
+              ))}
             </div>
 
             <div className="tile-bottom-action">
-              <span className="action-hint">Click to inspect legal citations</span>
+              <span className="action-hint">Click for full statutory breakdown</span>
               <ChevronRight size={16} />
             </div>
           </div>
@@ -441,18 +419,18 @@ export const RegulationsPage: React.FC = () => {
             <div className="pillar-detail-body">
               <div className="detail-section">
                 <h4>What This Means for You as a Borrower</h4>
-                <p className="detail-plain-text">{selectedPillar.simpleExplanation}</p>
+                <p className="detail-plain-text">{selectedPillar.mandate}</p>
               </div>
 
               <div className="detail-section">
-                <h4>Statutory & Regulatory Details</h4>
-                <p className="detail-legal-text">{selectedPillar.statutoryDetails}</p>
+                <h4>Statutory Protection & Creditor Duty</h4>
+                <p className="detail-legal-text">{selectedPillar.protection}</p>
               </div>
 
               <div className="detail-section">
                 <h4>Official Citations & Regulatory References</h4>
                 <div className="citations-pills-row">
-                  {selectedPillar.keyCitations.map((c: string, idx: number) => (
+                  {selectedPillar.citations.map((c: string, idx: number) => (
                     <span key={idx} className="citation-pill">
                       <ExternalLink size={12} /> {c}
                     </span>
@@ -461,9 +439,9 @@ export const RegulationsPage: React.FC = () => {
               </div>
 
               <div className="detail-takeaway-box">
-                <ShieldCheck size={20} className="text-neonlime" />
+                <ShieldCheck size={20} className="text-neonlime flex-shrink-0" />
                 <div>
-                  <b>Our AI Guarantee:</b>
+                  <b>Our Underwriting Guarantee:</b>
                   <p>{selectedPillar.userImpact}</p>
                 </div>
               </div>

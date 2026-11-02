@@ -167,7 +167,6 @@ export const App: React.FC = () => {
             </div>
             <div className="brand-text">
               <h1>FinRisk</h1>
-              <span className="brand-tag">Credit Intelligence</span>
             </div>
           </div>
         </div>
@@ -251,7 +250,6 @@ export const App: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="drawer-title">FinRisk</h4>
-                  <span className="drawer-sub">Credit Intelligence Suite</span>
                 </div>
               </div>
               <button

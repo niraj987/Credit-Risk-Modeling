@@ -97,10 +97,6 @@ export const AgentArchitectureFlow: React.FC = () => {
     <div className="agent-architecture-container reveal-on-scroll">
       {/* Container Header */}
       <div className="agent-flow-header">
-        <div className="agent-eyebrow">
-          <Sparkles size={14} className="text-neonlime" />
-          <span>Multi-Stage Autonomous Pipeline</span>
-        </div>
         <h2 className="agent-main-title">
           Autonomous Multi-Agent Architecture
         </h2>
@@ -163,11 +159,6 @@ export const AgentArchitectureFlow: React.FC = () => {
               <span>Selected Inspection: Layer {currentAgent.layer}</span>
             </div>
             <h3 className="panel-agent-headline">{currentAgent.name}</h3>
-          </div>
-          <div className="panel-meta-tags">
-            <span className="meta-active-badge">
-              <CheckCircle2 size={13} className="text-neonlime" /> Layer Active
-            </span>
           </div>
         </div>
 

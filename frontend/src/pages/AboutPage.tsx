@@ -73,10 +73,6 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="about-page-container animate-fade-in-up">
       <div className="page-header-wrap">
-        <div className="page-badge badge-blue">
-          <Terminal size={14} className="text-blue-400" />
-          <span>System Architecture & Governance</span>
-        </div>
         <h1>About FinRisk</h1>
         <p>
           An enterprise-grade financial intelligence platform bridging quantitative machine learning,
@@ -205,10 +201,6 @@ export const AboutPage: React.FC = () => {
       {/* Technical & Compliance Deep Dives: High-Hierarchy Modern Cards */}
       <div className="faq-section">
         <div className="section-title-wrap">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/60 text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
-            <Sparkles size={13} className="text-neonlime" />
-            <span>Institutional Documentation</span>
-          </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
             Technical & Compliance Deep Dives
           </h2>
@@ -220,10 +212,9 @@ export const AboutPage: React.FC = () => {
         <div className="deep-dives-grid">
           {deepDives.map((item, idx) => (
             <div key={idx} className="deep-dive-card">
-              {/* Top Row: Category Tag & Huge Stat */}
+              {/* Top Row: Category Tag */}
               <div className="deep-dive-top-bar">
                 <span className="deep-dive-category-chip">{item.category}</span>
-                <span className={`deep-dive-stat-badge ${item.statColor}`}>{item.stat}</span>
               </div>
 
               {/* Bold Question Header */}
@@ -252,25 +243,6 @@ export const AboutPage: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Open Source / GitHub Footer Card */}
-      <div className="github-card">
-        <div className="github-info">
-          <Github size={28} className="text-white" />
-          <div>
-            <h4>Open Source Financial Engineering Project</h4>
-            <p>Explore the full source code, Python multi-agent package, and test suite on GitHub.</p>
-          </div>
-        </div>
-        <a
-          href="https://github.com/niraj987/Credit-Risk-Modeling"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="github-link-btn"
-        >
-          View Repository <Github size={16} />
-        </a>
       </div>
     </div>
   );
