@@ -159,50 +159,87 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             />
           </div>
 
-          {/* How It Works & Inspirational Borrower Section */}
-          <div className="how-it-works-guide-card">
+          {/* How It Works & Inspirational Borrower Section (Fills Left Column Space) */}
+          <div className="how-it-works-guide-card expanded-fill-card">
             <div className="guide-card-header">
               <div className="flex items-center gap-2">
-                <Compass size={18} className="text-sky" />
+                <Compass size={18} className="text-neonlime" />
                 <h4>How Our Underwriting Committee Works</h4>
               </div>
-              <span className="step-count-pill">3-Step Resolution</span>
+              <span className="step-count-pill">5-Stage Verification</span>
             </div>
+
+            <p className="guide-intro-text">
+              In our platform, underwriting is never left to a single black-box score. 
+              Each loan application undergoes a structured, 5-stage verification committee to guarantee accuracy, fairness, and transparency:
+            </p>
 
             <div className="guide-steps-vertical">
               <div className="guide-step">
                 <div className="step-circle">1</div>
                 <div className="step-detail">
-                  <h5>Input Financial Fundamentals</h5>
-                  <p>Provide your current monthly income, existing debt obligations, and target loan sizing.</p>
+                  <h5>Profile & Capacity Ingestion</h5>
+                  <p>Validates monthly income consistency, computes DTI leverage boundaries, and sanity-checks revolving debt ratios.</p>
                 </div>
               </div>
 
               <div className="guide-step">
                 <div className="step-circle">2</div>
                 <div className="step-detail">
-                  <h5>5-Agent Autonomous Audit</h5>
-                  <p>
-                    Specialized agents verify KYC integrity, calculate LightGBM default probability, test macro stress,
-                    and cross-check statutory ECOA guidelines.
-                  </p>
+                  <h5>Quantitative ML Risk Modeling</h5>
+                  <p>Executes LightGBM default prediction model, computes 1-Year Probability of Default (PD), and extracts SHAP attribution vectors.</p>
                 </div>
               </div>
 
               <div className="guide-step">
                 <div className="step-circle">3</div>
                 <div className="step-detail">
-                  <h5>Transparent Terms & Action Plan</h5>
-                  <p>
-                    Receive an unmanipulated risk-adjusted APR, Basel capital allocation, and concrete steps to unlock lower rates.
-                  </p>
+                  <h5>Statutory Policy & Adverse Reason Mapping</h5>
+                  <p>Cross-references underwriting criteria against ECOA Regulation B (12 CFR § 1002.9) to guarantee transparent reason codes.</p>
+                </div>
+              </div>
+
+              <div className="guide-step">
+                <div className="step-circle">4</div>
+                <div className="step-detail">
+                  <h5>Fair Lending & Macro Stress Simulation</h5>
+                  <p>Performs Four-Fifths Adverse Impact Ratio (AIR ≥ 0.80) non-discrimination audit and simulates Fed +300 bps rate shock.</p>
+                </div>
+              </div>
+
+              <div className="guide-step">
+                <div className="step-circle">5</div>
+                <div className="step-detail">
+                  <h5>Committee Synthesis & Action Roadmap</h5>
+                  <p>Issues final binding approval, calibrates risk-adjusted APR (RAROC), and provides clear steps to optimize borrowing rates.</p>
                 </div>
               </div>
             </div>
 
+            {/* Borrower Protections Seal */}
+            <div className="borrower-guarantees-grid">
+              <div className="guarantee-chip">
+                <CheckCircle2 size={14} className="text-neonlime flex-shrink-0" />
+                <span>Zero Score Impact (Soft Inquiry)</span>
+              </div>
+              <div className="guarantee-chip">
+                <CheckCircle2 size={14} className="text-neonlime flex-shrink-0" />
+                <span>Statutory 12 CFR § 1002.9 Compliance</span>
+              </div>
+              <div className="guarantee-chip">
+                <CheckCircle2 size={14} className="text-neonlime flex-shrink-0" />
+                <span>Four-Fifths Non-Bias Verified</span>
+              </div>
+              <div className="guarantee-chip">
+                <CheckCircle2 size={14} className="text-neonlime flex-shrink-0" />
+                <span>End-to-End Client Encryption</span>
+              </div>
+            </div>
+
             <div className="inspirational-quote-box">
+              <ShieldCheck size={20} className="text-neonlime flex-shrink-0" />
               <p>
-                “You deserve full clarity into your borrowing power. No hidden markups, no mystery algorithms,
+                “You deserve complete clarity into your borrowing power. No hidden markups, no mystery algorithms,
                 and no unexpected penalties.”
               </p>
             </div>
