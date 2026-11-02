@@ -248,7 +248,7 @@ function simulateClientUnderwriting(applicant: ApplicantInput): UnderwritingResp
     grade = 'CCC/D (Subprime Default Risk)';
     decision = 'REJECTED';
     apr = 18.5;
-    if (dti > 0.50) adverseReasons.push(`Total Debt-To-Income (${(dti * 100).toFixed(1)}%) exceeds institutional 50.0% ceiling.`);
+    if (dti > 0.50) adverseReasons.push(`Total Debt-To-Income (${(dti * 100).toFixed(1)}%) exceeds regulatory 50.0% ceiling.`);
     if (score < 580) adverseReasons.push(`Credit bureau score (${score}) below minimum threshold of 580.`);
     adverseReasons.push(`Model-calibrated default probability (${pdPct}%) exceeds maximum tolerance.`);
     adverseReasons.push(`Elevated debt servicing burden relative to income (₹${income.toLocaleString()}).`);
@@ -300,7 +300,7 @@ function simulateClientUnderwriting(applicant: ApplicantInput): UnderwritingResp
       rag_regulatory_context: {
         retrieved_policies: [
           {
-            topic: 'Tier Cutoff & Institutional Policy',
+            topic: 'Tier Cutoff & Prudential Policy',
             source: 'credit_underwriting_policy.md',
             title: 'Credit Tier Classification Matrix',
             excerpt: 'Prime Tier (>=720, DTI<=36%), Near-Prime (660-719, DTI<=43%), Subprime (580-659).',

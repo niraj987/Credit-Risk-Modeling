@@ -22,6 +22,8 @@ import {
   X,
   TrendingUp,
   FileText,
+  User,
+  Table2,
 } from 'lucide-react';
 import { SavedEvaluation, jsDatabase } from '../services/db';
 
@@ -384,69 +386,119 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
             })}
           </div>
         ) : (
-          /* Mode 2: Interactive Data Matrix Table View */
-          <div className="history-table-card">
+          /* Mode 2: Executive Structured Financial Ledger Table View */
+          <div className="history-table-card executive-ledger-wrap animate-fade-in-up">
             <div className="table-responsive">
-              <table className="history-table">
+              <table className="executive-ledger-table">
                 <thead>
                   <tr>
-                    <th>Application ID</th>
-                    <th>Applicant / Profile</th>
+                    <th>Applicant / File ID</th>
                     <th>Date & Time</th>
-                    <th>FICO</th>
-                    <th>Loan Sizing</th>
-                    <th>DTI</th>
+                    <th>Credit Bureau (FICO)</th>
+                    <th>Loan Sizing & Income</th>
+                    <th>DTI Leverage</th>
                     <th>1-Yr PD</th>
-                    <th>Grade</th>
-                    <th>Decision</th>
-                    <th>APR</th>
-                    <th>Actions</th>
+                    <th>Credit Tier Grade</th>
+                    <th>Committee Verdict</th>
+                    <th>Recommended APR</th>
+                    <th>Audit & Review</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredRecords.map((rec) => (
-                    <tr key={rec.id} className="interactive-table-row">
-                      <td className="font-mono text-cyan font-bold">{rec.id}</td>
-                      <td><b>{rec.applicantName}</b></td>
-                      <td className="text-muted text-xs">{new Date(rec.timestamp).toLocaleString()}</td>
-                      <td><span className="badge-score">{rec.creditScore}</span></td>
-                      <td><b>₹{rec.loanAmount.toLocaleString('en-IN')}</b></td>
-                      <td>{(rec.dtiRatio * 100).toFixed(0)}%</td>
-                      <td className="font-mono font-bold">{rec.pdPercent}%</td>
-                      <td><span className="badge-grade">{rec.ratingGrade}</span></td>
-                      <td>
-                        <span className={`status-pill pill-${rec.decision.toLowerCase()}`}>
-                          {rec.decision}
-                        </span>
-                      </td>
-                      <td><b>{rec.recommendedApr}%</b></td>
-                      <td>
-                        <div className="table-actions">
-                          <button
-                            onClick={() => setInspectedRecord(rec)}
-                            className="btn-action-icon"
-                            title="Inspect Audit Certificate"
-                          >
-                            <Eye size={14} />
-                          </button>
-                          <button
-                            onClick={() => onSelectRecord(rec)}
-                            className="load-rec-btn"
-                            title="Load into Eligibility Checker"
-                          >
-                            <ArrowRight size={14} /> Load
-                          </button>
-                          <button
-                            onClick={() => onDeleteRecord(rec.id)}
-                            className="del-rec-btn"
-                            title="Delete Record"
-                          >
-                            <Trash2 size={14} />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                  {filteredRecords.map((rec) => {
+                    const isApproved = rec.decision === 'APPROVED';
+                    const isConditional = rec.decision.includes('CONDITIONAL');
+                    const tierDotColor = rec.creditScore >= 750 ? 'bg-emerald-400' : rec.creditScore >= 670 ? 'bg-sky' : rec.creditScore >= 600 ? 'bg-amber' : 'bg-rose';
+                    const initialLetter = rec.applicantName ? rec.applicantName[0].toUpperCase() : 'A';
+
+                    return (
+                      <tr key={rec.id} className="executive-ledger-row">
+                        <td>
+                          <div className="flex items-center gap-3">
+                            <div className={`applicant-avatar ${isApproved ? 'avatar-approved' : isConditional ? 'avatar-conditional' : 'avatar-rejected'}`}>
+                              {initialLetter}
+                            </div>
+                            <div className="applicant-id-group">
+                              <span className="applicant-name-bold">{rec.applicantName}</span>
+                              <span className="applicant-id-mono font-mono">{rec.id}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="timestamp-group">
+                            <span className="date-text">{new Date(rec.timestamp).toLocaleDateString()}</span>
+                            <span className="time-sub">{new Date(rec.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="fico-cell">
+                            <span className={`tier-dot ${tierDotColor}`}></span>
+                            <span className="fico-number">{rec.creditScore}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="loan-sizing-group">
+                            <span className="loan-bold">₹{rec.loanAmount.toLocaleString('en-IN')}</span>
+                            <span className="income-sub">Inc: ₹{rec.income ? rec.income.toLocaleString('en-IN') : 'N/A'}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="dti-progress-group">
+                            <div className="dti-text-row">
+                              <span>{(rec.dtiRatio * 100).toFixed(0)}%</span>
+                            </div>
+                            <div className="dti-mini-track">
+                              <div
+                                className={`dti-mini-fill ${rec.dtiRatio <= 0.35 ? 'bg-emerald' : rec.dtiRatio <= 0.43 ? 'bg-amber' : 'bg-rose'}`}
+                                style={{ width: `${Math.min(100, (rec.dtiRatio / 0.5) * 100)}%` }}
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span className={`pd-badge ${rec.pdPercent < 5 ? 'pd-safe' : rec.pdPercent < 15 ? 'pd-moderate' : 'pd-danger'}`}>
+                            {rec.pdPercent}%
+                          </span>
+                        </td>
+                        <td>
+                          <span className="badge-grade-clean">{rec.ratingGrade}</span>
+                        </td>
+                        <td>
+                          <span className={`status-pill pill-${rec.decision.toLowerCase()}`}>
+                            {rec.decision}
+                          </span>
+                        </td>
+                        <td>
+                          <span className="apr-value-bold">{rec.recommendedApr}%</span>
+                        </td>
+                        <td>
+                          <div className="ledger-actions-group">
+                            <button
+                              onClick={() => setInspectedRecord(rec)}
+                              className="btn-ledger-inspect"
+                              title="Inspect Complete Audit Trail & State"
+                            >
+                              <Eye size={14} /> <span>Inspect</span>
+                            </button>
+                            <button
+                              onClick={() => onSelectRecord(rec)}
+                              className="btn-ledger-load"
+                              title="Load Profile into Eligibility Checker"
+                            >
+                              <ArrowRight size={14} />
+                            </button>
+                            <button
+                              onClick={() => onDeleteRecord(rec.id)}
+                              className="btn-ledger-del"
+                              title="Delete Record"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -552,7 +604,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                     <Cpu size={18} className="text-sky" />
                     <div className="c-ag-body">
                       <b>Layer 2: Quantitative ML Risk Agent</b>
-                      <p>LightGBM model computed 1-year PD at {inspectedRecord.pdPercent}%. Institutional rating: {inspectedRecord.ratingGrade}.</p>
+                      <p>LightGBM model computed 1-year PD at {inspectedRecord.pdPercent}%. Credit rating: {inspectedRecord.ratingGrade}.</p>
                     </div>
                     <span className="c-ag-status status-pass">CALIBRATED</span>
                   </div>

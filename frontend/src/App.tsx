@@ -22,11 +22,11 @@ import {
   Info,
   FileText,
   Search,
-  Github,
   Sparkles,
   ArrowRight,
-  Menu,
+  ShieldCheck,
   X,
+  Scale,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -137,7 +137,7 @@ export const App: React.FC = () => {
     { id: 'home', label: 'Home', icon: <Home size={16} /> },
     { id: 'eligibility', label: 'Eligibility Checker', icon: <CheckCircle size={16} /> },
     { id: 'calculator', label: 'Loan Calculator', icon: <Calculator size={16} /> },
-    { id: 'regulations', label: 'RAG Knowledge Base', icon: <BookOpen size={16} /> },
+    { id: 'regulations', label: 'Borrower Rights & Laws', icon: <Scale size={16} /> },
     { id: 'history', label: `Audit Database (${historyRecords.length})`, icon: <Database size={16} /> },
     { id: 'about', label: 'About & Governance', icon: <Info size={16} /> },
   ];
@@ -147,11 +147,23 @@ export const App: React.FC = () => {
       {/* Top Header Navigation */}
       <header className="navbar">
         <div className="navbar-left">
-          <div className="brand-logo" onClick={() => setActivePage('home')} style={{ cursor: 'pointer' }}>
-            <span className="logo-icon">💳</span>
+          <div
+            className="brand-logo"
+            onClick={() => {
+              setActivePage('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            <div className="brand-crest-box">
+              <ShieldCheck size={22} className="text-sky-600" />
+            </div>
             <div className="brand-text">
-              <h1>Personal Loan Eligibility Checker</h1>
-              <span className="brand-tag">AI-Powered Multi-Agent Credit Underwriting Platform</span>
+              <div className="flex items-center gap-1.5">
+                <h1>FinRisk</h1>
+                <span className="brand-badge-pill">AI Underwriting</span>
+              </div>
+              <span className="brand-tag">Intelligent Pre-Qualification & Fair Lending Analytics</span>
             </div>
           </div>
         </div>
@@ -178,7 +190,7 @@ export const App: React.FC = () => {
           <button
             onClick={() => setIsRAGOpen(true)}
             className="nav-btn btn-search-rag"
-            title="Search Regulatory RAG"
+            title="Search Consumer Credit Laws"
           >
             <Search size={15} /> <span>Query Law</span>
           </button>
@@ -228,11 +240,13 @@ export const App: React.FC = () => {
         <div className="pro-nav-drawer-backdrop" onClick={() => setMobileMenuOpen(false)}>
           <div className="pro-nav-drawer-card" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-header">
-              <div className="flex items-center gap-2">
-                <span className="drawer-logo">💳</span>
+              <div className="flex items-center gap-2.5">
+                <div className="brand-crest-box-sm">
+                  <ShieldCheck size={20} className="text-sky-600" />
+                </div>
                 <div>
-                  <h4 className="drawer-title">FinRisk Underwriting Suite</h4>
-                  <span className="drawer-sub">Autonomous Multi-Agent Banking Platform</span>
+                  <h4 className="drawer-title">FinRisk AI</h4>
+                  <span className="drawer-sub">Autonomous Credit Analytics Platform</span>
                 </div>
               </div>
               <button
@@ -263,7 +277,7 @@ export const App: React.FC = () => {
               ))}
             </div>
 
-            <div className="drawer-section-label">Quick Action Hub</div>
+            <div className="drawer-section-label">Quick Actions</div>
             <div className="drawer-actions-grid">
               <button
                 onClick={() => {
@@ -272,7 +286,7 @@ export const App: React.FC = () => {
                 }}
                 className="drawer-action-btn btn-action-rag"
               >
-                <Search size={15} /> <span>Query Law RAG</span>
+                <Search size={15} /> <span>Query Laws</span>
               </button>
 
               <button
@@ -283,7 +297,7 @@ export const App: React.FC = () => {
                 }}
                 className="drawer-action-btn btn-action-check"
               >
-                <Sparkles size={15} /> <span>Instant Eligibility</span>
+                <Sparkles size={15} /> <span>Check Rate</span>
               </button>
             </div>
           </div>
@@ -323,18 +337,20 @@ export const App: React.FC = () => {
         {activePage === 'about' && <AboutPage />}
       </main>
 
-      {/* Institutional Footer */}
+      {/* Clean Professional Footer */}
       <footer className="site-footer">
         <div className="footer-container">
           <div className="footer-top-row">
             <div className="footer-brand">
               <div className="flex items-center gap-2">
-                <span className="text-xl">💳</span>
-                <span className="footer-brand-title">Personal Loan Eligibility Checker</span>
+                <div className="brand-crest-box-sm">
+                  <ShieldCheck size={18} className="text-sky-600" />
+                </div>
+                <span className="footer-brand-title">FinRisk AI Underwriting</span>
               </div>
               <p className="footer-tagline">
-                Institutional-grade financial intelligence, LangGraph multi-agent underwriting,
-                and regulatory compliance governance.
+                Empowering borrowers with transparent pre-qualification, unbiased AI risk assessment,
+                and actionable roadmaps to secure the best borrowing terms.
               </p>
             </div>
 
@@ -346,10 +362,10 @@ export const App: React.FC = () => {
             </div>
 
             <div className="footer-links-group">
-              <span className="footer-links-title">Governance</span>
-              <button onClick={() => setActivePage('regulations')}>RAG Policy Hub</button>
-              <button onClick={() => setActivePage('about')}>Architecture & FAQ</button>
-              <button onClick={() => setActivePage('history')}>IndexedDB Audit Trail</button>
+              <span className="footer-links-title">Compliance & Rights</span>
+              <button onClick={() => setActivePage('regulations')}>Borrower Rights & Laws</button>
+              <button onClick={() => setActivePage('about')}>System Governance & FAQ</button>
+              <button onClick={() => setActivePage('history')}>Audit Trail</button>
             </div>
 
             <div className="footer-links-group">
@@ -361,19 +377,18 @@ export const App: React.FC = () => {
               >
                 GitHub Repository
               </a>
-              <span className="version-pill">Version 2.2.0 • Production</span>
+              <span className="version-pill">Version 2.3.0 • Production</span>
             </div>
           </div>
 
           <div className="footer-bottom-row">
             <p className="disclaimer-text">
-              <b>Regulatory Disclaimer:</b> Personal Loan Eligibility Checker is an educational and
-              institutional simulation platform modeled after Basel III/IV Internal Ratings-Based (IRB)
-              accords, the Equal Credit Opportunity Act (ECOA 12 CFR § 1002.9), and the Fair Credit Reporting Act (FCRA).
-              Simulated default probabilities and eligibility verdicts do not constitute a formal commercial lending contract.
+              <b>Consumer Notice:</b> FinRisk AI is an educational pre-qualification platform designed to provide
+              transparent credit analysis under the Equal Credit Opportunity Act (ECOA 12 CFR § 1002.9) and the Fair Credit
+              Reporting Act (FCRA). Pre-qualification assessments use soft evaluations with zero impact on credit bureau scores.
             </p>
             <p className="copyright-text">
-              © {new Date().getFullYear()} Personal Loan Eligibility Checker • MIT Licensed
+              © {new Date().getFullYear()} FinRisk AI • MIT Licensed • Ethical & Transparent Underwriting
             </p>
           </div>
         </div>

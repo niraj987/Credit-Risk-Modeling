@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { ApplicantInput, UnderwritingResponse } from '../services/api';
-import { RiskGlobe3D } from '../components/RiskGlobe3D';
-import { RiskSurface3D } from '../components/RiskSurface3D';
 import { AgentTelemetry } from '../components/AgentTelemetry';
 import { ApplicantForm } from '../components/ApplicantForm';
 import {
@@ -22,6 +20,14 @@ import {
   HelpCircle,
   Activity,
   Layers,
+  Lock,
+  Compass,
+  ArrowRight,
+  Gauge,
+  Percent,
+  Check,
+  Clock,
+  HeartHandshake,
 } from 'lucide-react';
 
 interface EligibilityPageProps {
@@ -96,8 +102,54 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
       </div>
 
       <div className="eligibility-grid">
-        {/* Left Column: Form */}
+        {/* Left Column: Form + Borrower Empowerment & How It Works Guide */}
         <section className="form-col">
+          {/* Borrower Empowerment & Protection Banner */}
+          <div className="borrower-empowerment-card">
+            <div className="empowerment-badge">
+              <ShieldCheck size={15} className="text-emerald-400" />
+              <span>100% Soft Inquiry Protection</span>
+            </div>
+            <h3 className="empowerment-title">Check Your True Borrowing Power With Zero Score Impact</h3>
+            <p className="empowerment-text">
+              Traditional lenders perform hard credit bureau inquiries that damage your CIBIL/Experian credit score before
+              you even see an offer. Our autonomous engine evaluates your profile against tier-1 banking risk models
+              completely risk-free.
+            </p>
+
+            <div className="empowerment-benefits-list">
+              <div className="benefit-item">
+                <div className="benefit-icon-wrap text-emerald-400">
+                  <CheckCircle2 size={16} />
+                </div>
+                <div className="benefit-content">
+                  <b>No Credit Score Damage</b>
+                  <span>100% soft financial simulation — zero reporting to bureaus.</span>
+                </div>
+              </div>
+
+              <div className="benefit-item">
+                <div className="benefit-icon-wrap text-sky">
+                  <HeartHandshake size={16} />
+                </div>
+                <div className="benefit-content">
+                  <b>Eliminates Rejection Anxiety</b>
+                  <span>Get transparent mathematical feedback and statutory reasons instead of cold rejections.</span>
+                </div>
+              </div>
+
+              <div className="benefit-item">
+                <div className="benefit-icon-wrap text-amber">
+                  <Zap size={16} />
+                </div>
+                <div className="benefit-content">
+                  <b>Fair Lending Guaranteed</b>
+                  <span>Tested against the Four-Fifths rule to eliminate demographic and predatory bias.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="card-panel">
             <div className="card-header-bar">
               <h2>Applicant Profile & Sizing</h2>
@@ -110,21 +162,205 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
               isLoading={isLoading}
             />
           </div>
+
+          {/* How It Works & Inspirational Borrower Section */}
+          <div className="how-it-works-guide-card">
+            <div className="guide-card-header">
+              <div className="flex items-center gap-2">
+                <Compass size={18} className="text-sky" />
+                <h4>How Our Underwriting Committee Works</h4>
+              </div>
+              <span className="step-count-pill">3-Step Resolution</span>
+            </div>
+
+            <div className="guide-steps-vertical">
+              <div className="guide-step">
+                <div className="step-circle">1</div>
+                <div className="step-detail">
+                  <h5>Input Financial Fundamentals</h5>
+                  <p>Provide your current monthly income, existing debt obligations, and target loan sizing.</p>
+                </div>
+              </div>
+
+              <div className="guide-step">
+                <div className="step-circle">2</div>
+                <div className="step-detail">
+                  <h5>5-Agent Autonomous Audit</h5>
+                  <p>
+                    Specialized agents verify KYC integrity, calculate LightGBM default probability, test macro stress,
+                    and cross-check statutory ECOA guidelines.
+                  </p>
+                </div>
+              </div>
+
+              <div className="guide-step">
+                <div className="step-circle">3</div>
+                <div className="step-detail">
+                  <h5>Transparent Terms & Action Plan</h5>
+                  <p>
+                    Receive an unmanipulated risk-adjusted APR, Basel capital allocation, and concrete steps to unlock lower rates.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="inspirational-quote-box">
+              <p>
+                “You deserve full clarity into your borrowing power. No hidden markups, no mystery algorithms,
+                and no unexpected penalties.”
+              </p>
+            </div>
+          </div>
         </section>
 
-        {/* Right Column: 3D Visualization, Decision, and Telemetry */}
+        {/* Right Column: Executive Dashboard, Decision, and Telemetry */}
         <section className="dashboard-col">
-          {/* Top Panel: 3D Globe + 3D Risk Topology Surface */}
-          <div className="dashboard-3d-models-row">
-            <div className="globe-card glass-card">
-              <RiskGlobe3D riskScore={pdPercent} decision={decision} />
+          {/* Executive Credit Health & Risk Overview Dashboard (Replaces 3D Models) */}
+          <div className="executive-risk-dashboard-card">
+            <div className="exec-dash-header">
+              <div className="flex items-center gap-2">
+                <Gauge size={20} className="text-sky" />
+                <div>
+                  <h3 className="exec-dash-title">Executive Credit Health & Capacity Dashboard</h3>
+                  <p className="exec-dash-subtitle">Actuarially calibrated default probability & prudential solvency metrics</p>
+                </div>
+              </div>
+              <span className="badge-pill-cyan">Real-Time Risk Calibration</span>
             </div>
-            <div className="surface-3d-card glass-card">
-              <RiskSurface3D
-                creditScore={applicant.CreditScore}
-                dtiRatio={applicant.DTIRatio}
-                pdPercent={pdPercent}
-              />
+
+            <div className="exec-metrics-composite-grid">
+              {/* Default Probability Gauge Panel */}
+              <div className="exec-gauge-panel">
+                <div className="gauge-panel-top">
+                  <span className="gauge-lbl">1-Year Probability of Default (PD)</span>
+                  <span className={`gauge-badge ${pdPercent < 5 ? 'badge-safe' : pdPercent < 15 ? 'badge-moderate' : 'badge-danger'}`}>
+                    {pdPercent < 5 ? 'Low Risk Tier' : pdPercent < 15 ? 'Moderate Risk' : 'Elevated Risk'}
+                  </span>
+                </div>
+
+                {/* SVG Precision Gauge */}
+                <div className="svg-gauge-wrapper">
+                  <svg viewBox="0 0 200 115" className="precision-gauge-svg">
+                    {/* Background Arc */}
+                    <path
+                      d="M 20 100 A 80 80 0 0 1 180 100"
+                      fill="none"
+                      stroke="rgba(255, 255, 255, 0.1)"
+                      strokeWidth="14"
+                      strokeLinecap="round"
+                    />
+                    {/* Low Risk Zone (Green) */}
+                    <path
+                      d="M 20 100 A 80 80 0 0 1 70 33"
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="14"
+                      strokeLinecap="round"
+                      opacity="0.85"
+                    />
+                    {/* Moderate Risk Zone (Amber) */}
+                    <path
+                      d="M 75 30 A 80 80 0 0 1 125 30"
+                      fill="none"
+                      stroke="#f59e0b"
+                      strokeWidth="14"
+                      opacity="0.85"
+                    />
+                    {/* Elevated Risk Zone (Rose) */}
+                    <path
+                      d="M 130 33 A 80 80 0 0 1 180 100"
+                      fill="none"
+                      stroke="#f43f5e"
+                      strokeWidth="14"
+                      strokeLinecap="round"
+                      opacity="0.85"
+                    />
+                    {/* Needle Indicator */}
+                    {(() => {
+                      // map 0% to -90 deg, 50% to +90 deg
+                      const clampedPD = Math.min(50, Math.max(0, pdPercent));
+                      const angle = -90 + (clampedPD / 50) * 180;
+                      const rad = (angle * Math.PI) / 180;
+                      const nx = 100 + 65 * Math.cos(rad);
+                      const ny = 100 + 65 * Math.sin(rad);
+                      return (
+                        <g>
+                          <line
+                            x1="100"
+                            y1="100"
+                            x2={nx}
+                            y2={ny}
+                            stroke="#38bdf8"
+                            strokeWidth="3.5"
+                            strokeLinecap="round"
+                          />
+                          <circle cx="100" cy="100" r="7" fill="#38bdf8" />
+                          <circle cx="100" cy="100" r="3" fill="#0f172a" />
+                        </g>
+                      );
+                    })()}
+                  </svg>
+                  <div className="gauge-center-reading">
+                    <span className="reading-val">{pdPercent}%</span>
+                    <span className="reading-lbl">Calibrated PD</span>
+                  </div>
+                </div>
+
+                <div className="gauge-legend-row">
+                  <span className="legend-chip text-emerald-400">● 0-5% Prime</span>
+                  <span className="legend-chip text-amber">● 5-15% Near-Prime</span>
+                  <span className="legend-chip text-rose">● &gt;15% Subprime</span>
+                </div>
+              </div>
+
+              {/* Debt Capacity & Solvency Breakdown */}
+              <div className="exec-capacity-panel">
+                <div className="capacity-stat-row">
+                  <div className="capacity-meta">
+                    <span className="cap-label">Debt-to-Income (DTI) Leverage</span>
+                    <span className="cap-value">{(applicant.DTIRatio * 100).toFixed(0)}% <span className="cap-sub">/ 43% Ceiling</span></span>
+                  </div>
+                  <div className="cap-bar-track">
+                    <div
+                      className={`cap-bar-fill ${applicant.DTIRatio <= 0.35 ? 'bg-emerald' : applicant.DTIRatio <= 0.43 ? 'bg-amber' : 'bg-rose'}`}
+                      style={{ width: `${Math.min(100, (applicant.DTIRatio / 0.50) * 100)}%` }}
+                    />
+                  </div>
+                  <span className="cap-hint">
+                    {applicant.DTIRatio <= 0.35
+                      ? '✓ Prudent debt coverage preserves disposable income'
+                      : applicant.DTIRatio <= 0.43
+                      ? '⚠️ Approaching maximum regulatory debt threshold'
+                      : '🛑 Exceeds standard banking underwriting ceiling'}
+                  </span>
+                </div>
+
+                <div className="capacity-mini-cards-grid">
+                  <div className="mini-cap-card">
+                    <span className="mini-lbl">Loan-to-Income</span>
+                    <span className="mini-val">{(applicant.LoanAmount / Math.max(1, applicant.Income)).toFixed(1)}x</span>
+                    <span className="mini-sub">Annual Salary Ratio</span>
+                  </div>
+
+                  <div className="mini-cap-card">
+                    <span className="mini-lbl">Estimated Monthly EMI</span>
+                    <span className="mini-val text-sky">₹{Math.round((applicant.LoanAmount * (1 + (apr || 11.5) / 100 * 3)) / 36).toLocaleString('en-IN')}</span>
+                    <span className="mini-sub">36-Month Tenure</span>
+                  </div>
+
+                  <div className="mini-cap-card">
+                    <span className="mini-lbl">Credit Bureau Standing</span>
+                    <span className="mini-val text-emerald-400">{applicant.CreditScore >= 750 ? 'Excellent' : applicant.CreditScore >= 670 ? 'Good' : 'Needs Repair'}</span>
+                    <span className="mini-sub">FICO: {applicant.CreditScore}</span>
+                  </div>
+
+                  <div className="mini-cap-card">
+                    <span className="mini-lbl">Supervisory Buffer</span>
+                    <span className="mini-val text-amber">₹{expectedLoss.toLocaleString('en-IN')}</span>
+                    <span className="mini-sub">Basel Tier-1 Reserve</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -149,7 +385,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                   <span className="metric-sub">LGD = 45% Supervisory</span>
                 </div>
                 <div className="hero-metric">
-                  <span className="metric-lbl">Institutional Grade</span>
+                  <span className="metric-lbl">Credit Rating Grade</span>
                   <span className="metric-val">{ratingGrade}</span>
                   <span className="metric-sub">FICO: {applicant.CreditScore}</span>
                 </div>

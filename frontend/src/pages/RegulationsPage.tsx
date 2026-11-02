@@ -14,24 +14,26 @@ import {
   AlertCircle,
   ChevronRight,
   X,
+  Compass,
+  ArrowRight,
+  Gavel,
+  Check,
 } from 'lucide-react';
 import { searchRAG } from '../services/api';
 
 export const RegulationsPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState(
-    'What are the mandatory adverse action reason code requirements under ECOA Regulation B?'
-  );
+  const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
   const [selectedPillar, setSelectedPillar] = useState<any | null>(null);
 
   const sampleQueries = [
-    'Adverse Action reason codes under 12 CFR 1002.9',
-    'Basel III expected loss formula LGD standard',
-    'Four-Fifths Rule disparate impact test in credit',
-    'Maximum permissible Debt-To-Income (DTI) ceilings',
-    'CCAR severely adverse macro interest rate shock',
+    'Mandatory Adverse Action Reasons (ECOA § 1002.9)',
+    'Four-Fifths Rule for Algorithmic Non-Discrimination',
+    'Basel III Expected Loss Formula (PD × LGD × EAD)',
+    'Credit Bureau Dispute & Accuracy Rights (FCRA § 615)',
+    'Maximum Permissible Debt-To-Income (DTI) Ceilings',
   ];
 
   const pillars = [
@@ -126,6 +128,7 @@ export const RegulationsPage: React.FC = () => {
     : pillars.filter((p) => p.category === activeCategory);
 
   const handleSearch = async (queryText: string) => {
+    if (!queryText.trim()) return;
     setIsSearching(true);
     setSearchQuery(queryText);
     try {
@@ -144,12 +147,12 @@ export const RegulationsPage: React.FC = () => {
       <div className="page-header-wrap">
         <div className="page-badge badge-purple">
           <BookOpen size={14} className="text-purple-400" />
-          <span>Statutory Governance Engine</span>
+          <span>Consumer Credit Protection & Legal Transparency</span>
         </div>
-        <h1>Regulatory RAG Knowledge Base</h1>
+        <h1>Borrower Rights & Credit Regulations</h1>
         <p>
-          Our underwriting engine integrates real-time Retrieval-Augmented Generation (RAG) over
-          federal lending laws, statutory adverse action requirements, and Basel Committee capital frameworks.
+          Empowering borrowers with real-time statutory intelligence. Discover how federal credit laws,
+          mandatory adverse action disclosures, and Basel capital frameworks legally protect you against unfair or opaque lending practices.
         </p>
       </div>
 
@@ -159,16 +162,16 @@ export const RegulationsPage: React.FC = () => {
           <HelpCircle size={24} className="text-sky" />
         </div>
         <div className="guide-text-content">
-          <h3>Why Does the Regulatory Knowledge Base Matter to You?</h3>
+          <h3>Why Do Credit Regulations & Borrower Rights Matter to You?</h3>
           <p>
-            Banking laws aren't just dry legal documents—they are your <b>legal shield</b>. When you apply for a loan,
-            these laws guarantee your right to know exact rejection reasons, prevent discriminatory algorithms, and protect you
-            from hidden interest fees. Our AI inspects these rulebooks in real-time during your evaluation.
+            Credit laws aren't just dry legal textbooks—they are your <b>legal shield as a consumer</b>. When you apply for a loan,
+            these laws guarantee your right to receive exact rejection reasons, prevent discriminatory algorithms, and protect you
+            from hidden interest fees. Our AI validates each assessment against these rulebooks in real time.
           </p>
         </div>
       </div>
 
-      {/* Search Input Bar with Glass Effect */}
+      {/* Spacious, Elegant Search Bar with Clear Inputs */}
       <div className="reg-search-card-glass">
         <form
           onSubmit={(e) => {
@@ -178,22 +181,39 @@ export const RegulationsPage: React.FC = () => {
           className="search-form"
         >
           <div className="search-input-wrapper">
-            <Search className="search-icon" size={18} />
+            <Search className="search-icon text-muted" size={20} />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Ask anything in plain English (e.g., Can a bank deny me without giving reasons? What is Basel Expected Loss?)..."
+              placeholder="Search credit laws, adverse action rules, borrower rights, Basel formulas..."
               className="search-field"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="search-clear-btn"
+                title="Clear search"
+              >
+                <X size={16} />
+              </button>
+            )}
           </div>
           <button type="submit" className="search-submit-btn-sky" disabled={isSearching}>
-            {isSearching ? 'Querying Law...' : 'Search Policy RAG'}
+            {isSearching ? (
+              <span className="flex items-center gap-2">
+                <span className="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
+                Querying Law...
+              </span>
+            ) : (
+              'Search Knowledge Base'
+            )}
           </button>
         </form>
 
         <div className="quick-chips-row">
-          <span className="chips-label">Popular Questions:</span>
+          <span className="chips-label">Popular Topics:</span>
           {sampleQueries.map((q, i) => (
             <button
               key={i}
@@ -201,28 +221,55 @@ export const RegulationsPage: React.FC = () => {
               className="query-chip-pill"
               onClick={() => handleSearch(q)}
             >
-              {q}
+              <Sparkles size={13} className="text-sky" />
+              <span>{q}</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* RAG Search Results */}
+      {/* Structured, High-Clarity Search Results with Smooth Transitions */}
       {results.length > 0 && (
-        <div className="results-section-enhanced">
+        <div className="results-section-enhanced animate-fade-in-up">
           <div className="results-header-bar">
-            <h3>Retrieved Policy Extracts ({results.length} matches found)</h3>
+            <div>
+              <h3>Retrieved Legal Provisions ({results.length} verified references)</h3>
+              <p className="text-xs text-muted mt-0.5">Structured statutory guidance and consumer protections extracted for your query</p>
+            </div>
             <span className="results-badge">Semantic Vector Match</span>
           </div>
 
           <div className="results-pop-grid">
             {results.map((hit, idx) => (
-              <div key={idx} className="result-pop-card">
+              <div key={idx} className="result-pop-card group hover:border-sky/50 transition-all duration-300">
                 <div className="result-header">
-                  <h4>{hit.title}</h4>
+                  <div className="flex items-center gap-2">
+                    <Gavel size={18} className="text-sky" />
+                    <h4>{hit.title}</h4>
+                  </div>
                   <span className="result-source-badge">{hit.source_doc}</span>
                 </div>
-                <div className="result-body">{hit.content}</div>
+
+                {/* Structured Borrower Protection Box */}
+                <div className="result-protection-callout">
+                  <div className="callout-header">
+                    <ShieldCheck size={16} className="text-emerald-400" />
+                    <span>Plain-English Borrower Protection</span>
+                  </div>
+                  <p className="callout-text">
+                    Under this statute, lenders are strictly prohibited from issuing opaque decisions. You have the statutory right to full mathematical transparency and unmanipulated risk disclosures.
+                  </p>
+                </div>
+
+                {/* Structured Body / Legal Provision */}
+                <div className="result-body-structured">
+                  <div className="section-label">Legal Mandate & Regulatory Text</div>
+                  <div className="structured-text leading-relaxed text-sm text-slate-300">
+                    {hit.content}
+                  </div>
+                </div>
+
+                {/* Citations and Reference Pills */}
                 {hit.regulatory_citations && hit.regulatory_citations.length > 0 && (
                   <div className="result-footer">
                     <span className="citation-title">Statutory Citations:</span>
@@ -245,7 +292,7 @@ export const RegulationsPage: React.FC = () => {
       <div className="pillar-filter-bar">
         <div className="filter-headline-wrap">
           <h2>Core Statutory Pillars Protecting Borrowers</h2>
-          <p>Hover over or click any tile below to explore your rights and how our AI enforces them.</p>
+          <p>Click any pillar below to inspect how each regulation guarantees fair, transparent credit underwriting.</p>
         </div>
 
         <div className="filter-chips-cluster">
@@ -281,43 +328,32 @@ export const RegulationsPage: React.FC = () => {
               <div className="tile-icon-box">{pillar.icon}</div>
               <span className="tile-badge">{pillar.badge}</span>
             </div>
-
             <h3 className="tile-title">{pillar.title}</h3>
+            <p className="tile-summary">{pillar.simpleExplanation}</p>
 
-            {/* Plain English Highlight Box */}
-            <div className="tile-plain-english-box">
-              <span className="plain-english-tag">💡 In Plain English:</span>
-              <p>{pillar.simpleExplanation}</p>
+            <div className="tile-user-impact">
+              <span className="impact-tag">Your Protection:</span>
+              <p>{pillar.userImpact}</p>
             </div>
 
-            <p className="tile-legal-summary">{pillar.statutoryDetails}</p>
-
-            <div className="tile-footer-row">
-              <div className="tile-citations-summary">
-                <span className="citation-count">{pillar.keyCitations.length} Citations</span>
-              </div>
-              <span className="tile-explore-link">
-                <span>Inspect Law</span>
-                <ChevronRight size={15} />
-              </span>
+            <div className="tile-bottom-action">
+              <span className="action-hint">Click to inspect legal citations</span>
+              <ChevronRight size={16} />
             </div>
           </div>
         ))}
       </div>
 
-      {/* Interactive Pillar Detail Modal */}
+      {/* Pillar Detail Modal */}
       {selectedPillar && (
         <div className="modal-overlay" onClick={() => setSelectedPillar(null)}>
-          <div
-            className={`modal-card modal-large ${selectedPillar.colorClass}-modal`}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="modal-card modal-large" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div className="flex items-center gap-3">
-                <div className="modal-icon-wrap">{selectedPillar.icon}</div>
+                <div className="modal-header-icon-box">{selectedPillar.icon}</div>
                 <div>
-                  <span className="modal-eyebrow">{selectedPillar.badge}</span>
                   <h3 className="modal-title">{selectedPillar.title}</h3>
+                  <span className="modal-subtitle">{selectedPillar.badge}</span>
                 </div>
               </div>
               <button
@@ -329,28 +365,33 @@ export const RegulationsPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="modal-dialog-body">
-              <div className="modal-user-impact-card">
-                <h4>🎯 What This Means for You as a Borrower</h4>
-                <p>{selectedPillar.simpleExplanation}</p>
-                <div className="user-benefit-highlight">
-                  <b>Your Guarantee:</b> {selectedPillar.userImpact}
+            <div className="pillar-detail-body">
+              <div className="detail-section">
+                <h4>What This Means for You as a Borrower</h4>
+                <p className="detail-plain-text">{selectedPillar.simpleExplanation}</p>
+              </div>
+
+              <div className="detail-section">
+                <h4>Statutory & Regulatory Details</h4>
+                <p className="detail-legal-text">{selectedPillar.statutoryDetails}</p>
+              </div>
+
+              <div className="detail-section">
+                <h4>Official Citations & Regulatory References</h4>
+                <div className="citations-pills-row">
+                  {selectedPillar.keyCitations.map((c: string, idx: number) => (
+                    <span key={idx} className="citation-pill">
+                      <ExternalLink size={12} /> {c}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              <div className="modal-legal-card">
-                <h4>📜 Statutory Architecture & Regulatory Text</h4>
-                <p>{selectedPillar.statutoryDetails}</p>
-              </div>
-
-              <div className="modal-citations-card">
-                <h4>🔗 Official Legal Codes & Handbook References</h4>
-                <div className="citation-tags-list">
-                  {selectedPillar.keyCitations.map((cite: string, idx: number) => (
-                    <span key={idx} className="citation-tag-pill">
-                      <ExternalLink size={12} /> {cite}
-                    </span>
-                  ))}
+              <div className="detail-takeaway-box">
+                <ShieldCheck size={20} className="text-emerald-400" />
+                <div>
+                  <b>Our AI Guarantee:</b>
+                  <p>{selectedPillar.userImpact}</p>
                 </div>
               </div>
             </div>
@@ -358,15 +399,14 @@ export const RegulationsPage: React.FC = () => {
             <div className="modal-footer">
               <button
                 onClick={() => {
-                  setSearchQuery(`Detailed guidelines under ${selectedPillar.title}`);
                   setSelectedPillar(null);
-                  handleSearch(`Detailed guidelines under ${selectedPillar.title}`);
+                  handleSearch(selectedPillar.title);
                 }}
-                className="btn-modal-query"
+                className="btn-query-pillar"
               >
-                <Search size={15} /> Run Semantic RAG Query for This Law
+                <Search size={14} /> Query this statute in RAG
               </button>
-              <button onClick={() => setSelectedPillar(null)} className="btn-modal-close">
+              <button onClick={() => setSelectedPillar(null)} className="btn-secondary">
                 Close
               </button>
             </div>

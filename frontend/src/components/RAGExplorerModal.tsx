@@ -8,7 +8,7 @@ interface RAGExplorerModalProps {
 }
 
 export const RAGExplorerModal: React.FC<RAGExplorerModalProps> = ({ isOpen, onClose }) => {
-  const [query, setQuery] = useState('What are the adverse action notice requirements under ECOA?');
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -46,7 +46,7 @@ export const RAGExplorerModal: React.FC<RAGExplorerModalProps> = ({ isOpen, onCl
               <BookOpen className="text-purple-400" size={24} />
             </div>
             <div>
-              <h3 className="modal-title">Regulatory RAG Policy Explorer</h3>
+              <h3 className="modal-title">Borrower Rights & Policy Explorer</h3>
               <span className="modal-subtitle">
                 Semantic retrieval over Basel III/IV, ECOA 12 CFR § 1002.9, FCRA & Fair Lending laws
               </span>

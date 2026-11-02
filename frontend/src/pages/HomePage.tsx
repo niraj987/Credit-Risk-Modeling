@@ -8,22 +8,15 @@ import {
   Award,
   Calculator,
   CheckCircle2,
-  Sparkles,
-  TrendingDown,
-  Lock,
-  Zap,
   Clock,
-  Layers,
+  Lock,
   ChevronDown,
   ChevronUp,
-  Sliders,
-  DollarSign,
   Check,
   X,
-  FileText,
   HelpCircle,
+  TrendingUp,
 } from 'lucide-react';
-import { HeroGeometric3D } from '../components/HeroGeometric3D';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -31,7 +24,6 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   // Hero Interactive Simulator State
-  const [heroTab, setHeroTab] = useState<'simulator' | '3d'>('simulator');
   const [simScore, setSimScore] = useState<number>(740);
   const [simIncome, setSimIncome] = useState<number>(850000);
   const [simLoan, setSimLoan] = useState<number>(400000);
@@ -63,22 +55,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       icon: <ShieldCheck size={20} />,
       headline: 'Automated Identity & Fraud Verification',
       bullets: [
-        'Validates PAN/Aadhaar identity consistency and tenure plausibility',
-        'Flags synthetic identities and sudden velocity spikes in under 200ms',
-        'Zero manual paperwork verification with automated cross-checks',
+        'Validates identity consistency and tenure plausibility across public records',
+        'Flags synthetic identities and sudden velocity anomalies in under 200ms',
+        'Zero paperwork verification with automated checks',
       ],
       sampleOutput: 'Status: CLEAR • Anomaly Risk: 0.02% • Tenure Integrity: Verified',
     },
     {
       layer: 2,
-      name: 'Quantitative ML Risk Agent',
-      badge: 'Basel III/IV Calibrated',
+      name: 'Quantitative Risk Agent',
+      badge: 'Bank-Standard Calibrated',
       color: 'deep-blue',
       icon: <Cpu size={20} />,
       headline: 'LightGBM Default Probability Engine',
       bullets: [
         'Calculates calibrated 1-year Probability of Default (PD) via Gradient Boosting',
-        'Generates granular SHAP attribution vectors for every risk feature',
+        'Generates granular SHAP attribution vectors explaining every financial feature',
         'Computes Basel Capital Reserve obligations (Exposure at Default × LGD)',
       ],
       sampleOutput: 'Predicted PD: 3.4% • Rating Grade: AA- • Expected Loss: ₹14,200',
@@ -148,40 +140,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   return (
     <div className="home-container">
-      {/* Top Notification / Authority Banner */}
-      <div className="top-authority-strip">
-        <div className="authority-pill">
-          <Zap size={14} className="text-sky" />
-          <span>🌿 Ethical Banking Intelligence</span>
-        </div>
-        <span className="authority-divider">•</span>
-        <span className="authority-text">
-          Calibrated to Basel III/IV Standards & 12 CFR § 1002.9 Fair Lending Directives
-        </span>
-        <div className="live-status-dot">
-          <span className="pulse-indicator"></span>
-          <span>🌱 Committee Active</span>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <section className="hero-section">
         {/* Left Hero Column */}
         <div className="hero-content">
-          <div className="hero-eyebrow-badge">
-            <Sparkles size={14} className="text-coffee" />
-            <span>Next-Generation Lending Architecture</span>
-          </div>
-
           <h1 className="hero-headline">
-            Personal Loan <br />
-            <span className="headline-gradient-sky">Eligibility Checker</span>
+            Transparent Personal Loan <br />
+            <span className="headline-gradient-sky">Pre-Qualification</span>
           </h1>
 
           <p className="hero-lead">
-            Experience institutional-grade loan underwriting in seconds. Five autonomous agents
-            evaluate your financial profile, calculate calibrated default risk, and issue instant,
-            fully transparent credit decisions in Indian Rupees.
+            Take the anxiety and guesswork out of borrowing. Our automated multi-agent platform
+            evaluates your financial readiness in seconds with bank-standard precision—giving you
+            a 100% soft inquiry pre-qualification, estimated interest rates, and an actionable roadmap
+            to qualify for the lowest possible monthly payments.
           </p>
 
           {/* Value Highlights Grid */}
@@ -201,8 +173,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <Clock size={18} className="text-emerald" />
               </div>
               <div className="highlight-text">
-                <b>2-Second Decision</b>
-                <span>Real-Time Committee</span>
+                <b>Instant Decision</b>
+                <span>Automated Committee</span>
               </div>
             </div>
 
@@ -211,7 +183,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <Lock size={18} className="text-coffee" />
               </div>
               <div className="highlight-text">
-                <b>Legal Transparency</b>
+                <b>Full Transparency</b>
                 <span>12 CFR § 1002.9 Citations</span>
               </div>
             </div>
@@ -223,7 +195,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('eligibility')}
               className="btn-primary-sky"
             >
-              <span>Check Real Eligibility Now</span>
+              <span>Check Pre-Qualification</span>
               <ArrowRight size={18} />
             </button>
             <button
@@ -236,186 +208,160 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Right Hero Column: Interactive Dual-Mode Card */}
+        {/* Right Hero Column: Executive Live Qualification & Repayment Simulator */}
         <div className="hero-interactive-frame">
-          {/* Card Mode Tabs */}
-          <div className="hero-frame-tabs">
-            <button
-              className={`frame-tab-btn ${heroTab === 'simulator' ? 'active' : ''}`}
-              onClick={() => setHeroTab('simulator')}
-            >
-              <Sliders size={14} />
-              <span>Instant Eligibility Simulator</span>
-            </button>
-            <button
-              className={`frame-tab-btn ${heroTab === '3d' ? 'active' : ''}`}
-              onClick={() => setHeroTab('3d')}
-            >
-              <Layers size={14} />
-              <span>Interactive 3D Manifold</span>
-            </button>
-          </div>
+          <div className="simulator-widget-card">
+            <div className="sim-header">
+              <div>
+                <h3 className="sim-title">Live Qualification & Repayment Sizing</h3>
+                <p className="sim-sub">Slide values to see instant qualification & repayment breakdown</p>
+              </div>
+              <span className={`sim-status-badge badge-${simStatus.toLowerCase()}`}>
+                {simStatus === 'APPROVED' ? 'Prime Tier Eligible' : simStatus === 'CONDITIONAL' ? 'Near-Prime' : 'Subprime Review'}
+              </span>
+            </div>
 
-          {/* Mode 1: Interactive Live Eligibility Simulator */}
-          {heroTab === 'simulator' ? (
-            <div className="simulator-widget-card">
-              <div className="sim-header">
-                <div>
-                  <h3 className="sim-title">Live Qualification Simulator</h3>
-                  <p className="sim-sub">Slide values to see instant qualification & repayment</p>
+            {/* Sliders Grid */}
+            <div className="sim-sliders-grid">
+              {/* Score Slider */}
+              <div className="sim-slider-row">
+                <div className="sim-label-bar">
+                  <span>Credit Score (CIBIL / Experian)</span>
+                  <b className="text-sky font-mono">{simScore}</b>
                 </div>
-                <span className={`sim-status-badge badge-${simStatus.toLowerCase()}`}>
-                  {simStatus === 'APPROVED' ? '✅ Prime Approval' : simStatus === 'CONDITIONAL' ? '⚠️ Near-Prime' : '🛑 Subprime'}
-                </span>
+                <input
+                  type="range"
+                  min={300}
+                  max={850}
+                  value={simScore}
+                  onChange={(e) => setSimScore(Number(e.target.value))}
+                  className="sim-range-slider range-sky"
+                />
+                <div className="sim-ticks">
+                  <span>300 (Subprime)</span>
+                  <span>700 (Good)</span>
+                  <span>850 (Exceptional)</span>
+                </div>
               </div>
 
-              {/* Sliders Grid */}
-              <div className="sim-sliders-grid">
-                {/* Score Slider */}
-                <div className="sim-slider-row">
-                  <div className="sim-label-bar">
-                    <span>Credit Score (CIBIL / Experian)</span>
-                    <b className="text-sky font-mono">{simScore}</b>
-                  </div>
-                  <input
-                    type="range"
-                    min={300}
-                    max={850}
-                    value={simScore}
-                    onChange={(e) => setSimScore(Number(e.target.value))}
-                    className="sim-range-slider range-sky"
-                  />
-                  <div className="sim-ticks">
-                    <span>300 (Subprime)</span>
-                    <span>700 (Good)</span>
-                    <span>850 (Exceptional)</span>
-                  </div>
+              {/* Annual Income */}
+              <div className="sim-slider-row">
+                <div className="sim-label-bar">
+                  <span>Gross Annual Income (₹)</span>
+                  <b className="text-emerald font-mono">₹{simIncome.toLocaleString('en-IN')}</b>
                 </div>
+                <input
+                  type="range"
+                  min={200000}
+                  max={3000000}
+                  step={50000}
+                  value={simIncome}
+                  onChange={(e) => setSimIncome(Number(e.target.value))}
+                  className="sim-range-slider range-emerald"
+                />
+              </div>
 
-                {/* Annual Income */}
-                <div className="sim-slider-row">
-                  <div className="sim-label-bar">
-                    <span>Gross Annual Income (₹)</span>
-                    <b className="text-emerald font-mono">₹{simIncome.toLocaleString('en-IN')}</b>
-                  </div>
-                  <input
-                    type="range"
-                    min={200000}
-                    max={3000000}
-                    step={50000}
-                    value={simIncome}
-                    onChange={(e) => setSimIncome(Number(e.target.value))}
-                    className="sim-range-slider range-emerald"
-                  />
+              {/* Loan Amount */}
+              <div className="sim-slider-row">
+                <div className="sim-label-bar">
+                  <span>Requested Loan Amount (₹)</span>
+                  <b className="text-coffee font-mono">₹{simLoan.toLocaleString('en-IN')}</b>
                 </div>
+                <input
+                  type="range"
+                  min={50000}
+                  max={2500000}
+                  step={25000}
+                  value={simLoan}
+                  onChange={(e) => setSimLoan(Number(e.target.value))}
+                  className="sim-range-slider range-coffee"
+                />
+              </div>
 
-                {/* Loan Amount */}
-                <div className="sim-slider-row">
-                  <div className="sim-label-bar">
-                    <span>Requested Loan Amount (₹)</span>
-                    <b className="text-coffee font-mono">₹{simLoan.toLocaleString('en-IN')}</b>
-                  </div>
-                  <input
-                    type="range"
-                    min={50000}
-                    max={2500000}
-                    step={25000}
-                    value={simLoan}
-                    onChange={(e) => setSimLoan(Number(e.target.value))}
-                    className="sim-range-slider range-coffee"
-                  />
+              {/* Repayment Tenure Selector */}
+              <div className="sim-slider-row">
+                <div className="sim-label-bar">
+                  <span>Repayment Tenure</span>
+                  <b className="text-sky font-mono">{simTenure} Months ({simTenure / 12} Yrs)</b>
                 </div>
-
-                {/* Repayment Tenure Selector */}
-                <div className="sim-slider-row">
-                  <div className="sim-label-bar">
-                    <span>Repayment Tenure</span>
-                    <b className="text-sky font-mono">{simTenure} Months ({simTenure / 12} Yrs)</b>
-                  </div>
-                  <div className="flex gap-2 pt-1">
-                    {[12, 24, 36, 48, 60].map((t) => (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => setSimTenure(t)}
-                        className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all border ${
-                          simTenure === t
-                            ? 'bg-sky-600 text-white border-sky-600 shadow-sm'
-                            : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                        }`}
-                      >
-                        {t}m
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Natural Organic DTI Ratio Indicator */}
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 mt-1">
-                  <div className="flex items-center justify-between text-xs mb-1.5">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
-                      <span>🌿</span> Organic Debt-to-Income (DTI) Balance
-                    </span>
-                    <span className={`font-mono font-bold ${
-                      simDTI <= 0.35 ? 'text-emerald-600' : simDTI <= 0.45 ? 'text-amber-600' : 'text-rose-600'
-                    }`}>
-                      {(simDTI * 100).toFixed(1)}% {simDTI <= 0.35 ? '(Healthy)' : simDTI <= 0.45 ? '(Moderate)' : '(Stretched)'}
-                    </span>
-                  </div>
-                  <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-300 ${
-                        simDTI <= 0.35 ? 'bg-emerald-500' : simDTI <= 0.45 ? 'bg-amber-500' : 'bg-rose-500'
+                <div className="flex gap-2 pt-1">
+                  {[12, 24, 36, 48, 60].map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => setSimTenure(t)}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all border ${
+                        simTenure === t
+                          ? 'bg-sky-600 text-white border-sky-600 shadow-sm'
+                          : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                       }`}
-                      style={{ width: `${Math.min(100, (simDTI / 0.65) * 100)}%` }}
-                    />
-                  </div>
-                  <span className="text-[11px] text-slate-500 mt-1 block">
-                    {simDTI <= 0.35
-                      ? '🌱 Healthy monthly cash flow enables instant Prime Tier approval with minimal interest.'
-                      : simDTI <= 0.45
-                      ? '🌾 Near-Prime debt service. Adding a co-signer or lengthening tenure can lower rates.'
-                      : '🍂 Debt obligation exceeds 45% ceiling. Consider reducing loan principal.'}
+                    >
+                      {t}m
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Debt-to-Income Balance Meter */}
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 mt-1">
+                <div className="flex items-center justify-between text-xs mb-1.5">
+                  <span className="font-bold text-slate-700">
+                    Debt-to-Income (DTI) Capacity
+                  </span>
+                  <span className={`font-mono font-bold ${
+                    simDTI <= 0.35 ? 'text-emerald-600' : simDTI <= 0.45 ? 'text-amber-600' : 'text-rose-600'
+                  }`}>
+                    {(simDTI * 100).toFixed(1)}% {simDTI <= 0.35 ? '(Healthy)' : simDTI <= 0.45 ? '(Moderate)' : '(Stretched)'}
                   </span>
                 </div>
+                <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      simDTI <= 0.35 ? 'bg-emerald-500' : simDTI <= 0.45 ? 'bg-amber-500' : 'bg-rose-500'
+                    }`}
+                    style={{ width: `${Math.min(100, (simDTI / 0.65) * 100)}%` }}
+                  />
+                </div>
+                <span className="text-[11px] text-slate-500 mt-1 block">
+                  {simDTI <= 0.35
+                    ? 'Healthy monthly cash flow enables instant Prime Tier approval with minimal interest.'
+                    : simDTI <= 0.45
+                    ? 'Near-Prime debt service. Lengthening tenure or paying down small debts lowers rates.'
+                    : 'Debt obligation exceeds 45% ceiling. Consider reducing loan principal.'}
+                </span>
+              </div>
+            </div>
+
+            {/* Dynamic Live Result Bar */}
+            <div className="sim-result-strip">
+              <div className="sim-metric-cell">
+                <span className="sim-m-lbl">Monthly EMI</span>
+                <span className="sim-m-val text-sky">₹{simEmi.toLocaleString('en-IN')}/mo</span>
+                <span className="sim-m-sub">{simTenure} Mo Tenure</span>
               </div>
 
-              {/* Dynamic Live Result Bar */}
-              <div className="sim-result-strip">
-                <div className="sim-metric-cell">
-                  <span className="sim-m-lbl">Monthly EMI</span>
-                  <span className="sim-m-val text-sky">₹{simEmi.toLocaleString('en-IN')}/mo</span>
-                  <span className="sim-m-sub">{simTenure} Mo Tenure</span>
-                </div>
-
-                <div className="sim-metric-cell">
-                  <span className="sim-m-lbl">Benchmark APR</span>
-                  <span className="sim-m-val text-coffee">{simRate}%</span>
-                  <span className="sim-m-sub">Risk-Adjusted</span>
-                </div>
-
-                <div className="sim-metric-cell">
-                  <span className="sim-m-lbl">Max Eligibility</span>
-                  <span className="sim-m-val text-emerald">₹{maxQualifyingLoan.toLocaleString('en-IN')}</span>
-                  <span className="sim-m-sub">Based on Income</span>
-                </div>
+              <div className="sim-metric-cell">
+                <span className="sim-m-lbl">Estimated APR</span>
+                <span className="sim-m-val text-coffee">{simRate}%</span>
+                <span className="sim-m-sub">Risk-Adjusted</span>
               </div>
 
-              {/* Direct Verification CTA */}
-              <button
-                onClick={() => onNavigate('eligibility')}
-                className="sim-verify-btn"
-              >
-                <span>Run Full Committee Underwriting With These Numbers</span>
-                <ArrowRight size={16} />
-              </button>
+              <div className="sim-metric-cell">
+                <span className="sim-m-lbl">Max Pre-Approval</span>
+                <span className="sim-m-val text-emerald">₹{maxQualifyingLoan.toLocaleString('en-IN')}</span>
+                <span className="sim-m-sub">Based on Income</span>
+              </div>
             </div>
-          ) : (
-            /* Mode 2: Interactive 3D Model */
-            <div className="hero-3d-embed-card">
-              <HeroGeometric3D />
-            </div>
-          )}
+
+            {/* Direct Verification CTA */}
+            <button
+              onClick={() => onNavigate('eligibility')}
+              className="sim-verify-btn"
+            >
+              <span>Run Pre-Qualification With These Values</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
         </div>
       </section>
 
@@ -424,20 +370,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="stats-bento-grid">
           <div className="bento-stat-card border-sky">
             <span className="bento-num text-sky">₹12.4 Cr+</span>
-            <span className="bento-title">Loans Assessed</span>
+            <span className="bento-title">Loans Evaluated</span>
             <span className="bento-sub">Across 8,200+ consumer applications</span>
           </div>
 
           <div className="bento-stat-card border-coffee">
             <span className="bento-num text-coffee">&lt; 2.1 Sec</span>
             <span className="bento-title">Decision Latency</span>
-            <span className="bento-sub">Real-time asynchronous agent orchestration</span>
+            <span className="bento-sub">Real-time asynchronous multi-agent orchestration</span>
           </div>
 
           <div className="bento-stat-card border-emerald">
             <span className="bento-num text-emerald">99.4%</span>
-            <span className="bento-title">IRB Model Precision</span>
-            <span className="bento-sub">Validated against Basel default histories</span>
+            <span className="bento-title">Model Precision</span>
+            <span className="bento-sub">Validated against Basel historical default datasets</span>
           </div>
 
           <div className="bento-stat-card border-navy">
@@ -451,11 +397,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* Interactive 5-Layer Committee Showcase */}
       <section className="committee-bento-section">
         <div className="section-title-wrap">
-          <div className="section-badge-coffee">Enterprise Architecture</div>
+          <div className="section-badge-coffee">System Architecture</div>
           <h2>Explore the 5 Autonomous Underwriting Layers</h2>
           <p>
-            Click any layer below to inspect its mathematical models, statutory compliance rules,
-            and live execution telemetry.
+            Click any layer below to inspect how each specialized agent audits your financial profile,
+            verifies statutory compliance, and computes risk.
           </p>
         </div>
 
@@ -543,14 +489,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         })()}
       </section>
 
-      {/* Comparison: Traditional Bank vs. Our AI Committee */}
+      {/* Comparison: Traditional Bank vs. Our Modern AI Committee */}
       <section className="comparison-section">
         <div className="section-title-wrap">
           <div className="section-badge-sky">The Difference</div>
-          <h2>Why Borrowers & Institutions Choose Our Platform</h2>
+          <h2>Why Borrowers Trust Our Platform</h2>
           <p>
-            Traditional banks rely on opaque, legacy underwriting. We deliver institutional precision
-            with zero guesswork.
+            Traditional lenders rely on slow, opaque black-box systems. We deliver complete transparency,
+            instant soft evaluations, and clear steps to improve your terms.
           </p>
         </div>
 
@@ -566,7 +512,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="comp-features-list">
               <div className="comp-feature-row negative">
                 <X size={16} className="text-rose" />
-                <span><b>7 to 14 days</b> average approval turnaround</span>
+                <span><b>7 to 14 days</b> average turnaround time</span>
               </div>
               <div className="comp-feature-row negative">
                 <X size={16} className="text-rose" />
@@ -582,14 +528,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
               <div className="comp-feature-row negative">
                 <X size={16} className="text-rose" />
-                <span>No advice on how to improve terms or qualify next time</span>
+                <span>No guidance on how to improve terms or qualify next time</span>
               </div>
             </div>
           </div>
 
           {/* AI Committee Card (Highlighted) */}
           <div className="comparison-card ai-committee-card">
-            <div className="comp-highlight-tag">Recommended Modern Standard</div>
+            <div className="comp-highlight-tag">Modern Standard</div>
             <div className="comp-card-header">
               <span className="comp-badge-ai">Autonomous Multi-Agent</span>
               <h3>Our AI Underwriting Committee</h3>
@@ -599,7 +545,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="comp-features-list">
               <div className="comp-feature-row positive">
                 <Check size={16} className="text-emerald" />
-                <span><b>&lt; 2 seconds</b> instant committee decision and pricing</span>
+                <span><b>&lt; 2 seconds</b> instant automated decision & rate estimation</span>
               </div>
               <div className="comp-feature-row positive">
                 <Check size={16} className="text-emerald" />
@@ -615,7 +561,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
               <div className="comp-feature-row positive">
                 <Check size={16} className="text-emerald" />
-                <span><b>Counterfactual Action Plan:</b> Exact steps to qualify for lower rates</span>
+                <span><b>Actionable Guidance:</b> Exact steps to qualify for lower rates</span>
               </div>
             </div>
 
@@ -684,7 +630,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('eligibility')}
               className="btn-large-sky"
             >
-              <span>Launch Underwriting Committee</span>
+              <span>Launch Underwriting Check</span>
               <ArrowRight size={20} />
             </button>
           </div>

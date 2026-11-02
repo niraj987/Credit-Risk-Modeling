@@ -1,4 +1,4 @@
-# 🏦 FinRisk AI: Multi-Agent Credit Risk & Financial Intelligence Suite
+#  FinRisk AI: Multi-Agent Credit Risk & Financial Intelligence Suite
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![LangGraph](https://img.shields.io/badge/Orchestrator-LangGraph-orange.svg)](https://github.com/langchain-ai/langgraph)
@@ -10,7 +10,7 @@
 
 ---
 
-## 📌 Executive Summary
+##  Executive Summary
 
 Modern institutional credit underwriting cannot rely on black-box ML models alone. Global banking regulations (**Basel III/IV IRB Accords**, **ECOA Regulation B - 12 CFR § 1002.9**, and **FCRA § 615**) mandate continuous policy reconciliation, auditable explainability (SHAP), disparate impact fairness checks, and macro shock resilience.
 
@@ -18,7 +18,7 @@ Modern institutional credit underwriting cannot rely on black-box ML models alon
 
 ---
 
-## 🏛️ Multi-Agent Working Layers Architecture
+##  Multi-Agent Working Layers Architecture
 
 ```mermaid
 graph TD
@@ -56,7 +56,7 @@ graph TD
 
 ---
 
-## ⚡ Key Technical Innovations
+##  Key Technical Innovations
 
 - **LangGraph StateGraph Workflow**: Type-safe, auditable state passing across agent nodes with full JSON audit logging.
 - **Explainable AI (XAI)**: SHAP-driven local feature attribution identifying both positive risk-mitigating and negative risk-escalating drivers.
@@ -66,7 +66,7 @@ graph TD
 
 ---
 
-## 🚀 Quickstart Guide
+## Quickstart Guide
 
 ### 1. Set Up Virtual Environment & Dependencies
 
@@ -126,7 +126,29 @@ This platform deploys a resilient **Dual-Sync Database Architecture** engineered
 
 ---
 
-## ☁️ 1-Click Cloud Deployment (Vercel & Render)
+##  Enterprise Database Architecture
+
+This platform deploys a resilient **Dual-Sync Database Architecture** engineered for institutional credit underwriting:
+- **Server Database (SQLite 3 with WAL Mode / PostgreSQL Compatible)**:
+  - Strict ACID transaction durability with Write-Ahead Logging (`PRAGMA journal_mode = WAL`) and foreign key constraints.
+  - Relational indexes on `applicant_id`, `timestamp`, `final_decision`, and `credit_score` for sub-millisecond retrieval.
+  - Hybrid schema: Relational metadata columns combined with structured JSON document payloads storing complete 5-layer LangGraph state trajectories.
+  - Dedicated `audit_events` table recording every statutory policy check and underwriting decision.
+- **Client Cache (IndexedDB)**:
+  - Zero-latency client-side persistence ensuring the platform remains interactive even during transient network disconnects.
+  - Real-time synchronization with server REST endpoints (`/api/history`, `/api/database/stats`, `/api/database/seed`).
+
+---
+
+##  Natural Taste & Biophilic FinTech Design
+
+- **Organic Color Harmonies**: Deep obsidian earth slate, living forest & botanical emerald (`#10b981`), soothing sky horizon (`#0284c7`), and golden sunlight amber (`#f59e0b`).
+- **Tactile 3D Glass Refraction**: Built with Three.js physical transmission (`MeshPhysicalMaterial`) featuring specular glints, internal caustics, and mouse parallax.
+- **Human-Centric Transparency**: Replaces cold banking bureaucracy with empathetic, plain-English guidance and actionable counterfactual advice to empower borrowers.
+
+---
+
+##  1-Click Cloud Deployment (Vercel & Render)
 
 ### Deploying the Frontend to Vercel
 1. Import this repository into [Vercel](https://vercel.com).
@@ -171,7 +193,7 @@ pytest tests/ -v
 
 ---
 
-## 📊 Mathematical Foundations
+##  Mathematical Foundations
 
 ### Basel Expected Loss ($EL$)
 $$\text{Expected Loss (EL)} = \text{PD} \times \text{EAD} \times \text{LGD}$$
@@ -184,7 +206,7 @@ $$\text{Adverse Impact Ratio (AIR)} = \frac{\text{Approval Rate}_{\text{Protecte
 
 ---
 
-## 🎯 Enterprise Highlights for Technical Evaluation
+##  Enterprise Highlights for Technical Evaluation
 
 - **End-to-End Orchestration**: Deploys a stateful **LangGraph** multi-agent graph with checkpointing, ensuring auditability and state immutability.
 - **Explainable AI (XAI)**: Regulatory-compliant SHAP force attribution mapped directly to ECOA Adverse Action Reason Codes.
@@ -193,5 +215,5 @@ $$\text{Adverse Impact Ratio (AIR)} = \frac{\text{Approval Rate}_{\text{Protecte
 
 ---
 
-## 📄 License
+##  License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
