@@ -1,4 +1,5 @@
 import React from 'react';
+import { AgentArchitectureFlow } from '../components/AgentArchitectureFlow';
 import {
   ShieldCheck,
   Cpu,
@@ -165,45 +166,10 @@ export const AboutPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 5-Agent Layer Breakdown */}
-      <div className="architecture-section">
-        <div className="section-title-wrap">
-          <h3>Autonomous Multi-Agent Architecture (LangGraph Flow)</h3>
-          <p>Deterministic sequence of specialized banking agents processing each loan application.</p>
-        </div>
-
-        <div className="arch-flow-grid">
-          <div className="arch-step-box">
-            <div className="step-num-tag">Layer 1</div>
-            <h4>KYC & Anomaly Agent</h4>
-            <p>Sanity-checks borrower profile, checks debt leverage ratios, detects synthetic identities.</p>
-          </div>
-          <div className="arch-arrow">&rarr;</div>
-          <div className="arch-step-box">
-            <div className="step-num-tag">Layer 2</div>
-            <h4>Quantitative ML Agent</h4>
-            <p>Computes calibrated Default Probability (PD), Basel Expected Loss, and SHAP vectors.</p>
-          </div>
-          <div className="arch-arrow">&rarr;</div>
-          <div className="arch-step-box">
-            <div className="step-num-tag">Layer 3</div>
-            <h4>Regulatory RAG Agent</h4>
-            <p>Indexes Basel III/IV IRB and ECOA Regulation B for statutory citation extraction.</p>
-          </div>
-          <div className="arch-arrow">&rarr;</div>
-          <div className="arch-step-box">
-            <div className="step-num-tag">Layer 4</div>
-            <h4>Fair Lending & Stress</h4>
-            <p>Audits the Four-Fifths AIR rule and simulates CCAR +300 bps macroeconomic rate shocks.</p>
-          </div>
-          <div className="arch-arrow">&rarr;</div>
-          <div className="arch-step-box highlight-step">
-            <div className="step-num-tag">Layer 5</div>
-            <h4>Credit Committee</h4>
-            <p>Synthesizes final decision, Risk-Adjusted APR pricing (RAROC), and Credit Memo.</p>
-          </div>
-        </div>
-      </div>
+      {/* Autonomous Multi-Agent Architecture (LangGraph Flow) */}
+      <section className="architecture-showcase-section my-10">
+        <AgentArchitectureFlow />
+      </section>
 
       {/* Technical FAQ Section */}
       <div className="faq-section">

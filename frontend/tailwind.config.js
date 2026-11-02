@@ -7,6 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
+        darkmatte: '#0F0F0F',
+        darkslate: '#202020',
+        neonlime: '#5DD62C',
+        forest: '#337418',
+        frostedwhite: '#F8F8F8',
         nature: {
           50: '#f0fdf4',
           100: '#dcfce7',

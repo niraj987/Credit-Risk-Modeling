@@ -1,4 +1,4 @@
-#  FinRisk AI: Multi-Agent Credit Risk & Financial Intelligence Suite
+# 🛡️ FinRisk AI: Multi-Agent Credit Risk & Financial Intelligence Suite
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![LangGraph](https://img.shields.io/badge/Orchestrator-LangGraph-orange.svg)](https://github.com/langchain-ai/langgraph)
@@ -12,7 +12,7 @@
 
 ##  Executive Summary
 
-Modern institutional credit underwriting cannot rely on black-box ML models alone. Global banking regulations (**Basel III/IV IRB Accords**, **ECOA Regulation B - 12 CFR § 1002.9**, and **FCRA § 615**) mandate continuous policy reconciliation, auditable explainability (SHAP), disparate impact fairness checks, and macro shock resilience.
+Modern bank-standard credit underwriting cannot rely on black-box ML models alone. Global banking regulations (**Basel III/IV IRB Accords**, **ECOA Regulation B - 12 CFR § 1002.9**, and **FCRA § 615**) mandate continuous policy reconciliation, auditable explainability (SHAP), disparate impact fairness checks, and macro shock resilience.
 
 **FinRisk AI** re-architects loan evaluation by replacing monolithic scoring scripts with a **collaborative 5-layer autonomous agent committee**. Each agent layer specializes in a discrete pillar of credit risk analysis, collaborating through a typed **LangGraph StateGraph** to produce auditable, executive-grade Credit Memorandums.
 

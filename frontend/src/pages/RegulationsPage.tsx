@@ -18,23 +18,19 @@ import {
   ArrowRight,
   Gavel,
   Check,
+  Zap,
+  Info,
+  Layers,
+  FileCheck,
 } from 'lucide-react';
-import { searchRAG } from '../services/api';
+import { searchRAG, POPULAR_TOPICS_DATABASE, StructuredRAGHit } from '../services/api';
 
 export const RegulationsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<StructuredRAGHit[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
   const [selectedPillar, setSelectedPillar] = useState<any | null>(null);
-
-  const sampleQueries = [
-    'Mandatory Adverse Action Reasons (ECOA § 1002.9)',
-    'Four-Fifths Rule for Algorithmic Non-Discrimination',
-    'Basel III Expected Loss Formula (PD × LGD × EAD)',
-    'Credit Bureau Dispute & Accuracy Rights (FCRA § 615)',
-    'Maximum Permissible Debt-To-Income (DTI) Ceilings',
-  ];
 
   const pillars = [
     {
@@ -43,7 +39,7 @@ export const RegulationsPage: React.FC = () => {
       title: 'ECOA Regulation B (12 CFR § 1002.9)',
       badge: 'Adverse Action Protection',
       colorClass: 'tile-sky',
-      icon: <ShieldCheck size={26} className="text-sky" />,
+      icon: <ShieldCheck size={26} className="text-neonlime" />,
       simpleExplanation:
         'Lenders cannot secretly deny your loan. They are legally mandated to provide the top 4 exact, plain-English reasons for any rejection or modified terms within 30 days.',
       statutoryDetails:
@@ -57,7 +53,7 @@ export const RegulationsPage: React.FC = () => {
       title: 'Basel III & IV Capital Adequacy Framework',
       badge: 'Bank Safety & Solvency',
       colorClass: 'tile-emerald',
-      icon: <Scale size={26} className="text-emerald" />,
+      icon: <Scale size={26} className="text-neonlime" />,
       simpleExplanation:
         'Requires banks to calculate mathematically precise Expected Loss and maintain dedicated capital reserves for every loan, preventing financial system collapse.',
       statutoryDetails:
@@ -71,7 +67,7 @@ export const RegulationsPage: React.FC = () => {
       title: 'Fair Credit Reporting Act (FCRA § 615)',
       badge: 'Credit Bureau Accuracy',
       colorClass: 'tile-amber',
-      icon: <FileText size={26} className="text-amber" />,
+      icon: <FileText size={26} className="text-neonlime" />,
       simpleExplanation:
         'Gives you the absolute right to know which credit bureau (CIBIL, Experian, Equifax) provided your data, and entitles you to free credit disclosure and dispute rights.',
       statutoryDetails:
@@ -85,7 +81,7 @@ export const RegulationsPage: React.FC = () => {
       title: 'Four-Fifths Rule & Disparate Impact',
       badge: 'Algorithmic Non-Bias',
       colorClass: 'tile-rose',
-      icon: <Lock size={26} className="text-rose" />,
+      icon: <Lock size={26} className="text-neonlime" />,
       simpleExplanation:
         'Even if an AI credit model does not explicitly ask about protected traits, its approval rates across groups must pass the 80% (Four-Fifths) ratio test, guaranteeing algorithmic fairness.',
       statutoryDetails:
@@ -99,7 +95,7 @@ export const RegulationsPage: React.FC = () => {
       title: 'Truth in Lending Act (TILA Regulation Z)',
       badge: 'APR Disclosure & Transparency',
       colorClass: 'tile-purple',
-      icon: <DollarSign size={26} className="text-purple-400" />,
+      icon: <DollarSign size={26} className="text-neonlime" />,
       simpleExplanation:
         'Lenders cannot hide fees, processing charges, or rate markups. They must state the all-inclusive Annual Percentage Rate (APR) and total finance charge upfront.',
       statutoryDetails:
@@ -113,7 +109,7 @@ export const RegulationsPage: React.FC = () => {
       title: 'Gramm-Leach-Bliley Act (GLBA Safeguards)',
       badge: 'Financial Data Privacy',
       colorClass: 'tile-cyan',
-      icon: <Sparkles size={26} className="text-cyan-400" />,
+      icon: <Sparkles size={26} className="text-neonlime" />,
       simpleExplanation:
         'Guarantees your confidential financial data is encrypted and securely processed with client-side sovereignty, never leaked or sold to third-party telemarketers.',
       statutoryDetails:
@@ -141,12 +137,21 @@ export const RegulationsPage: React.FC = () => {
     }
   };
 
+  const handleSelectPopularTopic = (topic: StructuredRAGHit) => {
+    setSearchQuery(topic.title);
+    setResults([topic]);
+    const el = document.getElementById('rag-results-anchor');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="regulations-page-container">
-      {/* Top Header */}
-      <div className="page-header-wrap">
-        <div className="page-badge badge-purple">
-          <BookOpen size={14} className="text-purple-400" />
+      {/* Top Header with Glass Effect */}
+      <div className="page-header-wrap reveal-on-scroll">
+        <div className="page-badge badge-emerald">
+          <ShieldCheck size={14} className="text-neonlime" />
           <span>Consumer Credit Protection & Legal Transparency</span>
         </div>
         <h1>Borrower Rights & Credit Regulations</h1>
@@ -156,10 +161,10 @@ export const RegulationsPage: React.FC = () => {
         </p>
       </div>
 
-      {/* Plain-English Explainer for Common Users */}
-      <div className="rag-user-guide-banner">
+      {/* Plain-English Explainer Banner */}
+      <div className="rag-user-guide-banner reveal-on-scroll">
         <div className="guide-icon-box">
-          <HelpCircle size={24} className="text-sky" />
+          <HelpCircle size={26} className="text-neonlime" />
         </div>
         <div className="guide-text-content">
           <h3>Why Do Credit Regulations & Borrower Rights Matter to You?</h3>
@@ -171,8 +176,8 @@ export const RegulationsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Spacious, Elegant Search Bar with Clear Inputs */}
-      <div className="reg-search-card-glass">
+      {/* Spacious, Elegant Search Bar with Clear Inputs & Glass Effect */}
+      <div className="reg-search-card-glass reveal-on-scroll">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -181,7 +186,7 @@ export const RegulationsPage: React.FC = () => {
           className="search-form"
         >
           <div className="search-input-wrapper">
-            <Search className="search-icon text-muted" size={20} />
+            <Search className="search-icon text-slate-400" size={20} />
             <input
               type="text"
               value={searchQuery}
@@ -200,10 +205,10 @@ export const RegulationsPage: React.FC = () => {
               </button>
             )}
           </div>
-          <button type="submit" className="search-submit-btn-sky" disabled={isSearching}>
+          <button type="submit" className="search-submit-btn-lime" disabled={isSearching}>
             {isSearching ? (
               <span className="flex items-center gap-2">
-                <span className="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
+                <span className="animate-spin inline-block w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full" />
                 Querying Law...
               </span>
             ) : (
@@ -211,71 +216,139 @@ export const RegulationsPage: React.FC = () => {
             )}
           </button>
         </form>
+      </div>
 
-        <div className="quick-chips-row">
-          <span className="chips-label">Popular Topics:</span>
-          {sampleQueries.map((q, i) => (
-            <button
-              key={i}
-              type="button"
-              className="query-chip-pill"
-              onClick={() => handleSearch(q)}
+      {/* Popular Topics: 5 Ordered, Numbered Glass Boxes (01 to 05) */}
+      <div className="popular-topics-section reveal-on-scroll">
+        <div className="popular-topics-header">
+          <div className="flex items-center gap-2">
+            <Sparkles size={18} className="text-neonlime" />
+            <h3>Popular Topics: Key Statutory Protections</h3>
+          </div>
+          <span className="topics-count-badge">5 Verified Legal Frameworks</span>
+        </div>
+        <p className="popular-topics-sub">
+          Click any numbered box below to view its complete, structured legal mandate, borrower safeguards, and mathematical standards:
+        </p>
+
+        <div className="popular-boxes-grid">
+          {POPULAR_TOPICS_DATABASE.map((topic) => (
+            <div
+              key={topic.chunk_id}
+              onClick={() => handleSelectPopularTopic(topic)}
+              className="popular-topic-box group"
             >
-              <Sparkles size={13} className="text-sky" />
-              <span>{q}</span>
-            </button>
+              <div className="topic-box-top">
+                <span className="topic-number-pill">{topic.topic_number}</span>
+                <span className="topic-cat-tag">{topic.category}</span>
+              </div>
+
+              <h4 className="topic-box-title">{topic.title}</h4>
+              <p className="topic-box-summary">{topic.plain_english_summary}</p>
+
+              <div className="topic-box-footer">
+                <span className="topic-inspect-text">Inspect Structured Rule</span>
+                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform text-neonlime" />
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Structured, High-Clarity Search Results with Smooth Transitions */}
+      {/* Anchor for Smooth Scrolling */}
+      <div id="rag-results-anchor" />
+
+      {/* Structured, High-Clarity Search Results with Multi-Compartment Cards */}
       {results.length > 0 && (
         <div className="results-section-enhanced animate-fade-in-up">
           <div className="results-header-bar">
             <div>
               <h3>Retrieved Legal Provisions ({results.length} verified references)</h3>
-              <p className="text-xs text-muted mt-0.5">Structured statutory guidance and consumer protections extracted for your query</p>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Multi-compartment structured analysis: Plain-English summary, core mandates, borrower rights, and mathematical benchmarks.
+              </p>
             </div>
             <span className="results-badge">Semantic Vector Match</span>
           </div>
 
-          <div className="results-pop-grid">
+          <div className="results-structured-container">
             {results.map((hit, idx) => (
-              <div key={idx} className="result-pop-card group hover:border-sky/50 transition-all duration-300">
-                <div className="result-header">
-                  <div className="flex items-center gap-2">
-                    <Gavel size={18} className="text-sky" />
-                    <h4>{hit.title}</h4>
+              <div key={idx} className="structured-legal-card">
+                {/* 1. Header Banner */}
+                <div className="legal-card-header">
+                  <div className="header-meta-group">
+                    {hit.topic_number && <span className="topic-badge-number">{hit.topic_number}</span>}
+                    <div>
+                      <h4 className="legal-title-text">{hit.title}</h4>
+                      <span className="legal-source-tag">{hit.source_doc}</span>
+                    </div>
                   </div>
-                  <span className="result-source-badge">{hit.source_doc}</span>
+                  <span className="legal-category-pill">{hit.category}</span>
                 </div>
 
-                {/* Structured Borrower Protection Box */}
-                <div className="result-protection-callout">
-                  <div className="callout-header">
-                    <ShieldCheck size={16} className="text-emerald-400" />
-                    <span>Plain-English Borrower Protection</span>
+                {/* 2. Executive Plain-English Translation ("In Plain English") */}
+                <div className="legal-compartment plain-english-compartment">
+                  <div className="compartment-title text-neonlime">
+                    <HelpCircle size={16} />
+                    <span>In Plain English: What This Means For You as a Borrower</span>
                   </div>
-                  <p className="callout-text">
-                    Under this statute, lenders are strictly prohibited from issuing opaque decisions. You have the statutory right to full mathematical transparency and unmanipulated risk disclosures.
-                  </p>
+                  <p className="plain-english-body">{hit.plain_english_summary}</p>
                 </div>
 
-                {/* Structured Body / Legal Provision */}
-                <div className="result-body-structured">
-                  <div className="section-label">Legal Mandate & Regulatory Text</div>
-                  <div className="structured-text leading-relaxed text-sm text-slate-300">
-                    {hit.content}
+                {/* 3. Core Statutory Mandate (Bulleted Checklist) */}
+                <div className="legal-compartment mandate-compartment">
+                  <div className="compartment-title text-slate-200">
+                    <FileCheck size={16} className="text-neonlime" />
+                    <span>Statutory Mandate & Creditor Legal Requirements</span>
                   </div>
+                  <ul className="mandate-bullets-list">
+                    {hit.core_mandate_points.map((pt, pti) => (
+                      <li key={pti} className="mandate-bullet-item">
+                        <CheckCircle2 size={15} className="text-neonlime flex-shrink-0 mt-0.5" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Citations and Reference Pills */}
+                {/* 4. Borrower Rights & Actionable Protections */}
+                {hit.borrower_rights && hit.borrower_rights.length > 0 && (
+                  <div className="legal-compartment borrower-rights-compartment">
+                    <div className="compartment-title text-slate-200">
+                      <ShieldCheck size={16} className="text-neonlime" />
+                      <span>Your Statutory Borrower Rights & Recourse</span>
+                    </div>
+                    <ul className="rights-bullets-list">
+                      {hit.borrower_rights.map((br, bri) => (
+                        <li key={bri} className="rights-bullet-item">
+                          <Check size={14} className="text-neonlime flex-shrink-0 mt-0.5" />
+                          <span>{br}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* 5. Mathematical & Model Operational Standard */}
+                {hit.mathematical_formula && (
+                  <div className="legal-compartment math-compartment">
+                    <div className="compartment-title text-slate-200">
+                      <Zap size={15} className="text-amber-400" />
+                      <span>Mathematical & Model Operational Standard: {hit.formula_label || 'Standard'}</span>
+                    </div>
+                    <div className="formula-display-box">
+                      <code className="font-mono text-neonlime text-sm">{hit.mathematical_formula}</code>
+                    </div>
+                  </div>
+                )}
+
+                {/* 6. Official Citations & Reference Pills */}
                 {hit.regulatory_citations && hit.regulatory_citations.length > 0 && (
-                  <div className="result-footer">
-                    <span className="citation-title">Statutory Citations:</span>
+                  <div className="legal-card-footer">
+                    <span className="citation-title">Official Legal Citations:</span>
                     <div className="citation-tags">
                       {hit.regulatory_citations.map((c: string, ci: number) => (
-                        <span key={ci} className="tag-pill-sky">
+                        <span key={ci} className="tag-pill-lime">
                           <ExternalLink size={11} /> {c}
                         </span>
                       ))}
@@ -289,7 +362,7 @@ export const RegulationsPage: React.FC = () => {
       )}
 
       {/* Interactive Category Filter Bar */}
-      <div className="pillar-filter-bar">
+      <div className="pillar-filter-bar reveal-on-scroll">
         <div className="filter-headline-wrap">
           <h2>Core Statutory Pillars Protecting Borrowers</h2>
           <p>Click any pillar below to inspect how each regulation guarantees fair, transparent credit underwriting.</p>
@@ -317,7 +390,7 @@ export const RegulationsPage: React.FC = () => {
       </div>
 
       {/* Decorative Pop-Up Pillar Tiles Grid with Background Colors and Rich Shadows */}
-      <div className="pop-tiles-grid">
+      <div className="pop-tiles-grid reveal-on-scroll">
         {filteredPillars.map((pillar) => (
           <div
             key={pillar.id}
@@ -388,7 +461,7 @@ export const RegulationsPage: React.FC = () => {
               </div>
 
               <div className="detail-takeaway-box">
-                <ShieldCheck size={20} className="text-emerald-400" />
+                <ShieldCheck size={20} className="text-neonlime" />
                 <div>
                   <b>Our AI Guarantee:</b>
                   <p>{selectedPillar.userImpact}</p>

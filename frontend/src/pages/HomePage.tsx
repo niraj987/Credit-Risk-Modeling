@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AgentArchitectureFlow } from '../components/AgentArchitectureFlow';
 import {
   ArrowRight,
   ShieldCheck,
@@ -16,6 +17,7 @@ import {
   X,
   HelpCircle,
   TrendingUp,
+  Sparkles,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -394,99 +396,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Interactive 5-Layer Committee Showcase */}
-      <section className="committee-bento-section">
-        <div className="section-title-wrap">
-          <div className="section-badge-coffee">System Architecture</div>
-          <h2>Explore the 5 Autonomous Underwriting Layers</h2>
-          <p>
-            Click any layer below to inspect how each specialized agent audits your financial profile,
-            verifies statutory compliance, and computes risk.
-          </p>
-        </div>
-
-        {/* Interactive Layer Selector Tabs */}
-        <div className="layer-selector-strip">
-          {agents.map((ag) => (
-            <button
-              key={ag.layer}
-              onClick={() => setSelectedAgent(ag.layer)}
-              className={`layer-select-btn ${selectedAgent === ag.layer ? 'active' : ''}`}
-            >
-              <span className="layer-tag-num">Layer {ag.layer}</span>
-              <span className="layer-btn-title">{ag.name}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Selected Layer Live Inspector Card */}
-        {(() => {
-          const currentAgent = agents.find((a) => a.layer === selectedAgent) || agents[1];
-          return (
-            <div className="layer-detail-card">
-              <div className="detail-left-pane">
-                <div className="detail-header-row">
-                  <div className="detail-icon-circle">
-                    {currentAgent.icon}
-                  </div>
-                  <div>
-                    <span className="detail-layer-eyebrow">Layer {currentAgent.layer} • {currentAgent.badge}</span>
-                    <h3 className="detail-title">{currentAgent.name}</h3>
-                  </div>
-                </div>
-
-                <p className="detail-headline">{currentAgent.headline}</p>
-
-                <div className="detail-bullets-list">
-                  {currentAgent.bullets.map((b, idx) => (
-                    <div key={idx} className="detail-bullet-item">
-                      <CheckCircle2 size={16} className="text-emerald bullet-icon" />
-                      <span>{b}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => onNavigate('eligibility')}
-                  className="detail-action-btn"
-                >
-                  <span>Test Layer {currentAgent.layer} with Your Profile</span>
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-
-              <div className="detail-right-pane">
-                <div className="terminal-window">
-                  <div className="terminal-header">
-                    <div className="terminal-dots">
-                      <span className="dot dot-red"></span>
-                      <span className="dot dot-yellow"></span>
-                      <span className="dot dot-green"></span>
-                    </div>
-                    <span className="terminal-title">agent_telemetry.log</span>
-                  </div>
-                  <div className="terminal-body">
-                    <div className="terminal-line text-muted">
-                      &gt; LangGraph State Flow: Invoking Layer_{currentAgent.layer}_{currentAgent.name.replace(/\s+/g, '_')}...
-                    </div>
-                    <div className="terminal-line text-sky">
-                      &gt; Input Context: Stated Income, Credit Bureau Vector, Debt Obligations
-                    </div>
-                    <div className="terminal-line text-emerald">
-                      &gt; Execution Verdict: OK (Latency: 38ms)
-                    </div>
-                    <div className="terminal-output-box">
-                      {currentAgent.sampleOutput}
-                    </div>
-                    <div className="terminal-line text-muted">
-                      &gt; Telemetry dispatched to Credit Committee Synthesis Hub.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })()}
+      {/* Autonomous Multi-Agent Architecture (LangGraph Flow) */}
+      <section className="architecture-showcase-section">
+        <AgentArchitectureFlow />
       </section>
 
       {/* Comparison: Traditional Bank vs. Our Modern AI Committee */}

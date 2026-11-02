@@ -13,6 +13,7 @@ import { AboutPage } from './pages/AboutPage';
 import { HistoryPage } from './pages/HistoryPage';
 import { CreditMemoModal } from './components/CreditMemoModal';
 import { RAGExplorerModal } from './components/RAGExplorerModal';
+import { useScrollProgress } from './hooks/useScrollProgress';
 import {
   Home,
   CheckCircle,
@@ -27,12 +28,15 @@ import {
   ShieldCheck,
   X,
   Scale,
+  Activity,
+  Layers,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export const App: React.FC = () => {
   const [activePage, setActivePage] = useState<string>('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { scrollProgress } = useScrollProgress();
 
   const [applicant, setApplicant] = useState<ApplicantInput>({
     Age: 32,
@@ -144,8 +148,14 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-layout">
-      {/* Top Header Navigation */}
-      <header className="navbar">
+      {/* Scroll Progress Bar at Very Top of Screen */}
+      <div className="scroll-progress-line" style={{ width: `${scrollProgress}%` }} />
+
+      {/* Sinuous Glowing Ambient Background Track (Inspired by Reference Design) */}
+      <div className="ambient-glow-mesh" />
+
+      {/* Top Header Navigation with Ultra-Glass Effect */}
+      <header className="navbar glass-header">
         <div className="navbar-left">
           <div
             className="brand-logo"
@@ -155,8 +165,8 @@ export const App: React.FC = () => {
             }}
             style={{ cursor: 'pointer' }}
           >
-            <div className="brand-crest-box">
-              <ShieldCheck size={22} className="text-sky-600" />
+            <div className="brand-crest-box bg-lime-tint">
+              <ShieldCheck size={22} className="text-neonlime" />
             </div>
             <div className="brand-text">
               <div className="flex items-center gap-1.5">
@@ -181,6 +191,7 @@ export const App: React.FC = () => {
             >
               {item.icon}
               <span>{item.label}</span>
+              {activePage === item.id && <span className="nav-active-glow-dot" />}
             </button>
           ))}
         </nav>
