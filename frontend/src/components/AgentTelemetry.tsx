@@ -109,9 +109,8 @@ export const AgentTelemetry: React.FC<AgentTelemetryProps> = ({
               onClick={() => setExpandedLayer(isExpanded ? null : layer.num)}
             >
               <div className="telemetry-header">
-                <div className="telemetry-icon-wrapper">{layer.icon}</div>
+                <span className="telemetry-badge-type">{layer.sub}</span>
                 <div className="flex items-center gap-1">
-                  <span className="telemetry-layer-tag">L{layer.num}</span>
                   {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                 </div>
               </div>

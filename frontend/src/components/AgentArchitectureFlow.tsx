@@ -67,9 +67,7 @@ export const AgentArchitectureFlow: React.FC = () => {
           Autonomous Multi-Agent Architecture
         </h2>
         <p className="agent-main-subtitle">
-          In our platform, loan underwriting is never left to a single opaque neural net. We deploy 5 specialized
-          autonomous agents operating under cryptographic separation of duties—collaborating dynamically to produce
-          statutorily auditable, bias-verified credit decisions in under 2 seconds.
+          In our platform, loan underwriting is never left to a single opaque neural net. Autonomous agents operate under cryptographic separation of duties—collaborating dynamically to produce statutorily auditable, bias-verified credit decisions in under 2 seconds.
         </p>
       </div>
 
@@ -96,12 +94,10 @@ export const AgentArchitectureFlow: React.FC = () => {
                 {/* Status Footprint */}
                 <div className="box-status-footer">
                   <span className="box-status-chip">
-                    <CheckCircle2 size={13} className="text-neonlime" />
+                    <span className="status-dot-pulse" />
                     <span>{agent.status}</span>
                   </span>
-                  <span className="box-arrow-indicator">
-                    <ArrowRight size={14} />
-                  </span>
+                  <span className="box-arrow-indicator">→</span>
                 </div>
               </div>
             );

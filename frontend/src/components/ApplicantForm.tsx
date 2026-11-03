@@ -101,42 +101,6 @@ export const ApplicantForm: React.FC<ApplicantFormProps> = ({
 
   return (
     <div className="form-container">
-      <div className="presets-section">
-        <label className="section-label">
-          <Sparkles size={14} className="text-amber-400" /> Quick Select Preset Profiles
-        </label>
-        <div className="preset-buttons">
-          <button
-            type="button"
-            className="preset-btn btn-prime"
-            onClick={() => handlePreset('prime')}
-          >
-            🌟 Prime (Tier 1)
-          </button>
-          <button
-            type="button"
-            className="preset-btn btn-near-prime"
-            onClick={() => handlePreset('near_prime')}
-          >
-            ⚠️ Near-Prime (Tier 2)
-          </button>
-          <button
-            type="button"
-            className="preset-btn btn-subprime"
-            onClick={() => handlePreset('subprime')}
-          >
-            🛑 Subprime (Tier 4)
-          </button>
-          <button
-            type="button"
-            className="preset-btn btn-kyc"
-            onClick={() => handlePreset('kyc_flag')}
-          >
-            🚨 KYC Anomaly
-          </button>
-        </div>
-      </div>
-
       <div className="form-grid">
         {/* Credit Score */}
         <div className="form-group">

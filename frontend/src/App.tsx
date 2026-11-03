@@ -181,7 +181,6 @@ export const App: React.FC = () => {
                 className={`nav-link ${activePage === item.id ? 'active' : ''}`}
               >
                 <span>{item.label}</span>
-                {activePage === item.id && <span className="nav-active-glow-dot" />}
               </button>
             ))}
           </nav>

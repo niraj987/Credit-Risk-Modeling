@@ -149,7 +149,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
           <div className="card-panel">
             <div className="card-header-bar">
               <h2>Applicant Profile & Sizing</h2>
-              <span className="badge-pill">4 Presets Available</span>
             </div>
             <ApplicantForm
               input={applicant}
@@ -166,7 +165,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
           <div className="executive-risk-dashboard-card">
             <div className="exec-dash-header">
               <div className="flex items-center gap-2">
-                <Gauge size={20} className="text-sky" />
                 <div>
                   <h3 className="exec-dash-title">Executive Credit Health & Capacity Dashboard</h3>
                 </div>
@@ -370,16 +368,12 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             </div>
           </div>
 
-          {/* 5-Layer Agent Telemetry Cards */}
+          {/* Agent Telemetry Cards */}
           <div className="telemetry-wrapper">
             <div className="telemetry-title-bar">
               <div className="flex items-center gap-2">
-                <Activity size={18} className="text-sky" />
                 <h3>Autonomous Working Layers</h3>
               </div>
-              <span className="live-pulse-badge">
-                <span className="pulse-dot"></span> 5 Agents Active
-              </span>
             </div>
             <AgentTelemetry
               logs={results?.agent_logs || []}
@@ -400,7 +394,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 onClick={() => setActiveTab('xai')}
               >
                 <div className="tab-btn-inner">
-                  <Brain size={18} className="tab-icon-sky" />
                   <div className="tab-text-group">
                     <span className="tab-main-label">SHAP Explainability</span>
                     <span className="tab-sub-label">12 CFR § 1002.9 Factors</span>
@@ -413,7 +406,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 onClick={() => setActiveTab('stress')}
               >
                 <div className="tab-btn-inner">
-                  <TrendingDown size={18} className="tab-icon-amber" />
                   <div className="tab-text-group">
                     <span className="tab-main-label">CCAR Macro Stress</span>
                     <span className="tab-sub-label">Fed +300 bps Shock</span>
@@ -426,7 +418,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 onClick={() => setActiveTab('counterfactual')}
               >
                 <div className="tab-btn-inner">
-                  <Lightbulb size={18} className="tab-icon-emerald" />
                   <div className="tab-text-group">
                     <span className="tab-main-label">Action Plan</span>
                     <span className="tab-sub-label">Lower Interest Rate</span>
@@ -439,10 +430,9 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 onClick={() => setActiveTab('logs')}
               >
                 <div className="tab-btn-inner">
-                  <Terminal size={18} className="tab-icon-purple" />
                   <div className="tab-text-group">
                     <span className="tab-main-label">Audit Logs</span>
-                    <span className="tab-sub-label">5-Agent Live Trace</span>
+                    <span className="tab-sub-label">Live Trace</span>
                   </div>
                 </div>
               </button>
@@ -453,9 +443,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
               {activeTab === 'xai' && (
                 <div className="xai-pane-enhanced">
                   <div className="pane-intro-card glass-banner">
-                    <div className="pane-intro-icon bg-sky-tint">
-                      <Brain size={22} className="text-sky" />
-                    </div>
                     <div className="pane-intro-copy">
                       <h4>Why This Matters To You (Statutory Transparency)</h4>
                       <p>
@@ -474,13 +461,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                           className={`glass-feature-card ${isRisk ? 'card-risk-glow' : 'card-safe-glow'}`}
                         >
                           <div className="feature-card-header">
-                            <div className="feature-icon-badge">
-                              {isRisk ? (
-                                <ArrowUpRight size={18} className="text-rose" />
-                              ) : (
-                                <ArrowDownRight size={18} className="text-emerald" />
-                              )}
-                            </div>
                             <span className={`feature-status-pill ${isRisk ? 'pill-rose' : 'pill-emerald'}`}>
                               {isRisk ? '+ Increases Risk' : '- Lowers Risk (Helps You)'}
                             </span>
@@ -517,9 +497,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
               {activeTab === 'stress' && (
                 <div className="stress-pane-enhanced">
                   <div className="pane-intro-card glass-banner">
-                    <div className="pane-intro-icon bg-amber-tint">
-                      <TrendingDown size={22} className="text-amber" />
-                    </div>
                     <div className="pane-intro-copy">
                       <h4>Federal Reserve CCAR & DFAST Stress Testing</h4>
                       <p>
@@ -548,7 +525,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                         <span className="metric-context">Standard Basel Reserve Level</span>
                       </div>
                       <div className="scenario-status-strip status-pass">
-                        <CheckCircle2 size={16} />
                         <span>Resilience Verdict: Optimal Solvency</span>
                       </div>
                     </div>
@@ -571,7 +547,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                         <span className="metric-context">+35% Stress Deterioration</span>
                       </div>
                       <div className="scenario-status-strip status-pass">
-                        <CheckCircle2 size={16} />
                         <span>Resilience Verdict: Capital Adequacy Maintained</span>
                       </div>
                     </div>
@@ -594,7 +569,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                         <span className="metric-context">+80% Tail Risk Multiplier</span>
                       </div>
                       <div className="scenario-status-strip status-warning">
-                        <AlertTriangle size={16} />
                         <span>Tier-1 Capital Buffer Required</span>
                       </div>
                     </div>
@@ -606,9 +580,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
               {activeTab === 'counterfactual' && (
                 <div className="counterfactual-pane-enhanced">
                   <div className="pane-intro-card glass-banner">
-                    <div className="pane-intro-icon bg-emerald-tint">
-                      <Lightbulb size={22} className="text-emerald" />
-                    </div>
                     <div className="pane-intro-copy">
                       <h4>How To Qualify For Lower Interest Rates</h4>
                       <p>
@@ -629,7 +600,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                           <h4 className="cf-action-title">{cf.action}</h4>
                           <p className="cf-recommendation-text">{cf.recommendation}</p>
                           <div className="cf-card-bottom">
-                            <Zap size={15} className="text-emerald" />
                             <span>Estimated APR Reduction: <b>0.75% to 1.50%</b></span>
                           </div>
                         </div>
@@ -646,7 +616,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                             Paying down ₹25,000 across active revolving credit lines immediately elevates your bureau score by 15-25 points.
                           </p>
                           <div className="cf-card-bottom">
-                            <Zap size={15} className="text-emerald" />
                             <span>Estimated APR Savings: <b>Save ~₹1,450/month</b></span>
                           </div>
                         </div>
@@ -661,7 +630,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                             Adjusting repayment tenure reduces your monthly Debt-to-Income (DTI) ratio from 28% to 22%, locking in Prime Tier covenants.
                           </p>
                           <div className="cf-card-bottom">
-                            <Zap size={15} className="text-emerald" />
                             <span>Approval Probability Boost: <b>+14%</b></span>
                           </div>
                         </div>
@@ -675,9 +643,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
               {activeTab === 'logs' && (
                 <div className="logs-pane-enhanced">
                   <div className="pane-intro-card glass-banner">
-                    <div className="pane-intro-icon bg-purple-tint">
-                      <Terminal size={22} className="text-purple-400" />
-                    </div>
                     <div className="pane-intro-copy">
                       <h4>Autonomous Multi-Agent Execution Trace</h4>
                       <p>
@@ -733,12 +698,12 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                           agent_name: 'Credit Committee Orchestrator',
                           status: 'SYNTHESIS_COMPLETE',
                           timestamp: new Date().toISOString(),
-                          summary: `Synthesized telemetry across 4 upstream agents. Issued final verdict: ${decision} at ${apr}% recommended APR.`,
+                          summary: `Synthesized telemetry across upstream agents. Issued final verdict: ${decision} at ${apr}% recommended APR.`,
                         },
                       ]).map((log: any, i: number) => (
                         <div key={i} className="terminal-log-entry">
                           <div className="log-badge-col">
-                            <span className="log-layer-badge">Layer {log.layer}</span>
+                            <span className="log-layer-badge">Audit Verification</span>
                           </div>
                           <div className="log-content-col">
                             <div className="log-meta-line">
@@ -764,9 +729,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
         <div className="committee-horizontal-card">
           <div className="committee-card-header">
             <div className="header-badge-group">
-              <div className="icon-crest-wrap">
-                <Compass size={24} className="text-neonlime" />
-              </div>
               <div>
                 <h3 className="section-mega-title">
                   How Our <span className="text-gradient-lime">Underwriting Committee</span> Works
@@ -777,7 +739,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
 
           <p className="committee-horizontal-lead">
             In our platform, underwriting is <span className="highlight-white font-bold">never outsourced to an opaque black box</span>. 
-            Every loan application traverses a <span className="highlight-lime font-bold">5-stage multi-agent committee</span> engineered to 
+            Every loan application traverses an <span className="highlight-lime font-bold">autonomous multi-agent committee</span> engineered to 
             guarantee mathematical rigor, regulatory fairness, and transparent borrower explanations across the board.
           </p>
 
@@ -786,7 +748,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             {/* Stage 1 */}
             <div className="c-stage-card">
               <div className="c-stage-top">
-                <span className="c-stage-num">01</span>
                 <span className="c-stage-tag tag-sky">Capacity Verification</span>
               </div>
               <h4 className="c-stage-title">Profile & Capacity Ingestion</h4>
@@ -795,7 +756,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 strict <b className="text-sky">Debt-To-Income (DTI)</b> boundaries, and sanity-checks revolving debt ratios.
               </p>
               <div className="c-stage-footer">
-                <span className="c-check-icon">✓</span>
                 <span className="c-footer-text">Prevents overleveraging before models run</span>
               </div>
             </div>
@@ -803,7 +763,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             {/* Stage 2 */}
             <div className="c-stage-card">
               <div className="c-stage-top">
-                <span className="c-stage-num">02</span>
                 <span className="c-stage-tag tag-emerald">Machine Learning</span>
               </div>
               <h4 className="c-stage-title">Quantitative Risk Modeling</h4>
@@ -812,7 +771,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 actuarial <b className="text-neonlime">1-Year Default Probability (PD)</b>, and extracts SHAP attribution vectors.
               </p>
               <div className="c-stage-footer">
-                <span className="c-check-icon">✓</span>
                 <span className="c-footer-text">Calibrated against tier-1 banking loss data</span>
               </div>
             </div>
@@ -820,7 +778,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             {/* Stage 3 */}
             <div className="c-stage-card">
               <div className="c-stage-top">
-                <span className="c-stage-num">03</span>
                 <span className="c-stage-tag tag-amber">Statutory Policy</span>
               </div>
               <h4 className="c-stage-title">Adverse Reason Mapping</h4>
@@ -829,7 +786,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 guarantee top-4 <b className="text-amber">plain-English reason codes</b>.
               </p>
               <div className="c-stage-footer">
-                <span className="c-check-icon">✓</span>
                 <span className="c-footer-text">Zero unexplained credit rejections</span>
               </div>
             </div>
@@ -837,7 +793,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             {/* Stage 4 */}
             <div className="c-stage-card">
               <div className="c-stage-top">
-                <span className="c-stage-num">04</span>
                 <span className="c-stage-tag tag-rose">Fair Lending Audit</span>
               </div>
               <h4 className="c-stage-title">Non-Bias & Macro Stress</h4>
@@ -846,7 +801,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 a <b className="text-rose">Federal Reserve +300 bps rate crisis</b>.
               </p>
               <div className="c-stage-footer">
-                <span className="c-check-icon">✓</span>
                 <span className="c-footer-text">Tested against severe economic crises</span>
               </div>
             </div>
@@ -854,7 +808,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             {/* Stage 5 */}
             <div className="c-stage-card">
               <div className="c-stage-top">
-                <span className="c-stage-num">05</span>
                 <span className="c-stage-tag tag-purple">Executive Verdict</span>
               </div>
               <h4 className="c-stage-title">Committee Synthesis</h4>
@@ -863,7 +816,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 calibrated <b className="text-neonlime">RAROC interest APR</b>, and builds an actionable improvement roadmap.
               </p>
               <div className="c-stage-footer">
-                <span className="c-check-icon">✓</span>
                 <span className="c-footer-text">Transparent credit memo generated</span>
               </div>
             </div>
@@ -873,19 +825,15 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
           <div className="committee-horizontal-footer">
             <div className="horizontal-guarantees-row">
               <div className="h-guarantee-pill">
-                <CheckCircle2 size={16} className="text-neonlime flex-shrink-0" />
                 <span><b>Zero Score Impact</b> • 100% Soft Inquiry Safe</span>
               </div>
               <div className="h-guarantee-pill">
-                <CheckCircle2 size={16} className="text-neonlime flex-shrink-0" />
                 <span><b>Equal Credit Rights</b> • Mandatory Statutory Disclosures</span>
               </div>
               <div className="h-guarantee-pill">
-                <CheckCircle2 size={16} className="text-neonlime flex-shrink-0" />
                 <span><b>Four-Fifths Standard</b> • Mathematical Non-Bias Proof</span>
               </div>
               <div className="h-guarantee-pill">
-                <CheckCircle2 size={16} className="text-neonlime flex-shrink-0" />
                 <span><b>Client Privacy</b> • Strict Client-Side Encryption</span>
               </div>
             </div>
