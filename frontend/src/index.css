@@ -7702,13 +7702,13 @@ input[type="range"]::-webkit-slider-thumb,
   left: 0 !important;
   right: 0 !important;
   z-index: 1000 !important;
-  max-width: 1400px !important;
-  width: calc(100% - 48px) !important;
-  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 32px !important;
+  margin: 0 !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: space-between !important;
-  gap: 16px !important;
+  justify-content: center !important;
   pointer-events: none !important;
 }
 
@@ -7718,11 +7718,14 @@ input[type="range"]::-webkit-slider-thumb,
 }
 
 .header-isolated-brand {
+  position: absolute !important;
+  left: 32px !important;
   display: flex;
   align-items: center;
   background: transparent;
   padding: 4px 8px;
   user-select: none;
+  pointer-events: auto !important;
 }
 
 /* FinRisk Brand: NEVERA Font Design & Increased Bold Impact */
@@ -7786,8 +7789,17 @@ input[type="range"]::-webkit-slider-thumb,
 
 @media (max-width: 1024px) {
   .header-outer-container {
-    width: calc(100% - 24px) !important;
+    width: 100% !important;
+    padding: 0 16px !important;
     top: 10px !important;
+    justify-content: space-between !important;
+  }
+  .header-isolated-brand {
+    position: static !important;
+    left: auto !important;
+  }
+  .navbar-options-glass-box {
+    margin: 0 !important;
   }
   .brand-title-navera {
     font-size: 1.85rem !important;
@@ -8864,7 +8876,31 @@ input[type="range"]::-webkit-slider-thumb,
     inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
 }
 
-/* Skin 2: Translucent Cyber Emerald Glass */
+/* Skin 2: Luxury Metallic Brushed Gold (Matches Reference Image) */
+.skin-luxury-gold {
+  background: linear-gradient(135deg, #fef08a 0%, #facc15 22%, #eab308 50%, #ca8a04 75%, #854d0e 100%) !important;
+  border: 1.5px solid rgba(254, 240, 138, 0.8) !important;
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.85),
+    0 0 45px rgba(234, 179, 8, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(113, 63, 18, 0.45) !important;
+  color: #291203 !important;
+}
+
+.skin-luxury-gold .space-bank-logo,
+.skin-luxury-gold .space-card-number,
+.skin-luxury-gold .space-meta-val {
+  color: #1e0f02 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.skin-luxury-gold .space-meta-label {
+  color: #713f12 !important;
+  font-weight: 700;
+}
+
+/* Skin 2 Fallback: Translucent Cyber Emerald Glass */
 .skin-cyber-emerald {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(8, 28, 18, 0.88) 60%, rgba(4, 16, 10, 0.96) 100%) !important;
   backdrop-filter: blur(14px);
@@ -9025,6 +9061,48 @@ input[type="range"]::-webkit-slider-thumb,
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.78rem;
   letter-spacing: 0.12em;
+}
+
+/* ==========================================================================
+   21B. 3D SCULPTED METALLIC GOLDEN HAND CRADLING FLOATING CARDS
+   Matches the luxury reference aesthetic with open palm holding the cards
+   ========================================================================== */
+.sculpted-golden-hand-wrapper {
+  position: absolute;
+  bottom: -65px;
+  right: -55px;
+  width: 460px;
+  height: 290px;
+  pointer-events: none;
+  z-index: 25;
+  transform-style: preserve-3d;
+  transform: translateZ(50px);
+  animation: floatGoldenHand 6.5s ease-in-out infinite alternate;
+  filter: drop-shadow(0 20px 38px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 25px rgba(234, 179, 8, 0.35));
+}
+
+@media (max-width: 640px) {
+  .sculpted-golden-hand-wrapper {
+    bottom: -45px;
+    right: -25px;
+    width: 320px;
+    height: 200px;
+  }
+}
+
+@keyframes floatGoldenHand {
+  0% {
+    transform: translateZ(50px) translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateZ(50px) translateY(8px) rotate(-1deg);
+  }
+}
+
+.golden-hand-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
 /* ==========================================================================
@@ -9224,9 +9302,10 @@ input[type="range"]::-webkit-slider-thumb,
   width: 950px;
   height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.32) 0%, rgba(147, 51, 234, 0.14) 50%, transparent 75%);
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(147, 51, 234, 0.08) 50%, transparent 75%);
   filter: blur(85px);
   transform: translate3d(-10%, -5%, -220px);
+  opacity: 0.35;
 }
 
 .giant-bg-glow-gold {
@@ -9234,14 +9313,17 @@ input[type="range"]::-webkit-slider-thumb,
   width: 750px;
   height: 520px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(234, 179, 8, 0.22) 0%, rgba(202, 138, 4, 0.1) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.16) 0%, rgba(202, 138, 4, 0.06) 45%, transparent 70%);
   filter: blur(75px);
   transform: translate3d(22%, 18%, -160px);
+  opacity: 0.35;
 }
 
 .giant-bg-card-orbit {
   position: relative;
   transform-style: preserve-3d;
+  opacity: 0.20 !important;
+  transition: opacity 0.4s ease;
   animation: floatGiantBackgroundCard 18s ease-in-out infinite alternate;
 }
 

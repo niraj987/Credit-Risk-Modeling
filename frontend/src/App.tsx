@@ -149,8 +149,8 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-layout">
-      {/* 3D Giant Background Credit Card floating behind every section */}
-      <BackgroundGiantCreditCard />
+      {/* 3D Giant Background Credit Card floating ONLY on the Home section */}
+      {activePage === 'home' && <BackgroundGiantCreditCard />}
 
       {/* Scroll Progress Bar at Very Top of Screen */}
       <div className="scroll-progress-line" style={{ width: `${scrollProgress}%` }} />
@@ -351,12 +351,9 @@ export const App: React.FC = () => {
             </div>
           </div>
 
-          <div className="footer-bottom-row text-center flex flex-col items-center justify-center py-4 gap-1">
-            <p className="copyright-text text-center mx-auto text-slate-200 font-semibold text-sm">
-              © 2026 FinRisk AI. All Rights Reserved.
-            </p>
-            <p className="text-xs text-slate-400 text-center font-normal max-w-xl">
-              Proprietary and confidential software. Unauthorized copying, reverse engineering, redistribution, or duplication of this code, algorithms, and platform is strictly prohibited.
+          <div className="footer-bottom-row text-center flex items-center justify-center py-4">
+            <p className="copyright-text text-center mx-auto text-slate-300 font-semibold text-sm">
+              © 2026 FinRisk. All Rights Reserved.
             </p>
           </div>
         </div>
