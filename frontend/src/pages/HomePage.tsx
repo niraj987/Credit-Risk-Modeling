@@ -142,39 +142,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             to qualify for the lowest possible monthly payments.
           </p>
 
-          {/* Value Highlights Grid */}
-          <div className="hero-highlights-row">
-            <div className="hero-highlight-item">
-              <div className="highlight-icon-box bg-sky-tint">
-                <ShieldCheck size={18} className="text-sky" />
-              </div>
-              <div className="highlight-text">
-                <b>Zero Bureau Impact</b>
-                <span>100% Soft Inquiry Safe</span>
-              </div>
-            </div>
-
-            <div className="hero-highlight-item">
-              <div className="highlight-icon-box bg-emerald-tint">
-                <Clock size={18} className="text-emerald" />
-              </div>
-              <div className="highlight-text">
-                <b>Instant Decision</b>
-                <span>Automated Committee</span>
-              </div>
-            </div>
-
-            <div className="hero-highlight-item">
-              <div className="highlight-icon-box bg-coffee-tint">
-                <Lock size={18} className="text-coffee" />
-              </div>
-              <div className="highlight-text">
-                <b>Full Transparency</b>
-                <span>12 CFR § 1002.9 Citations</span>
-              </div>
-            </div>
-          </div>
-
           {/* Primary Action Buttons */}
           <div className="hero-cta-group">
             <button
@@ -194,38 +161,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Right Hero Column: 3D Floating Credit Cards Showcase */}
+        {/* Right Hero Column: 3D Hand Holding Floating Credit Cards Showcase */}
         <div className="hero-interactive-frame">
           <FloatingCardsShowcase />
-        </div>
-      </section>
-
-      {/* Authority Stats Bar */}
-      <section className="stats-bento-section">
-        <div className="stats-bento-grid">
-          <div className="bento-stat-card border-sky">
-            <span className="bento-num text-sky">₹12.4 Cr+</span>
-            <span className="bento-title">Loans Evaluated</span>
-            <span className="bento-sub">Across 8,200+ consumer applications</span>
-          </div>
-
-          <div className="bento-stat-card border-coffee">
-            <span className="bento-num text-coffee">&lt; 2.1 Sec</span>
-            <span className="bento-title">Decision Latency</span>
-            <span className="bento-sub">Real-time asynchronous multi-agent orchestration</span>
-          </div>
-
-          <div className="bento-stat-card border-emerald">
-            <span className="bento-num text-emerald">99.4%</span>
-            <span className="bento-title">Model Precision</span>
-            <span className="bento-sub">Validated against Basel historical default datasets</span>
-          </div>
-
-          <div className="bento-stat-card border-navy">
-            <span className="bento-num text-neonlime">100%</span>
-            <span className="bento-title">Fair Lending Audit</span>
-            <span className="bento-sub">Four-Fifths Rule compliance guarantee</span>
-          </div>
         </div>
       </section>
 
@@ -362,7 +300,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section className="bottom-cta-banner">
         <div className="bottom-cta-inner">
           <div className="bottom-cta-copy">
-            <span className="bottom-pill">Zero Risk • Instant Answers</span>
             <h2>Check Your Personal Loan Eligibility in 2 Minutes</h2>
             <p>
               Get personalized interest rates, monthly EMI breakdown, and regulatory risk scores
