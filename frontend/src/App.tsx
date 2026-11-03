@@ -13,6 +13,7 @@ import { AboutPage } from './pages/AboutPage';
 import { HistoryPage } from './pages/HistoryPage';
 import { CreditMemoModal } from './components/CreditMemoModal';
 import { RAGExplorerModal } from './components/RAGExplorerModal';
+import { BackgroundGiantCreditCard } from './components/BackgroundGiantCreditCard';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import {
   Home,
@@ -148,6 +149,9 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-layout">
+      {/* 3D Giant Background Credit Card floating behind every section */}
+      <BackgroundGiantCreditCard />
+
       {/* Scroll Progress Bar at Very Top of Screen */}
       <div className="scroll-progress-line" style={{ width: `${scrollProgress}%` }} />
 
