@@ -164,10 +164,6 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
     <div className="history-page-container">
       {/* Header */}
       <div className="page-header-wrap">
-        <div className="page-badge badge-cyan">
-          <Database size={14} className="text-cyan-400" />
-          <span>Enterprise Database Hub • SQLite WAL & IndexedDB Dual-Sync</span>
-        </div>
         <h1>Underwriting Audit Trail & Application History</h1>
         <p>
           Every evaluated loan application is securely persisted with ACID guarantees across our SQLite WAL database

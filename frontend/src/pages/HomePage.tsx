@@ -147,8 +147,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         {/* Left Hero Column */}
         <div className="hero-content">
           <h1 className="hero-headline">
-            Transparent Personal Loan <br />
-            <span className="headline-gradient-sky">Pre-Qualification</span>
+            <span className="headline-title-animated">Transparent Personal Loan</span>
+            <span className="headline-subtitle-animated">Pre-Qualification</span>
           </h1>
 
           <p className="hero-lead">

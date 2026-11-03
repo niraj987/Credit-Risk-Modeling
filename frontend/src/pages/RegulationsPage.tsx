@@ -394,10 +394,10 @@ export const RegulationsPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Pillar Detail Modal */}
+      {/* Structured Pillar Detail Modal */}
       {selectedPillar && (
         <div className="modal-overlay" onClick={() => setSelectedPillar(null)}>
-          <div className="modal-card modal-large" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-card modal-large structured-pillar-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div className="flex items-center gap-3">
                 <div className="modal-header-icon-box">{selectedPillar.icon}</div>
@@ -415,27 +415,57 @@ export const RegulationsPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="pillar-detail-body">
-              <div className="detail-section">
-                <h4>What This Means for You as a Borrower</h4>
-                <p className="detail-plain-text">{selectedPillar.mandate}</p>
+            <div className="pillar-detail-body structured-modal-body">
+              {/* Card 1: What This Means for You as a Borrower */}
+              <div className="structured-detail-card card-borrower-meaning">
+                <div className="structured-card-header">
+                  <div className="card-header-icon-wrap bg-sky-tint">
+                    <HelpCircle size={18} className="text-sky" />
+                  </div>
+                  <div>
+                    <span className="card-badge-label text-sky">Borrower Protection Impact</span>
+                    <h4>What This Means for You as a Borrower</h4>
+                  </div>
+                </div>
+                <div className="structured-card-content">
+                  <p className="detail-plain-text">{selectedPillar.mandate}</p>
+                </div>
               </div>
 
-              <div className="detail-section">
-                <h4>Statutory Protection & Creditor Duty</h4>
-                <p className="detail-legal-text">{selectedPillar.protection}</p>
+              {/* Card 2: Statutory Protection & Creditor Duty */}
+              <div className="structured-detail-card card-creditor-duty">
+                <div className="structured-card-header">
+                  <div className="card-header-icon-wrap bg-purple-tint">
+                    <Scale size={18} className="text-purple-400" />
+                  </div>
+                  <div>
+                    <span className="card-badge-label text-purple-400">Statutory Compliance Mandate</span>
+                    <h4>Statutory Protection & Creditor Duty</h4>
+                  </div>
+                </div>
+                <div className="structured-card-content">
+                  <p className="detail-legal-text">{selectedPillar.protection}</p>
+                </div>
               </div>
 
-              <div className="detail-takeaway-box">
-                <ShieldCheck size={22} className="text-neonlime flex-shrink-0" />
-                <div>
-                  <b>Our Underwriting Guarantee:</b>
-                  <p>{selectedPillar.userImpact}</p>
+              {/* Card 3: Our Underwriting Guarantee */}
+              <div className="structured-detail-card card-platform-guarantee">
+                <div className="structured-card-header">
+                  <div className="card-header-icon-wrap bg-emerald-tint">
+                    <ShieldCheck size={18} className="text-emerald" />
+                  </div>
+                  <div>
+                    <span className="card-badge-label text-emerald">FinRisk Automated Guarantee</span>
+                    <h4>Our Underwriting Guarantee</h4>
+                  </div>
+                </div>
+                <div className="structured-card-content">
+                  <p className="guarantee-text">{selectedPillar.userImpact}</p>
                 </div>
               </div>
             </div>
 
-            <div className="modal-footer">
+            <div className="modal-footer structured-modal-footer">
               <button
                 onClick={() => {
                   setSelectedPillar(null);
@@ -443,10 +473,10 @@ export const RegulationsPage: React.FC = () => {
                 }}
                 className="btn-query-pillar"
               >
-                <Search size={14} /> Query this statute in RAG
+                <Search size={15} /> <span>Query this statute in RAG</span>
               </button>
               <button onClick={() => setSelectedPillar(null)} className="btn-secondary">
-                Close
+                <span>Close</span>
               </button>
             </div>
           </div>

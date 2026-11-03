@@ -162,12 +162,8 @@ export const App: React.FC = () => {
             }}
             style={{ cursor: 'pointer' }}
           >
-            <div className="brand-crest-box bg-lime-tint">
-              <ShieldCheck size={22} className="text-neonlime" />
-            </div>
             <div className="brand-text">
-              <h1>FinRisk</h1>
-              <span className="brand-url-tag">personal loan eligibility checker.vercel.app</span>
+              <h1 className="brand-title-navera">FinRisk</h1>
             </div>
           </div>
         </div>
@@ -224,12 +220,7 @@ export const App: React.FC = () => {
           <div className="pro-nav-drawer-card" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-header">
               <div className="flex items-center gap-2.5">
-                <div className="brand-crest-box-sm">
-                  <ShieldCheck size={20} className="text-neonlime" />
-                </div>
-                <div>
-                  <h4 className="drawer-title">FinRisk</h4>
-                </div>
+                <h4 className="drawer-title brand-title-navera">FinRisk</h4>
               </div>
               <button
                 className="drawer-close-btn"
@@ -362,14 +353,9 @@ export const App: React.FC = () => {
             </div>
           </div>
 
-          <div className="footer-bottom-row">
-            <p className="disclaimer-text">
-              <b>Consumer Notice:</b> FinRisk AI is an educational pre-qualification platform designed to provide
-              transparent credit analysis under the Equal Credit Opportunity Act (ECOA 12 CFR § 1002.9) and the Fair Credit
-              Reporting Act (FCRA). Pre-qualification assessments use soft evaluations with zero impact on credit bureau scores.
-            </p>
-            <p className="copyright-text">
-              © {new Date().getFullYear()} FinRisk AI • MIT Licensed • Ethical & Transparent Underwriting
+          <div className="footer-bottom-row text-center flex justify-center py-4">
+            <p className="copyright-text text-center mx-auto text-slate-400 font-medium text-sm">
+              © 2026 FinRisk AI
             </p>
           </div>
         </div>

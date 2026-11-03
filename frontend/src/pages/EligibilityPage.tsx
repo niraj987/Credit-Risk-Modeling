@@ -178,9 +178,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
               <div className="exec-gauge-panel">
                 <div className="gauge-panel-top">
                   <span className="gauge-lbl">1-Year Probability of Default (PD)</span>
-                  <span className={`gauge-badge ${pdPercent < 5 ? 'badge-safe' : pdPercent < 15 ? 'badge-moderate' : 'badge-danger'}`}>
-                    {pdPercent < 5 ? 'Low Risk Tier' : pdPercent < 15 ? 'Moderate Risk' : 'Elevated Risk'}
-                  </span>
                 </div>
 
                 {/* SVG Precision Gauge */}
@@ -220,33 +217,55 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                       strokeLinecap="round"
                       opacity="0.85"
                     />
-                    {/* Needle Indicator */}
+                    {/* Dynamic High-Precision Needle Indicator */}
                     {(() => {
-                      // map 0% to -90 deg, 50% to +90 deg
-                      const clampedPD = Math.min(50, Math.max(0, pdPercent));
-                      const angle = -90 + (clampedPD / 50) * 180;
-                      const rad = (angle * Math.PI) / 180;
-                      const nx = 100 + 65 * Math.cos(rad);
-                      const ny = 100 + 65 * Math.sin(rad);
+                      const clampedPD = Math.max(0, Math.min(30, pdPercent));
+                      let thetaDeg = 0;
+                      if (clampedPD <= 5) {
+                        thetaDeg = (clampedPD / 5) * 55;
+                      } else if (clampedPD <= 15) {
+                        thetaDeg = 55 + ((clampedPD - 5) / 10) * 70;
+                      } else {
+                        thetaDeg = 125 + ((clampedPD - 15) / 15) * 55;
+                      }
+                      const thetaRad = (thetaDeg * Math.PI) / 180;
+                      // Gauge center (100, 100), needle length 66
+                      const nx = 100 - 66 * Math.cos(thetaRad);
+                      const ny = 100 - 66 * Math.sin(thetaRad);
+
+                      const isHigh = pdPercent >= 15;
+                      const isMod = pdPercent >= 5 && pdPercent < 15;
+                      const needleColor = isHigh ? '#f43f5e' : isMod ? '#f59e0b' : '#10b981';
+                      const needleFilter = isHigh 
+                        ? 'drop-shadow(0 0 8px rgba(244, 63, 94, 0.85))' 
+                        : isMod 
+                        ? 'drop-shadow(0 0 6px rgba(245, 158, 11, 0.75))' 
+                        : 'drop-shadow(0 0 6px rgba(16, 185, 129, 0.75))';
+
                       return (
-                        <g>
+                        <g style={{ filter: needleFilter, transition: 'all 0.5s ease-out' }}>
                           <line
                             x1="100"
                             y1="100"
                             x2={nx}
                             y2={ny}
-                            stroke="#38bdf8"
+                            stroke={needleColor}
                             strokeWidth="3.5"
                             strokeLinecap="round"
                           />
-                          <circle cx="100" cy="100" r="7" fill="#38bdf8" />
+                          <circle cx="100" cy="100" r="7" fill={needleColor} />
                           <circle cx="100" cy="100" r="3" fill="#0f172a" />
                         </g>
                       );
                     })()}
                   </svg>
                   <div className="gauge-center-reading">
-                    <span className="reading-val">{pdPercent}%</span>
+                    <span 
+                      className="reading-val" 
+                      style={{ color: pdPercent >= 15 ? '#f43f5e' : pdPercent >= 5 ? '#f59e0b' : '#10b981' }}
+                    >
+                      {pdPercent}%
+                    </span>
                     <span className="reading-lbl">Calibrated PD</span>
                   </div>
                 </div>
@@ -749,15 +768,10 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 <Compass size={24} className="text-neonlime" />
               </div>
               <div>
-                <span className="section-eyebrow">DETERMINISTIC UNDERWRITING ARCHITECTURE</span>
                 <h3 className="section-mega-title">
                   How Our <span className="text-gradient-lime">Underwriting Committee</span> Works
                 </h3>
               </div>
-            </div>
-            <div className="header-meta-pill">
-              <span className="pulse-dot-green"></span>
-              <span>5 Autonomous Verification Stages • 100% Consensus Required</span>
             </div>
           </div>
 
