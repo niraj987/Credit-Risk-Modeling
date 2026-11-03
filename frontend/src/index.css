@@ -2016,22 +2016,26 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
-  color: var(--color-navy);
-  border: 1px solid var(--color-gray-border);
-  padding: 10px 18px;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  font-weight: 800;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(168, 85, 247, 0.35) !important;
+  padding: 11px 22px !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: var(--shadow-sm);
+  transition: none !important;
+  box-shadow: none !important;
 }
 
-.memo-quick-btn:hover {
-  background: var(--color-gray-subtle);
-  border-color: var(--color-sky);
-  color: var(--color-sky);
+.memo-quick-btn:hover,
+.memo-quick-btn:focus,
+.memo-quick-btn:active {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border-color: rgba(168, 85, 247, 0.35) !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 /* Telemetry Grid */
@@ -4128,55 +4132,71 @@ body {
   box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
 }
 
-/* Audit Certificate Inspector Modal */
+/* Audit Certificate Inspector Modal (Database Inspect View) */
+.audit-certificate-modal {
+  max-width: 860px !important;
+  width: 95% !important;
+}
+
+.audit-certificate-modal .modal-subtitle {
+  color: #cbd5e1 !important;
+  font-size: 0.82rem !important;
+  margin-top: 3px;
+  display: block;
+}
+
 .cert-hash-strip {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--color-navy);
-  color: #ffffff;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
+  background: rgba(22, 14, 34, 0.92) !important;
+  border: 1px solid rgba(168, 85, 247, 0.35) !important;
+  color: #ffffff !important;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 22px;
 }
 
 .hash-label {
-  font-size: 0.7rem;
-  font-weight: 800;
-  color: #94a3b8;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  color: #cbd5e1 !important;
   display: block;
+  letter-spacing: 0.06em;
 }
 
 .hash-code {
-  font-size: 0.85rem;
-  color: #38bdf8;
+  font-size: 0.88rem !important;
+  color: #38bdf8 !important;
   letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .btn-copy-hash {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.75rem;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-copy-hash:hover {
-  background: rgba(56, 189, 248, 0.25);
-  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.3) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
 }
 
 .cert-metrics-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 24px;
 }
 
@@ -4187,77 +4207,125 @@ body {
 }
 
 .cert-m-cell {
-  background: var(--color-gray-subtle);
-  border: 1px solid var(--color-gray-border);
-  border-radius: 8px;
-  padding: 12px;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(168, 85, 247, 0.28) !important;
+  border-radius: 10px !important;
+  padding: 14px !important;
   display: flex;
   flex-direction: column;
 }
 
 .cert-m-cell span {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-gray-medium);
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  color: #cbd5e1 !important;
+  letter-spacing: 0.04em !important;
 }
 
 .cert-m-cell b {
-  font-size: 1.15rem;
-  color: var(--color-navy);
-  margin: 2px 0;
+  font-size: 1.25rem !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  margin: 4px 0 !important;
 }
 
 .cert-m-cell small {
-  font-size: 0.7rem;
-  color: var(--color-gray-medium);
+  font-size: 0.76rem !important;
+  color: #94a3b8 !important;
 }
 
 .cert-agents-breakdown h4 {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: var(--color-navy);
-  margin-bottom: 12px;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin-bottom: 14px !important;
+  letter-spacing: 0.01em !important;
 }
 
 .cert-agents-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px !important;
 }
 
 .cert-agent-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: #ffffff;
-  border: 1px solid var(--color-gray-border);
-  padding: 12px 16px;
-  border-radius: 8px;
+  gap: 16px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(168, 85, 247, 0.22) !important;
+  padding: 14px 18px !important;
+  border-radius: 10px !important;
 }
 
 .c-ag-body {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px !important;
   flex: 1;
 }
 
 .c-ag-body b {
-  font-size: 0.85rem;
-  color: var(--color-navy);
+  font-size: 0.92rem !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
 }
 
 .c-ag-body p {
-  font-size: 0.78rem;
-  color: var(--color-gray-dark);
+  font-size: 0.85rem !important;
+  color: #e2e8f0 !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
 }
 
 .c-ag-status {
-  font-size: 0.7rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 4px;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(74, 222, 128, 0.35) !important;
+  letter-spacing: 0.05em !important;
+}
+
+.audit-certificate-modal .btn-modal-query {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(192, 132, 252, 0.45) !important;
+  padding: 10px 18px !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.audit-certificate-modal .btn-modal-query:hover {
+  background: linear-gradient(135deg, #c084fc 0%, #9333ea 100%) !important;
+  transform: translateY(-1px);
+}
+
+.audit-certificate-modal .btn-modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  padding: 10px 18px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  cursor: pointer;
+}
+
+.audit-certificate-modal .btn-modal-close:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
 }
 
 /* Interactive Telemetry Cards */
@@ -9061,48 +9129,6 @@ input[type="range"]::-webkit-slider-thumb,
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.78rem;
   letter-spacing: 0.12em;
-}
-
-/* ==========================================================================
-   21B. 3D SCULPTED METALLIC GOLDEN HAND CRADLING FLOATING CARDS
-   Matches the luxury reference aesthetic with open palm holding the cards
-   ========================================================================== */
-.sculpted-golden-hand-wrapper {
-  position: absolute;
-  bottom: -65px;
-  right: -55px;
-  width: 460px;
-  height: 290px;
-  pointer-events: none;
-  z-index: 25;
-  transform-style: preserve-3d;
-  transform: translateZ(50px);
-  animation: floatGoldenHand 6.5s ease-in-out infinite alternate;
-  filter: drop-shadow(0 20px 38px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 25px rgba(234, 179, 8, 0.35));
-}
-
-@media (max-width: 640px) {
-  .sculpted-golden-hand-wrapper {
-    bottom: -45px;
-    right: -25px;
-    width: 320px;
-    height: 200px;
-  }
-}
-
-@keyframes floatGoldenHand {
-  0% {
-    transform: translateZ(50px) translateY(0px) rotate(0deg);
-  }
-  100% {
-    transform: translateZ(50px) translateY(8px) rotate(-1deg);
-  }
-}
-
-.golden-hand-svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
 }
 
 /* ==========================================================================
