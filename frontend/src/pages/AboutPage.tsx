@@ -71,8 +71,8 @@ export const AboutPage: React.FC = () => {
   ];
 
   return (
-    <div className="about-page-container animate-fade-in-up">
-      <div className="page-header-wrap">
+    <div className="about-page-container">
+      <div className="page-header-wrap reveal-on-scroll">
         <h1>About FinRisk</h1>
         <p>
           An enterprise-grade financial intelligence platform bridging quantitative machine learning,
@@ -80,43 +80,43 @@ export const AboutPage: React.FC = () => {
         </p>
       </div>
 
-      {/* High-Impact Stat Highlights */}
-      <div className="about-stats-grid">
-        <div className="about-stat-card">
+      {/* High-Impact Stat Highlights with Scroll Transition */}
+      <div className="about-stats-grid reveal-on-scroll">
+        <div className="about-stat-card reveal-on-scroll stagger-1">
           <span className="stat-num text-emerald-400">0 Score Impact</span>
           <span className="stat-label">100% Soft Inquiry Simulation</span>
           <p className="stat-desc">Zero credit bureau inquiries — test your true credit terms without penalty.</p>
         </div>
 
-        <div className="about-stat-card">
+        <div className="about-stat-card reveal-on-scroll stagger-2">
           <span className="stat-num text-sky">12 CFR § 1002.9</span>
           <span className="stat-label">Mandatory Adverse Action Rules</span>
           <p className="stat-desc">Full legal disclosure of the top financial factors behind every decision.</p>
         </div>
 
-        <div className="about-stat-card">
+        <div className="about-stat-card reveal-on-scroll stagger-3">
           <span className="stat-num text-amber">80% Four-Fifths</span>
           <span className="stat-label">Fair Lending Non-Bias Standard</span>
           <p className="stat-desc">Continuous disparate impact testing to eliminate algorithmic discrimination.</p>
         </div>
 
-        <div className="about-stat-card">
+        <div className="about-stat-card reveal-on-scroll stagger-4">
           <span className="stat-num text-purple-400">5 Autonomous Layers</span>
           <span className="stat-label">Multi-Stage Agent Pipeline</span>
           <p className="stat-desc">Deterministic separation of duties across specialized financial AI agents.</p>
         </div>
       </div>
 
-      {/* Core Mission Bento Grid */}
-      <div className="about-bento-section">
-        <div className="section-title-wrap">
+      {/* Core Mission Bento Grid with Scroll Transition */}
+      <div className="about-bento-section reveal-on-scroll">
+        <div className="section-title-wrap reveal-on-scroll">
           <h2>Core Mission: Transparent & Equitable Credit</h2>
           <p>Overcoming the legacy banking flaws that leave everyday borrowers disempowered.</p>
         </div>
 
         <div className="about-bento-grid">
           {/* Card 1: Rejection Transparency */}
-          <div className="bento-card bento-sky">
+          <div className="bento-card bento-sky reveal-on-scroll stagger-1">
             <div className="bento-top">
               <div className="bento-icon-box bg-sky-tint">
                 <ShieldCheck size={24} className="text-sky" />
@@ -135,7 +135,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           {/* Card 2: Actuarial Rigor */}
-          <div className="bento-card bento-emerald">
+          <div className="bento-card bento-emerald reveal-on-scroll stagger-2">
             <div className="bento-top">
               <div className="bento-icon-box bg-emerald-tint">
                 <Scale size={24} className="text-emerald-400" />
@@ -154,7 +154,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           {/* Card 3: Non-Bias */}
-          <div className="bento-card bento-rose">
+          <div className="bento-card bento-rose reveal-on-scroll stagger-3">
             <div className="bento-top">
               <div className="bento-icon-box bg-rose-tint">
                 <Lock size={24} className="text-rose" />
@@ -173,7 +173,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           {/* Card 4: Action Plan */}
-          <div className="bento-card bento-amber">
+          <div className="bento-card bento-amber reveal-on-scroll stagger-4">
             <div className="bento-top">
               <div className="bento-icon-box bg-amber-tint">
                 <Award size={24} className="text-amber" />
@@ -194,12 +194,12 @@ export const AboutPage: React.FC = () => {
       </div>
 
       {/* Autonomous Multi-Agent Architecture */}
-      <section className="architecture-showcase-section my-10">
+      <section className="architecture-showcase-section my-10 reveal-on-scroll">
         <AgentArchitectureFlow />
       </section>
 
       {/* Technical & Compliance Deep Dives: High-Hierarchy Modern Cards */}
-      <div className="faq-section">
+      <div className="faq-section reveal-on-scroll">
         <div className="section-title-wrap">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
             Technical & Compliance Deep Dives
@@ -211,7 +211,7 @@ export const AboutPage: React.FC = () => {
 
         <div className="deep-dives-grid">
           {deepDives.map((item, idx) => (
-            <div key={idx} className="deep-dive-card">
+            <div key={idx} className={`deep-dive-card reveal-on-scroll stagger-${(idx % 4) + 1}`}>
               {/* Top Row: Category Tag */}
               <div className="deep-dive-top-bar">
                 <span className="deep-dive-category-chip">{item.category}</span>

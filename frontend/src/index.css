@@ -161,18 +161,31 @@ body {
   font-weight: 800 !important;
   letter-spacing: 0.04em !important;
   color: #ffffff !important;
+  line-height: 1.1;
+}
+
+.brand-url-tag {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: #5dd62c;
+  letter-spacing: 0.02em;
+  display: block;
+  line-height: 1.1;
+  margin-top: 2px;
+  font-weight: 600;
+  opacity: 0.9;
 }
 
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .nav-links, .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .nav-link {
@@ -3048,43 +3061,62 @@ body {
 }
 
 /* ------------------------------------------------------------
-   3. RAG Knowledge Base Pop-Up Tiles with Background Colors
+   3. Borrower Rights Matter (Open Webpage Surface - No Container Box)
    ------------------------------------------------------------ */
-.rag-user-guide-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(56, 189, 248, 0.1) 100%);
-  border: 1px solid rgba(2, 132, 199, 0.25);
-  border-radius: var(--radius-md);
-  padding: 20px 24px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-sm);
+.rights-matter-open-section {
+  max-width: 960px;
+  margin: 0 auto 36px;
+  text-align: center;
+  padding: 10px 16px;
 }
 
-.guide-icon-box {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+.rights-matter-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
-.guide-text-content h3 {
-  font-size: 1.05rem !important;
+.rights-matter-header h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.95rem) !important;
   font-weight: 800 !important;
   color: #ffffff !important;
-  margin-bottom: 4px;
+  letter-spacing: -0.02em;
 }
 
-.guide-text-content p {
-  font-size: 0.88rem !important;
-  color: #e2e8f0 !important;
-  line-height: 1.55;
+.rights-matter-lead {
+  font-size: clamp(0.92rem, 1.3vw, 1.05rem) !important;
+  color: #cbd5e1 !important;
+  line-height: 1.7 !important;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.highlight-text-lime {
+  color: #5dd62c !important;
+  font-weight: 700;
+}
+
+.highlight-text-white {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+/* Key Borrower Benefit Strip in Pop Tile Cards */
+.tile-benefit-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(93, 214, 44, 0.08);
+  border: 1px solid rgba(93, 214, 44, 0.22);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #a7f3d0 !important;
+  line-height: 1.45;
+  margin: 4px 0 10px;
 }
 
 /* Beautiful Unified Search Pill Bar */
@@ -4548,140 +4580,311 @@ body {
   line-height: 1.4;
 }
 
-/* How It Works Guide (Eligibility Page Left Column Below Form) - Fills Vacant Space */
-.how-it-works-guide-card {
-  background: rgba(18, 24, 38, 0.85) !important;
+/* ============================================================
+   FULL-WIDTH HORIZONTAL UNDERWRITING COMMITTEE PIPELINE
+   Spans the entire webpage width with rich glassmorphism & typography
+   ============================================================ */
+.committee-horizontal-section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 36px auto 48px;
+  padding: 0 16px;
+}
+
+.committee-horizontal-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(18, 24, 38, 0.88) 100%) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  margin-top: 20px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: var(--radius-xl, 24px);
+  padding: 32px 30px;
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(93, 214, 44, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
   display: flex;
   flex-direction: column;
+  gap: 22px;
 }
 
-.how-it-works-guide-card.expanded-fill-card {
-  flex: 1;
-}
-
-.guide-card-header {
+.committee-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.guide-card-header h4 {
-  font-size: 1rem;
-  font-weight: 800;
-  color: #ffffff !important;
-}
-
-.guide-intro-text {
-  font-size: 0.84rem !important;
-  color: #cbd5e1 !important;
-  line-height: 1.55;
-  margin-bottom: 16px;
-}
-
-.step-count-pill {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #5dd62c !important;
-  background: rgba(93, 214, 44, 0.12) !important;
-  border: 1px solid rgba(93, 214, 44, 0.35) !important;
-  padding: 3px 10px;
-  border-radius: 9999px;
-}
-
-.guide-steps-vertical {
+.header-badge-group {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  gap: 16px;
 }
 
-.guide-step {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.step-circle {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(93, 214, 44, 0.12) !important;
-  border: 1px solid rgba(93, 214, 44, 0.4) !important;
-  color: #5dd62c !important;
+.icon-crest-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(93, 214, 44, 0.12);
+  border: 1px solid rgba(93, 214, 44, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 800;
   flex-shrink: 0;
-  margin-top: 2px;
+  box-shadow: 0 0 16px rgba(93, 214, 44, 0.2);
 }
 
-.step-detail h5 {
-  font-size: 0.88rem;
+.section-eyebrow {
+  font-size: 0.72rem;
   font-weight: 800;
+  color: #5dd62c;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.section-mega-title {
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem) !important;
+  font-weight: 800 !important;
   color: #ffffff !important;
-  margin-bottom: 2px;
+  letter-spacing: -0.02em;
+  margin: 0;
 }
 
-.step-detail p {
-  font-size: 0.8rem;
+.text-gradient-lime {
+  background: linear-gradient(135deg, #5dd62c 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.pulse-dot-green {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5dd62c;
+  box-shadow: 0 0 10px #5dd62c;
+  animation: pulse 2s infinite;
+}
+
+.committee-horizontal-lead {
+  font-size: 0.94rem !important;
   color: #cbd5e1 !important;
-  line-height: 1.5;
+  line-height: 1.65;
+  max-width: 1080px;
+  margin: 0;
 }
 
-.borrower-guarantees-grid {
+/* 5 Horizontal Sequential Stage Bento Cards Across Webpage */
+.committee-stages-horizontal-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 20px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 8px 0;
 }
 
-@media (max-width: 600px) {
-  .borrower-guarantees-grid {
+@media (max-width: 1200px) {
+  .committee-stages-horizontal-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .committee-stages-horizontal-grid {
     grid-template-columns: 1fr;
   }
 }
 
-.guarantee-chip {
+.c-stage-card {
+  background: rgba(14, 18, 30, 0.72) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-top: 3px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 16px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.c-stage-card:hover {
+  transform: translateY(-4px);
+  background: rgba(18, 24, 38, 0.88) !important;
+  border-color: rgba(93, 214, 44, 0.4) !important;
+  border-top-color: #5dd62c !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(93, 214, 44, 0.12);
+}
+
+.c-stage-top {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+}
+
+.c-stage-num {
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #5dd62c;
+  line-height: 1;
+}
+
+.c-stage-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 9999px;
+}
+
+.tag-sky {
+  background: rgba(56, 189, 248, 0.14);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.tag-emerald {
+  background: rgba(16, 185, 129, 0.14);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.tag-amber {
+  background: rgba(245, 158, 11, 0.14);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.tag-rose {
+  background: rgba(244, 63, 94, 0.14);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.tag-purple {
+  background: rgba(168, 85, 247, 0.14);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.c-stage-title {
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.c-stage-desc {
+  font-size: 0.8rem !important;
+  color: #cbd5e1 !important;
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+}
+
+.c-stage-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: auto;
+}
+
+.c-check-icon {
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: #5dd62c;
+}
+
+.c-footer-text {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Horizontal Footer: Guarantees & Quote */
+.committee-horizontal-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 8px;
+}
+
+.horizontal-guarantees-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .horizontal-guarantees-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .horizontal-guarantees-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.h-guarantee-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 0.76rem;
-  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.78rem;
   color: #f1f5f9;
 }
 
-.inspirational-quote-box {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-top: 18px;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
-  background: rgba(93, 214, 44, 0.06) !important;
-  border: 1px solid rgba(93, 214, 44, 0.2) !important;
-  border-left: 3px solid #5dd62c !important;
+.h-guarantee-pill b {
+  color: #5dd62c;
 }
 
-.inspirational-quote-box p {
-  font-size: 0.82rem;
+.horizontal-quote-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(93, 214, 44, 0.06);
+  border: 1px solid rgba(93, 214, 44, 0.2);
+  border-left: 4px solid #5dd62c;
+  border-radius: 12px;
+  padding: 12px 18px;
+}
+
+.horizontal-quote-strip p {
+  font-size: 0.85rem;
   font-style: italic;
   color: #cbd5e1 !important;
-  line-height: 1.55;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -5512,6 +5715,11 @@ body {
   transform: translateY(0);
 }
 
+.stagger-1 { transition-delay: 0.08s !important; }
+.stagger-2 { transition-delay: 0.16s !important; }
+.stagger-3 { transition-delay: 0.24s !important; }
+.stagger-4 { transition-delay: 0.32s !important; }
+
 /* ============================================================
    AUTONOMOUS MULTI-AGENT ARCHITECTURE BOXES
    ============================================================ */
@@ -6259,7 +6467,7 @@ body {
    Eliminates all white-card & invisible-text contrast issues
    ============================================================ */
 
-/* 1. All Cards, Panels & Containers: Dark Glass Surface */
+/* 1. All Cards, Panels & Containers: Advanced Frosted Glass Surface */
 .card-panel,
 .panel-card,
 .glass-card,
@@ -6280,7 +6488,6 @@ body {
 .mission-card,
 .github-card,
 .pop-tile-card,
-.rag-user-guide-banner,
 .reg-search-card-glass,
 .about-stat-card,
 .bento-card,
@@ -6293,13 +6500,36 @@ body {
 .rag-modal-glass,
 .telemetry-wrapper,
 .agent-telemetry-card,
-.glass-tabs-container {
-  background: rgba(26, 26, 26, 0.84) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+.glass-tabs-container,
+.committee-horizontal-card,
+.c-stage-card,
+.deep-dive-card,
+.audit-interactive-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(18, 24, 38, 0.84) 100%) !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.24) !important;
   color: #f4f4f5 !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 20px rgba(93, 214, 44, 0.04) !important;
+  box-shadow: 
+    0 20px 48px rgba(0, 0, 0, 0.55), 
+    0 0 25px rgba(93, 214, 44, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.card-panel:hover,
+.bento-stat-card:hover,
+.bento-card:hover,
+.pop-tile-card:hover,
+.about-stat-card:hover,
+.deep-dive-card:hover,
+.c-stage-card:hover {
+  border-color: rgba(93, 214, 44, 0.35) !important;
+  border-top-color: rgba(255, 255, 255, 0.38) !important;
+  box-shadow: 
+    0 24px 55px rgba(0, 0, 0, 0.65), 
+    0 0 30px rgba(93, 214, 44, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
 }
 
 /* 2. Headings & High-Emphasis Titles: Crisp Pure White (#FFFFFF) */

@@ -138,12 +138,12 @@ export const App: React.FC = () => {
   };
 
   const navItems = [
-    { id: 'home', label: 'Home', icon: <Home size={16} /> },
-    { id: 'eligibility', label: 'Eligibility Checker', icon: <CheckCircle size={16} /> },
-    { id: 'calculator', label: 'Loan Calculator', icon: <Calculator size={16} /> },
-    { id: 'regulations', label: 'Borrower Rights & Laws', icon: <Scale size={16} /> },
-    { id: 'history', label: `Audit Database (${historyRecords.length})`, icon: <Database size={16} /> },
-    { id: 'about', label: 'About & Governance', icon: <Info size={16} /> },
+    { id: 'home', label: 'Home' },
+    { id: 'eligibility', label: 'Eligibility Checker' },
+    { id: 'calculator', label: 'Loan Calculator' },
+    { id: 'regulations', label: 'Rights & Laws' },
+    { id: 'history', label: 'Database' },
+    { id: 'about', label: 'About' },
   ];
 
   return (
@@ -151,7 +151,7 @@ export const App: React.FC = () => {
       {/* Scroll Progress Bar at Very Top of Screen */}
       <div className="scroll-progress-line" style={{ width: `${scrollProgress}%` }} />
 
-      {/* Top Header Navigation with Ultra-Glass Effect */}
+      {/* Top Header Navigation with Ultra-Glass Effect - Clean 7 Options Layout */}
       <header className="navbar glass-header">
         <div className="navbar-left">
           <div
@@ -167,11 +167,12 @@ export const App: React.FC = () => {
             </div>
             <div className="brand-text">
               <h1>FinRisk</h1>
+              <span className="brand-url-tag">personal loan eligibility checker.vercel.app</span>
             </div>
           </div>
         </div>
 
-        {/* Desktop Nav Links */}
+        {/* Desktop Nav Links - 6 Focused Clean Options Without Icons */}
         <nav className="navbar-center desktop-nav">
           {navItems.map((item) => (
             <button
@@ -182,23 +183,14 @@ export const App: React.FC = () => {
               }}
               className={`nav-link ${activePage === item.id ? 'active' : ''}`}
             >
-              {item.icon}
               <span>{item.label}</span>
               {activePage === item.id && <span className="nav-active-glow-dot" />}
             </button>
           ))}
         </nav>
 
-        {/* Action Buttons */}
+        {/* 7th Option: Professional Executive Menu Control Box */}
         <div className="navbar-right">
-          <button
-            onClick={() => setIsRAGOpen(true)}
-            className="nav-btn btn-search-rag"
-            title="Search Consumer Credit Laws"
-          >
-            <Search size={15} /> <span>Query Law</span>
-          </button>
-
           {results && (
             <button
               onClick={() => setIsMemoOpen(true)}
@@ -209,19 +201,6 @@ export const App: React.FC = () => {
             </button>
           )}
 
-          {activePage !== 'eligibility' && (
-            <button
-              onClick={() => {
-                setActivePage('eligibility');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="nav-btn btn-cta"
-            >
-              <Sparkles size={15} /> <span>Check Eligibility</span>
-            </button>
-          )}
-
-          {/* Professional Executive Menu Control Box */}
           <button
             className={`pro-menu-box ${mobileMenuOpen ? 'active' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -273,7 +252,6 @@ export const App: React.FC = () => {
                   }}
                   className={`drawer-link ${activePage === item.id ? 'active' : ''}`}
                 >
-                  <div className="drawer-link-icon">{item.icon}</div>
                   <span className="drawer-link-text">{item.label}</span>
                   {activePage === item.id && <span className="drawer-active-dot"></span>}
                 </button>

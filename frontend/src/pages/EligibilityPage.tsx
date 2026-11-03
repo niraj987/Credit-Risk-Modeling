@@ -158,92 +158,6 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
               isLoading={isLoading}
             />
           </div>
-
-          {/* How It Works & Inspirational Borrower Section (Fills Left Column Space) */}
-          <div className="how-it-works-guide-card expanded-fill-card">
-            <div className="guide-card-header">
-              <div className="flex items-center gap-2">
-                <Compass size={18} className="text-neonlime" />
-                <h4>How Our Underwriting Committee Works</h4>
-              </div>
-              <span className="step-count-pill">5-Stage Verification</span>
-            </div>
-
-            <p className="guide-intro-text">
-              In our platform, underwriting is never left to a single black-box score. 
-              Each loan application undergoes a structured, 5-stage verification committee to guarantee accuracy, fairness, and transparency:
-            </p>
-
-            <div className="guide-steps-vertical">
-              <div className="guide-step">
-                <div className="step-circle">1</div>
-                <div className="step-detail">
-                  <h5>Profile & Capacity Ingestion</h5>
-                  <p>Validates monthly income consistency, computes DTI leverage boundaries, and sanity-checks revolving debt ratios.</p>
-                </div>
-              </div>
-
-              <div className="guide-step">
-                <div className="step-circle">2</div>
-                <div className="step-detail">
-                  <h5>Quantitative ML Risk Modeling</h5>
-                  <p>Executes LightGBM default prediction model, computes 1-Year Probability of Default (PD), and extracts SHAP attribution vectors.</p>
-                </div>
-              </div>
-
-              <div className="guide-step">
-                <div className="step-circle">3</div>
-                <div className="step-detail">
-                  <h5>Statutory Policy & Adverse Reason Mapping</h5>
-                  <p>Cross-references underwriting criteria against ECOA Regulation B (12 CFR § 1002.9) to guarantee transparent reason codes.</p>
-                </div>
-              </div>
-
-              <div className="guide-step">
-                <div className="step-circle">4</div>
-                <div className="step-detail">
-                  <h5>Fair Lending & Macro Stress Simulation</h5>
-                  <p>Performs Four-Fifths Adverse Impact Ratio (AIR ≥ 0.80) non-discrimination audit and simulates Fed +300 bps rate shock.</p>
-                </div>
-              </div>
-
-              <div className="guide-step">
-                <div className="step-circle">5</div>
-                <div className="step-detail">
-                  <h5>Committee Synthesis & Action Roadmap</h5>
-                  <p>Issues final binding approval, calibrates risk-adjusted APR (RAROC), and provides clear steps to optimize borrowing rates.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Borrower Protections Seal */}
-            <div className="borrower-guarantees-grid">
-              <div className="guarantee-chip">
-                <CheckCircle2 size={14} className="text-neonlime flex-shrink-0" />
-                <span>Zero Score Impact (Soft Inquiry)</span>
-              </div>
-              <div className="guarantee-chip">
-                <CheckCircle2 size={14} className="text-neonlime flex-shrink-0" />
-                <span>Statutory 12 CFR § 1002.9 Compliance</span>
-              </div>
-              <div className="guarantee-chip">
-                <CheckCircle2 size={14} className="text-neonlime flex-shrink-0" />
-                <span>Four-Fifths Non-Bias Verified</span>
-              </div>
-              <div className="guarantee-chip">
-                <CheckCircle2 size={14} className="text-neonlime flex-shrink-0" />
-                <span>End-to-End Client Encryption</span>
-              </div>
-            </div>
-
-            <div className="inspirational-quote-box">
-              <ShieldCheck size={20} className="text-neonlime flex-shrink-0" />
-              <p>
-                “You deserve complete clarity into your borrowing power. No hidden markups, no mystery algorithms,
-                and no unexpected penalties.”
-              </p>
-            </div>
-          </div>
         </section>
 
         {/* Right Column: Executive Dashboard, Decision, and Telemetry */}
@@ -825,6 +739,153 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
           </div>
         </section>
       </div>
+
+      {/* Full-Width Horizontal Section: How Our Underwriting Committee Works */}
+      <section className="committee-horizontal-section reveal-on-scroll">
+        <div className="committee-horizontal-card">
+          <div className="committee-card-header">
+            <div className="header-badge-group">
+              <div className="icon-crest-wrap">
+                <Compass size={24} className="text-neonlime" />
+              </div>
+              <div>
+                <span className="section-eyebrow">DETERMINISTIC UNDERWRITING ARCHITECTURE</span>
+                <h3 className="section-mega-title">
+                  How Our <span className="text-gradient-lime">Underwriting Committee</span> Works
+                </h3>
+              </div>
+            </div>
+            <div className="header-meta-pill">
+              <span className="pulse-dot-green"></span>
+              <span>5 Autonomous Verification Stages • 100% Consensus Required</span>
+            </div>
+          </div>
+
+          <p className="committee-horizontal-lead">
+            In our platform, underwriting is <span className="highlight-white font-bold">never outsourced to an opaque black box</span>. 
+            Every loan application traverses a <span className="highlight-lime font-bold">5-stage multi-agent committee</span> engineered to 
+            guarantee mathematical rigor, regulatory fairness, and transparent borrower explanations across the board.
+          </p>
+
+          {/* 5 Horizontal Sequential Stage Bento Cards */}
+          <div className="committee-stages-horizontal-grid">
+            {/* Stage 1 */}
+            <div className="c-stage-card">
+              <div className="c-stage-top">
+                <span className="c-stage-num">01</span>
+                <span className="c-stage-tag tag-sky">Capacity Verification</span>
+              </div>
+              <h4 className="c-stage-title">Profile & Capacity Ingestion</h4>
+              <p className="c-stage-desc">
+                Validates <b className="text-white">monthly income</b> stability, computes 
+                strict <b className="text-sky">Debt-To-Income (DTI)</b> boundaries, and sanity-checks revolving debt ratios.
+              </p>
+              <div className="c-stage-footer">
+                <span className="c-check-icon">✓</span>
+                <span className="c-footer-text">Prevents overleveraging before models run</span>
+              </div>
+            </div>
+
+            {/* Stage 2 */}
+            <div className="c-stage-card">
+              <div className="c-stage-top">
+                <span className="c-stage-num">02</span>
+                <span className="c-stage-tag tag-emerald">Machine Learning</span>
+              </div>
+              <h4 className="c-stage-title">Quantitative Risk Modeling</h4>
+              <p className="c-stage-desc">
+                Executes <b className="text-white">LightGBM predictive engine</b>, computes 
+                actuarial <b className="text-neonlime">1-Year Default Probability (PD)</b>, and extracts SHAP attribution vectors.
+              </p>
+              <div className="c-stage-footer">
+                <span className="c-check-icon">✓</span>
+                <span className="c-footer-text">Calibrated against tier-1 banking loss data</span>
+              </div>
+            </div>
+
+            {/* Stage 3 */}
+            <div className="c-stage-card">
+              <div className="c-stage-top">
+                <span className="c-stage-num">03</span>
+                <span className="c-stage-tag tag-amber">Statutory Policy</span>
+              </div>
+              <h4 className="c-stage-title">Adverse Reason Mapping</h4>
+              <p className="c-stage-desc">
+                Cross-references risk vectors against <b className="text-white">ECOA Regulation B</b> to 
+                guarantee top-4 <b className="text-amber">plain-English reason codes</b>.
+              </p>
+              <div className="c-stage-footer">
+                <span className="c-check-icon">✓</span>
+                <span className="c-footer-text">Zero unexplained credit rejections</span>
+              </div>
+            </div>
+
+            {/* Stage 4 */}
+            <div className="c-stage-card">
+              <div className="c-stage-top">
+                <span className="c-stage-num">04</span>
+                <span className="c-stage-tag tag-rose">Fair Lending Audit</span>
+              </div>
+              <h4 className="c-stage-title">Non-Bias & Macro Stress</h4>
+              <p className="c-stage-desc">
+                Enforces the <b className="text-white">Four-Fifths Rule (AIR ≥ 0.80)</b> and simulates 
+                a <b className="text-rose">Federal Reserve +300 bps rate crisis</b>.
+              </p>
+              <div className="c-stage-footer">
+                <span className="c-check-icon">✓</span>
+                <span className="c-footer-text">Tested against severe economic crises</span>
+              </div>
+            </div>
+
+            {/* Stage 5 */}
+            <div className="c-stage-card">
+              <div className="c-stage-top">
+                <span className="c-stage-num">05</span>
+                <span className="c-stage-tag tag-purple">Executive Verdict</span>
+              </div>
+              <h4 className="c-stage-title">Committee Synthesis</h4>
+              <p className="c-stage-desc">
+                Issues the <b className="text-white">final binding approval</b>, establishes 
+                calibrated <b className="text-neonlime">RAROC interest APR</b>, and builds an actionable improvement roadmap.
+              </p>
+              <div className="c-stage-footer">
+                <span className="c-check-icon">✓</span>
+                <span className="c-footer-text">Transparent credit memo generated</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar: Horizontal Borrower Guarantees & Quote */}
+          <div className="committee-horizontal-footer">
+            <div className="horizontal-guarantees-row">
+              <div className="h-guarantee-pill">
+                <CheckCircle2 size={16} className="text-neonlime flex-shrink-0" />
+                <span><b>Zero Score Impact</b> • 100% Soft Inquiry Safe</span>
+              </div>
+              <div className="h-guarantee-pill">
+                <CheckCircle2 size={16} className="text-neonlime flex-shrink-0" />
+                <span><b>Equal Credit Rights</b> • Mandatory Statutory Disclosures</span>
+              </div>
+              <div className="h-guarantee-pill">
+                <CheckCircle2 size={16} className="text-neonlime flex-shrink-0" />
+                <span><b>Four-Fifths Standard</b> • Mathematical Non-Bias Proof</span>
+              </div>
+              <div className="h-guarantee-pill">
+                <CheckCircle2 size={16} className="text-neonlime flex-shrink-0" />
+                <span><b>Client Privacy</b> • Strict Client-Side Encryption</span>
+              </div>
+            </div>
+
+            <div className="horizontal-quote-strip">
+              <ShieldCheck size={20} className="text-neonlime flex-shrink-0" />
+              <p>
+                “You deserve complete clarity into your borrowing power. No hidden markups, no mystery algorithms,
+                and no unexpected penalties.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

@@ -35,80 +35,80 @@ export const RegulationsPage: React.FC = () => {
     {
       id: 'ecoa',
       category: 'REJECTION_RIGHTS',
-      title: 'ECOA Regulation B (12 CFR § 1002.9)',
+      title: 'Equal Credit Opportunity Act (ECOA)',
       badge: 'Adverse Action Protection',
       colorClass: 'tile-sky',
       icon: <ShieldCheck size={24} className="text-neonlime" />,
-      rule: 'Lenders cannot silently deny a credit application without formal notice.',
+      rule: 'Lenders cannot silently deny a credit application without formal written disclosure.',
       mandate: 'Mandatory disclosure of top 4 exact, plain-English reasons for any rejection or modified terms within 30 days.',
       protection: 'Guarantees actionable feedback and prevents discriminatory credit denial based on protected demographics.',
-      citations: ['12 CFR § 1002.9(a)(2)', 'CFPB Circular 2022-03', 'ECOA Section 701'],
-      userImpact: 'Guarantees you receive actionable feedback to fix your financial profile.',
+      userImpact: 'Guarantees you receive actionable feedback to fix your financial profile and qualify for better terms.',
+      keyBenefit: 'Guaranteed written explanation for any loan decision within 30 days.',
     },
     {
       id: 'basel',
       category: 'SOLVENCY',
-      title: 'Basel III & IV Capital Framework',
+      title: 'Basel Capital Adequacy Framework',
       badge: 'Bank Safety & Solvency',
       colorClass: 'tile-emerald',
       icon: <Scale size={24} className="text-neonlime" />,
       rule: 'Banks must calculate actuarially sound Expected Loss on all consumer loans.',
-      mandate: 'Internal Ratings-Based (IRB) approach governs Expected Loss: EL = PD × EAD × LGD with dedicated Tier-1 equity capital.',
-      protection: 'Ensures your loan interest rate reflects fair, actuarially sound risk pricing rather than predatory corporate profit markups.',
-      citations: ['Basel BCBS 128', 'Dodd-Frank Title I', 'CRR II Art. 158'],
+      mandate: 'Expected Loss calculation (PD × EAD × LGD) must be backed by dedicated Tier-1 equity reserves.',
+      protection: 'Ensures your loan interest rate reflects fair, actuarially sound risk pricing rather than predatory corporate markups.',
       userImpact: 'Ensures your loan interest rate reflects fair, actuarially sound risk pricing.',
+      keyBenefit: 'Fair interest rate pricing based on true mathematical risk, not arbitrary markups.',
     },
     {
       id: 'fcra',
       category: 'CREDIT_RIGHTS',
-      title: 'Fair Credit Reporting Act (FCRA § 615)',
+      title: 'Fair Credit Reporting Act (FCRA)',
       badge: 'Credit Bureau Accuracy',
       colorClass: 'tile-amber',
       icon: <FileText size={24} className="text-neonlime" />,
-      rule: 'Lenders taking adverse action must disclose the consumer credit bureau used.',
+      rule: 'Lenders taking adverse action must disclose the consumer credit bureau consulted.',
       mandate: 'Gives you the absolute right to know which bureau (CIBIL, Experian) provided your file, plus free credit disclosure and dispute rights.',
       protection: 'Protects you from erroneous bureau entries and unauthorized credit inquiries that damage your score.',
-      citations: ['15 U.S.C. § 1681m', 'CFPB Bulletin 2012-09', 'FCRA § 609'],
       userImpact: 'Protects you from erroneous bureau entries and unauthorized credit checks.',
+      keyBenefit: 'Full transparency into credit reports and free dispute rights for inaccurate data.',
     },
     {
       id: 'fairlending',
       category: 'FAIRNESS',
-      title: 'Four-Fifths Rule & Disparate Impact',
+      title: 'Four-Fifths Rule & Algorithmic Parity',
       badge: 'Algorithmic Non-Bias',
       colorClass: 'tile-rose',
       icon: <Lock size={24} className="text-neonlime" />,
       rule: 'AI credit algorithms must maintain demographic parity across all borrower cohorts.',
-      mandate: 'Approval rates across demographic cohorts must satisfy the 80% (Four-Fifths) ratio: AIR = Rate(Protected) / Rate(Reference) >= 0.80.',
+      mandate: 'Approval rates across demographic cohorts must satisfy the 80% (Four-Fifths) ratio: AIR = Rate(Protected) / Rate(Reference) ≥ 0.80.',
       protection: 'Guarantees automated credit models are statistically tested and prohibited from exhibiting indirect demographic bias.',
-      citations: ['29 CFR § 1607.4(D)', 'CFPB Supervisory Circular', 'DOJ Fair Lending Directives'],
       userImpact: 'Ensures AI algorithms never discriminate against protected demographics.',
+      keyBenefit: 'Rigorous algorithmic testing to guarantee unbiased approval decisions for every applicant.',
     },
     {
       id: 'tila',
       category: 'APR_TRANSPARENCY',
-      title: 'Truth in Lending Act (TILA Reg Z)',
+      title: 'Truth in Lending Act (TILA)',
       badge: 'APR Disclosure & Transparency',
       colorClass: 'tile-purple',
       icon: <DollarSign size={24} className="text-neonlime" />,
       rule: 'Lenders are legally barred from concealing processing fees or compounding traps.',
       mandate: 'Mandates standard upfront disclosure of Annual Percentage Rate (APR), payment schedule, finance charges, and prepayment terms.',
       protection: 'Protects borrowers from hidden fees, surprise penalty rate hikes, or balloon payment covenants.',
-      citations: ['12 CFR § 1026.18', 'TILA 15 U.S.C. § 1601', 'CFPB Reg Z Handbook'],
       userImpact: 'Protects you from hidden fees, sudden balloon payments, or predatory interest.',
+      keyBenefit: 'Zero hidden fees: clear APR, total interest cost, and monthly payment schedules upfront.',
     },
     {
       id: 'glba',
       category: 'PRIVACY',
-      title: 'Gramm-Leach-Bliley Act (GLBA Safeguards)',
+      title: 'Gramm-Leach-Bliley Privacy Safeguards',
       badge: 'Financial Data Privacy',
       colorClass: 'tile-cyan',
       icon: <Sparkles size={24} className="text-neonlime" />,
       rule: 'Confidential borrower financial data must remain strictly encrypted and sovereign.',
-      mandate: '16 CFR Part 314 mandates comprehensive technical, administrative, and physical encryption safeguards for nonpublic personal financial data.',
+      mandate: 'Comprehensive technical, administrative, and physical encryption safeguards for nonpublic personal financial data.',
       protection: 'Guarantees your monthly salary and PAN/Aadhaar identity details are never monetized, leaked, or shared with third parties.',
-      citations: ['16 CFR § 314.3', '15 U.S.C. § 6801', 'FTC Safeguards Rule 2023'],
       userImpact: 'Guarantees your salary and PAN/Aadhaar data remains 100% private and encrypted.',
+      keyBenefit: 'Bank-grade encryption protecting all your financial data from unauthorized sharing or sale.',
     },
   ];
 
@@ -150,19 +150,18 @@ export const RegulationsPage: React.FC = () => {
         </p>
       </div>
 
-      {/* Plain-English Explainer Banner */}
-      <div className="rag-user-guide-banner reveal-on-scroll">
-        <div className="guide-icon-box">
-          <HelpCircle size={26} className="text-neonlime" />
+      {/* Plain-English Explainer Written Directly on the Webpage (No Container Box) */}
+      <div className="rights-matter-open-section reveal-on-scroll">
+        <div className="rights-matter-header">
+          <HelpCircle size={24} className="text-neonlime inline-block mr-2" />
+          <h2>Why Do Credit Regulations & Borrower Rights Matter to You?</h2>
         </div>
-        <div className="guide-text-content">
-          <h3>Why Do Credit Regulations & Borrower Rights Matter to You?</h3>
-          <p>
-            Credit laws aren't just dry legal textbooks—they are your <b>legal shield as a consumer</b>. When you apply for a loan,
-            these laws guarantee your right to receive exact rejection reasons, prevent discriminatory algorithms, and protect you
-            from hidden interest fees. Our AI validates each assessment against these rulebooks in real time.
-          </p>
-        </div>
+        <p className="rights-matter-lead">
+          Credit laws aren't just dry legal textbooks—they are your <span className="highlight-text-lime font-bold">legal shield as a consumer</span>. 
+          When you apply for a loan, these statutes guarantee your absolute right to receive <span className="text-white font-bold">exact rejection reasons</span>, 
+          prohibit <span className="text-white font-bold">discriminatory black-box algorithms</span>, and strictly outlaw <span className="text-white font-bold">hidden interest rates or surprise fees</span>. 
+          Our underwriting engine executes these rulebooks automatically so every decision is fair, audited, and mathematically transparent.
+        </p>
       </div>
 
       {/* Spacious, Elegant Search Bar: Perfectly Aligned Unified Pill */}
@@ -351,7 +350,7 @@ export const RegulationsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Decorative Pop-Up Pillar Tiles Grid with Structured Content & Stable Hover */}
+      {/* Decorative Pop-Up Pillar Tiles Grid with Descent, Structured Content & Zero Clutter */}
       <div className="pop-tiles-grid reveal-on-scroll">
         {filteredPillars.map((pillar) => (
           <div
@@ -381,14 +380,14 @@ export const RegulationsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="tile-bottom-citations">
-              {pillar.citations.map((c, ci) => (
-                <span key={ci} className="tile-cite-chip">{c}</span>
-              ))}
+            {/* Key Borrower Benefit Strip */}
+            <div className="tile-benefit-strip">
+              <CheckCircle2 size={15} className="text-neonlime flex-shrink-0 mt-0.5" />
+              <span>{pillar.keyBenefit}</span>
             </div>
 
             <div className="tile-bottom-action">
-              <span className="action-hint">Click for full statutory breakdown</span>
+              <span className="action-hint">View full legal guidance</span>
               <ChevronRight size={16} />
             </div>
           </div>
@@ -427,19 +426,8 @@ export const RegulationsPage: React.FC = () => {
                 <p className="detail-legal-text">{selectedPillar.protection}</p>
               </div>
 
-              <div className="detail-section">
-                <h4>Official Citations & Regulatory References</h4>
-                <div className="citations-pills-row">
-                  {selectedPillar.citations.map((c: string, idx: number) => (
-                    <span key={idx} className="citation-pill">
-                      <ExternalLink size={12} /> {c}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
               <div className="detail-takeaway-box">
-                <ShieldCheck size={20} className="text-neonlime flex-shrink-0" />
+                <ShieldCheck size={22} className="text-neonlime flex-shrink-0" />
                 <div>
                   <b>Our Underwriting Guarantee:</b>
                   <p>{selectedPillar.userImpact}</p>
