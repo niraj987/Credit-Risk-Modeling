@@ -1,229 +1,202 @@
-import React, { useState } from 'react';
-import { Wifi, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Wifi } from 'lucide-react';
 
 export const FloatingCardsShowcase: React.FC = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const [hasLanded, setHasLanded] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setMousePos({ x, y });
-  };
+  useEffect(() => {
+    // Entrance animation: cards fall gracefully from outer space then stack
+    const timer = setTimeout(() => {
+      setHasLanded(true);
+    }, 120);
 
-  const handleMouseLeave = () => {
-    setMousePos({ x: 0, y: 0 });
-  };
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
 
-  // Subtle interactive 3D parallax tilt
-  const tiltX = -mousePos.y * 12;
-  const tiltY = mousePos.x * 16;
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Scroll effect: Down-scroll disappears cards one by one; Up-scroll adds them back one by one!
+  // Card 3 disappears first (scrollY >= 90)
+  // Card 2 disappears second (scrollY >= 200)
+  // Card 1 disappears third (scrollY >= 330)
+  const isCard3Active = scrollY < 90;
+  const isCard2Active = scrollY < 200;
+  const isCard1Active = scrollY < 330;
 
   return (
-    <div
-      className="hand-cards-stage-wrapper"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Ambient Atmospheric Lighting & Glowing Halo */}
-      <div className="hand-ambient-purple-glow" />
-      <div className="hand-ambient-gold-glow" />
+    <div className="cards-pure-space-viewport">
+      {/* Infinite Cosmic Atmospheric Ambient Glow */}
+      <div className="space-purple-radial-core" />
+      <div className="space-purple-radial-wide" />
 
-      {/* Twinkling Ambient Sparkle Stars */}
-      <div className="sparkle-star star-1">✦</div>
-      <div className="sparkle-star star-2">✦</div>
-      <div className="sparkle-star star-3">✦</div>
-      <div className="sparkle-star star-4">✦</div>
+      {/* Floating Sparkle Stars in Pure Space */}
+      <div className="space-star star-pos-1">✦</div>
+      <div className="space-star star-pos-2">✦</div>
+      <div className="space-star star-pos-3">✦</div>
+      <div className="space-star star-pos-4">✦</div>
 
-      {/* Main 3D Interactive Stage */}
-      <div
-        className="hand-cards-3d-scene"
-        style={{
-          transform: `perspective(1200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
-        }}
-      >
+      {/* 3D Falling & Stacking Stage in Open Space (Zero Box Borders) */}
+      <div className="cards-space-3d-stage">
         {/* =========================================================
-            FLOATING CARDS GROUP (Hovering above the Golden Palm)
+            CARD 3: Deep Royal Cosmic Violet Card (Back Layer)
             ========================================================= */}
-        <div className="floating-cards-cluster">
-          {/* Card 2: Champagne Gold Companion Card (Tilted Behind) */}
-          <div className="hand-card-item card-gold-back">
-            <div className="card-face card-skin-gold">
-              {/* Card Top: Bank Name */}
-              <div className="hand-card-header">
-                <span className="hand-bank-logo text-amber-950 font-bold">FinRisk</span>
-                <Wifi size={17} className="text-amber-900/70 rotate-90" />
-              </div>
-
-              {/* EMV Chip */}
-              <div className="hand-emv-chip chip-gold-theme">
-                <div className="emv-line-h" />
-                <div className="emv-line-v" />
-              </div>
-
-              {/* 12-Digit Number in Metallic Sheen */}
-              <div className="hand-card-number text-amber-950/90">
-                <span>8391</span>
-                <span>5620</span>
-                <span>4178</span>
-              </div>
-
-              {/* Footer: Expiration & CVV */}
-              <div className="hand-card-footer text-amber-950/80">
-                <div>
-                  <span className="meta-lbl">EXPIRES</span>
-                  <span className="meta-val font-mono">11/30</span>
-                </div>
-                <div>
-                  <span className="meta-lbl">CVV</span>
-                  <span className="meta-val font-mono font-bold">XXX</span>
-                </div>
-              </div>
+        <div
+          className={`space-card-wrapper card-layer-3 ${
+            !hasLanded
+              ? 'falling-from-space-3'
+              : isCard3Active
+              ? 'stacked-floating-3'
+              : 'scroll-disappeared-3'
+          }`}
+        >
+          <div className="space-card-body skin-cosmic-violet">
+            <div className="space-card-header">
+              <span className="space-bank-logo text-purple-200">FinRisk</span>
+              <Wifi size={18} className="text-purple-300 rotate-90" />
             </div>
-          </div>
 
-          {/* Card 1: Sleek Matte Black Card with Purple Sides (Hero Foreground) */}
-          <div className="hand-card-item card-black-hero">
-            <div className="card-face card-skin-black">
-              {/* Gloss Reflection Overlay */}
-              <div className="card-diagonal-sheen" />
+            {/* Brass EMV Chip */}
+            <div className="space-emv-chip chip-gold-variant">
+              <div className="chip-inner-h" />
+              <div className="chip-inner-v" />
+            </div>
 
-              {/* Card Header: Only "FinRisk" */}
-              <div className="hand-card-header">
-                <span className="hand-bank-logo text-white font-extrabold tracking-tight">FinRisk</span>
-                <div className="flex items-center gap-1">
-                  <span className="text-[10px] font-bold text-neonlime tracking-widest uppercase">PRIME</span>
-                  <Wifi size={19} className="text-zinc-300 rotate-90" />
-                </div>
+            {/* XXXX-XXXX-XXXX Number (As Requested) */}
+            <div className="space-card-number text-purple-200">
+              <span>XXXX</span>
+              <span className="num-hyphen">-</span>
+              <span>XXXX</span>
+              <span className="num-hyphen">-</span>
+              <span>XXXX</span>
+            </div>
+
+            {/* Expiration XX/XX & Written CVV: XXX */}
+            <div className="space-card-footer text-purple-300/90">
+              <div>
+                <span className="space-meta-label text-purple-400">EXPIRES</span>
+                <span className="space-meta-val font-mono">XX/XX</span>
               </div>
-
-              {/* Authentic Golden EMV Chip */}
-              <div className="hand-emv-chip chip-brass-theme">
-                <div className="emv-line-h" />
-                <div className="emv-line-v" />
-                <div className="emv-core" />
-              </div>
-
-              {/* 12-Digit Random Number in Green / Gold / Silver Gradient */}
-              <div className="hand-card-number number-gradient-green-gold">
-                <span>4829</span>
-                <span>7104</span>
-                <span>9382</span>
-              </div>
-
-              {/* Card Footer: Expiry & Written CVV: XXX */}
-              <div className="hand-card-footer">
-                <div>
-                  <span className="meta-lbl">VALID THRU</span>
-                  <span className="meta-val font-mono text-zinc-200">08/29</span>
-                </div>
-                <div className="text-right">
-                  <span className="meta-lbl">SECURITY CODE</span>
-                  <div className="cvv-badge-pill">
-                    <span className="cvv-tag">CVV</span>
-                    <span className="cvv-digits font-mono font-bold text-neonlime">XXX</span>
-                  </div>
-                </div>
+              <div className="text-right">
+                <span className="space-meta-label text-purple-400">CVV</span>
+                <span className="space-cvv-pill bg-purple-900/60 border-purple-500/50 text-purple-200">
+                  XXX
+                </span>
               </div>
             </div>
           </div>
         </div>
 
         {/* =========================================================
-            SCULPTED METALLIC GOLDEN HAND (Supporting & Holding the Cards)
+            CARD 2: Translucent Cyber Emerald Glass Card (Middle Layer)
             ========================================================= */}
-        <div className="sculpted-hand-wrapper">
-          <svg
-            viewBox="0 0 600 380"
-            className="sculpted-gold-hand-svg"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              {/* Rich Golden Gradients for Realistic Metallic Specular Contours */}
-              <linearGradient id="goldPalmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#ffd875" />
-                <stop offset="25%" stopColor="#e5a93c" />
-                <stop offset="50%" stopColor="#c58322" />
-                <stop offset="75%" stopColor="#9a5e12" />
-                <stop offset="100%" stopColor="#5f3506" />
-              </linearGradient>
+        <div
+          className={`space-card-wrapper card-layer-2 ${
+            !hasLanded
+              ? 'falling-from-space-2'
+              : isCard2Active
+              ? 'stacked-floating-2'
+              : 'scroll-disappeared-2'
+          }`}
+        >
+          <div className="space-card-body skin-cyber-emerald">
+            <div className="space-card-header">
+              <span className="space-bank-logo text-emerald-100">FinRisk</span>
+              <Wifi size={18} className="text-emerald-300 rotate-90" />
+            </div>
 
-              <linearGradient id="goldFingerGrad1" x1="20%" y1="0%" x2="80%" y2="100%">
-                <stop offset="0%" stopColor="#fff3b0" />
-                <stop offset="20%" stopColor="#e5aa3f" />
-                <stop offset="60%" stopColor="#a76818" />
-                <stop offset="100%" stopColor="#553006" />
-              </linearGradient>
+            {/* Silver EMV Chip */}
+            <div className="space-emv-chip chip-silver-variant">
+              <div className="chip-inner-h" />
+              <div className="chip-inner-v" />
+            </div>
 
-              <linearGradient id="goldFingerGrad2" x1="10%" y1="10%" x2="90%" y2="90%">
-                <stop offset="0%" stopColor="#ffe994" />
-                <stop offset="35%" stopColor="#d89b33" />
-                <stop offset="70%" stopColor="#8c5310" />
-                <stop offset="100%" stopColor="#482403" />
-              </linearGradient>
+            {/* XXXX-XXXX-XXXX Number */}
+            <div className="space-card-number text-emerald-200">
+              <span>XXXX</span>
+              <span className="num-hyphen">-</span>
+              <span>XXXX</span>
+              <span className="num-hyphen">-</span>
+              <span>XXXX</span>
+            </div>
 
-              <linearGradient id="goldWristGrad" x1="0%" y1="40%" x2="100%" y2="60%">
-                <stop offset="0%" stopColor="#e5aa3f" />
-                <stop offset="40%" stopColor="#c58322" />
-                <stop offset="75%" stopColor="#7a440a" />
-                <stop offset="100%" stopColor="#3d1e02" />
-              </linearGradient>
+            {/* Expiration XX/XX & Written CVV: XXX */}
+            <div className="space-card-footer text-emerald-300/90">
+              <div>
+                <span className="space-meta-label text-emerald-400">EXPIRES</span>
+                <span className="space-meta-val font-mono">XX/XX</span>
+              </div>
+              <div className="text-right">
+                <span className="space-meta-label text-emerald-400">CVV</span>
+                <span className="space-cvv-pill bg-emerald-950/70 border-emerald-500/50 text-neonlime">
+                  XXX
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-              <filter id="handGoldGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="-4" dy="12" stdDeviation="16" floodColor="rgba(0,0,0,0.85)" />
-                <feDropShadow dx="0" dy="0" stdDeviation="12" floodColor="rgba(245,158,11,0.35)" />
-              </filter>
-            </defs>
+        {/* =========================================================
+            CARD 1: Matte Obsidian Black with Gold & Emerald Text (Front Layer)
+            ========================================================= */}
+        <div
+          className={`space-card-wrapper card-layer-1 ${
+            !hasLanded
+              ? 'falling-from-space-1'
+              : isCard1Active
+              ? 'stacked-floating-1'
+              : 'scroll-disappeared-1'
+          }`}
+        >
+          <div className="space-card-body skin-matte-black-hero">
+            {/* Elegant Gloss Reflection Sheen */}
+            <div className="card-gloss-shimmer" />
 
-            <g filter="url(#handGoldGlow)" className="gold-hand-mesh-group">
-              {/* Wrist & Forearm extending from the bottom right */}
-              <path
-                d="M 600,290 C 530,270 480,260 430,240 C 390,225 350,215 310,210 C 270,205 240,215 210,230 C 230,260 270,290 320,310 C 390,340 480,360 600,380 Z"
-                fill="url(#goldWristGrad)"
-              />
+            <div className="space-card-header">
+              <span className="space-bank-logo text-white font-extrabold tracking-tight">FinRisk</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-bold text-neonlime tracking-widest uppercase">ELITE</span>
+                <Wifi size={19} className="text-zinc-300 rotate-90" />
+              </div>
+            </div>
 
-              {/* Hand Palm Center with Anatomical Metallic Specular Highlights */}
-              <path
-                d="M 210,230 C 180,240 145,242 120,232 C 95,222 80,202 70,185 C 85,182 110,185 140,192 C 180,202 240,210 290,212 C 320,213 250,225 210,230 Z"
-                fill="url(#goldPalmGrad)"
-              />
+            {/* Authentic Brass EMV Chip */}
+            <div className="space-emv-chip chip-brass-hero">
+              <div className="chip-inner-h" />
+              <div className="chip-inner-v" />
+              <div className="chip-inner-box" />
+            </div>
 
-              {/* Pinky Finger (Curved gracefully at the base) */}
-              <path
-                d="M 85,185 C 60,175 35,165 20,158 C 12,154 8,146 12,140 C 18,132 30,136 48,144 C 70,153 95,168 115,180 Z"
-                fill="url(#goldFingerGrad2)"
-              />
+            {/* XXXX-XXXX-XXXX in Metallic Gold & Green Gradient */}
+            <div className="space-card-number number-gradient-gold-green">
+              <span>XXXX</span>
+              <span className="num-hyphen">-</span>
+              <span>XXXX</span>
+              <span className="num-hyphen">-</span>
+              <span>XXXX</span>
+            </div>
 
-              {/* Ring Finger */}
-              <path
-                d="M 115,180 C 85,160 55,142 35,128 C 24,120 22,110 30,104 C 38,98 52,102 75,116 C 105,134 135,158 155,178 Z"
-                fill="url(#goldFingerGrad1)"
-              />
-
-              {/* Middle Finger (Longest, open upward cradle gesture) */}
-              <path
-                d="M 155,178 C 120,148 85,120 62,100 C 50,90 48,78 58,70 C 70,62 86,68 112,88 C 145,114 185,146 210,172 Z"
-                fill="url(#goldFingerGrad1)"
-              />
-
-              {/* Index Finger (Front-most supporting finger) */}
-              <path
-                d="M 210,172 C 175,140 140,110 115,88 C 102,76 100,64 112,56 C 125,48 142,54 170,76 C 205,104 245,138 275,170 Z"
-                fill="url(#goldFingerGrad2)"
-              />
-
-              {/* Thumb (Curved naturally along the side) */}
-              <path
-                d="M 245,215 C 220,185 195,155 185,135 C 178,122 182,112 195,110 C 210,108 225,122 245,145 C 270,175 295,198 310,210 Z"
-                fill="url(#goldPalmGrad)"
-              />
-
-              {/* Polished Metallic Specular Light Streaks on Knuckles & Fingers */}
-              <ellipse cx="140" cy="85" rx="32" ry="4" transform="rotate(-38 140 85)" fill="#ffffff" opacity="0.32" />
-              <ellipse cx="90" cy="98" rx="28" ry="3.5" transform="rotate(-38 90 98)" fill="#ffffff" opacity="0.28" />
-              <ellipse cx="215" cy="148" rx="24" ry="4" transform="rotate(-34 215 148)" fill="#ffffff" opacity="0.25" />
-            </g>
-          </svg>
+            {/* Expiry XX/XX & Written CVV: XXX */}
+            <div className="space-card-footer">
+              <div>
+                <span className="space-meta-label text-zinc-400">EXPIRES</span>
+                <span className="space-meta-val font-mono text-zinc-200">XX/XX</span>
+              </div>
+              <div className="text-right">
+                <span className="space-meta-label text-zinc-400">SECURITY CODE</span>
+                <div className="space-cvv-pill bg-zinc-900/80 border-purple-500/40 text-neonlime font-bold">
+                  <span className="text-[9px] text-zinc-400 mr-1">CVV</span>
+                  <span>XXX</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

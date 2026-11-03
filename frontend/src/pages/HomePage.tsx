@@ -142,6 +142,33 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             to qualify for the lowest possible monthly payments.
           </p>
 
+          {/* Open Value Highlights Strip (Box-Free Canvas Layout) */}
+          <div className="hero-open-highlights-strip">
+            <div className="open-highlight-item">
+              <ShieldCheck size={18} className="text-neonlime flex-shrink-0" />
+              <div className="open-highlight-text">
+                <b>Zero Bureau Impact</b>
+                <span>100% Soft Inquiry Safe</span>
+              </div>
+            </div>
+
+            <div className="open-highlight-item">
+              <Clock size={18} className="text-sky flex-shrink-0" />
+              <div className="open-highlight-text">
+                <b>Instant Decision</b>
+                <span>Automated Committee</span>
+              </div>
+            </div>
+
+            <div className="open-highlight-item">
+              <Lock size={18} className="text-purple-400 flex-shrink-0" />
+              <div className="open-highlight-text">
+                <b>Full Transparency</b>
+                <span>12 CFR § 1002.9 Citations</span>
+              </div>
+            </div>
+          </div>
+
           {/* Primary Action Buttons */}
           <div className="hero-cta-group">
             <button
@@ -161,9 +188,38 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Right Hero Column: 3D Hand Holding Floating Credit Cards Showcase */}
+        {/* Right Hero Column: 3D Floating Credit Cards Showcase in Open Space */}
         <div className="hero-interactive-frame">
           <FloatingCardsShowcase />
+        </div>
+      </section>
+
+      {/* Authority Stats Strip (Box-Free Open Canvas Layout) */}
+      <section className="authority-stats-open-section reveal-on-scroll">
+        <div className="authority-stats-open-grid">
+          <div className="open-stat-column">
+            <span className="open-stat-num text-sky">₹12.4 Cr+</span>
+            <span className="open-stat-title">Loans Evaluated</span>
+            <span className="open-stat-desc">Across 8,200+ consumer applications</span>
+          </div>
+
+          <div className="open-stat-column">
+            <span className="open-stat-num text-purple-400">&lt; 2.1 Sec</span>
+            <span className="open-stat-title">Decision Latency</span>
+            <span className="open-stat-desc">Real-time asynchronous multi-agent orchestration</span>
+          </div>
+
+          <div className="open-stat-column">
+            <span className="open-stat-num text-emerald">99.4%</span>
+            <span className="open-stat-title">Model Precision</span>
+            <span className="open-stat-desc">Validated against Basel historical default datasets</span>
+          </div>
+
+          <div className="open-stat-column">
+            <span className="open-stat-num text-neonlime">100%</span>
+            <span className="open-stat-title">Fair Lending Audit</span>
+            <span className="open-stat-desc">Four-Fifths Rule compliance guarantee</span>
+          </div>
         </div>
       </section>
 
@@ -300,6 +356,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section className="bottom-cta-banner">
         <div className="bottom-cta-inner">
           <div className="bottom-cta-copy">
+            <span className="bottom-open-tag">Zero Risk • Instant Answers</span>
             <h2>Check Your Personal Loan Eligibility in 2 Minutes</h2>
             <p>
               Get personalized interest rates, monthly EMI breakdown, and regulatory risk scores

@@ -79,16 +79,18 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #0d0c18; /* Purple-infused obsidian dark background */
+  background-color: #0b0716; /* Deep rich cosmic obsidian-purple */
   color: #f8f8f8;
   line-height: 1.6;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(ellipse 110% 55% at 50% -5%, rgba(168, 85, 247, 0.22) 0px, transparent 65%),
-    radial-gradient(ellipse 95% 50% at 50% 105%, rgba(139, 92, 246, 0.18) 0px, transparent 65%),
-    radial-gradient(circle 800px at 10% 35%, rgba(126, 34, 206, 0.16) 0px, transparent 70%),
-    radial-gradient(circle 850px at 90% 65%, rgba(93, 214, 44, 0.08) 0px, transparent 70%),
-    radial-gradient(circle 600px at 50% 50%, rgba(88, 28, 135, 0.14) 0px, transparent 75%);
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(168, 85, 247, 0.36) 0px, transparent 65%),
+    radial-gradient(circle 900px at 15% 25%, rgba(147, 51, 234, 0.32) 0px, transparent 65%),
+    radial-gradient(circle 900px at 85% 45%, rgba(168, 85, 247, 0.32) 0px, transparent 65%),
+    radial-gradient(circle 900px at 18% 70%, rgba(139, 92, 246, 0.32) 0px, transparent 65%),
+    radial-gradient(circle 900px at 82% 90%, rgba(168, 85, 247, 0.34) 0px, transparent 65%),
+    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(126, 34, 206, 0.38) 0px, transparent 65%),
+    radial-gradient(circle 600px at 50% 50%, rgba(192, 132, 252, 0.18) 0px, transparent 75%);
   background-size: 100% 100%;
   background-attachment: fixed;
   min-height: 100vh;
@@ -569,15 +571,18 @@ body {
   box-shadow: none !important;
 }
 
-/* Hero Right Interactive Frame */
+/* Hero Right Interactive Frame (Open Space - Zero Box Outline as requested) */
 .hero-interactive-frame {
-  background: rgba(18, 24, 38, 0.75) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-radius: var(--radius-xl);
-  padding: 24px;
-  box-shadow: var(--shadow-lg);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
 }
 
 .hero-frame-tabs {
@@ -8521,4 +8526,477 @@ input[type="range"]::-webkit-slider-thumb,
 .cvv-digits {
   font-size: 0.78rem;
   letter-spacing: 0.12em;
+}
+
+/* ==========================================================================
+   21. FLOATING CREDIT CARDS IN OPEN SPACE (FALLING & SCROLL DISAPPEARING)
+   ========================================================================== */
+.cards-pure-space-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  padding: 10px 0;
+  overflow: visible;
+}
+
+/* Ambient Radial Glows in Open Space */
+.space-purple-radial-core {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.38) 0%, rgba(139, 92, 246, 0.15) 50%, transparent 72%);
+  filter: blur(50px);
+  z-index: 1;
+  pointer-events: none;
+  animation: spaceGlowPulse 6s ease-in-out infinite alternate;
+}
+
+.space-purple-radial-wide {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.22) 0%, transparent 65%);
+  filter: blur(65px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes spaceGlowPulse {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  100% { transform: scale(1.12); opacity: 1; }
+}
+
+/* Space Twinkle Stars */
+.space-star {
+  position: absolute;
+  font-size: 1.4rem;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.8));
+}
+
+.star-pos-1 {
+  top: 10%;
+  left: 15%;
+  color: #fef08a;
+  animation: twinkleSparkle 3.5s ease-in-out infinite;
+}
+
+.star-pos-2 {
+  top: 22%;
+  right: 10%;
+  font-size: 1.8rem;
+  color: #c084fc;
+  filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.9));
+  animation: twinkleSparkle 4.2s ease-in-out infinite 0.8s;
+}
+
+.star-pos-3 {
+  bottom: 25%;
+  left: 8%;
+  font-size: 1.1rem;
+  color: #5dd62c;
+  animation: twinkleSparkle 3s ease-in-out infinite 1.4s;
+}
+
+.star-pos-4 {
+  bottom: 12%;
+  right: 20%;
+  font-size: 1.5rem;
+  color: #fde047;
+  animation: twinkleSparkle 4.8s ease-in-out infinite 2s;
+}
+
+/* 3D Stage (Zero Box Borders / Outlines) */
+.cards-space-3d-stage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 280px;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+
+@media (max-width: 640px) {
+  .cards-space-3d-stage {
+    max-width: 320px;
+    height: 210px;
+  }
+}
+
+.space-card-wrapper {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Falling from Space on Load */
+.falling-from-space-1 {
+  transform: translateY(-800px) rotateX(45deg) rotateY(-20deg) scale(0.65) !important;
+  opacity: 0;
+}
+
+.falling-from-space-2 {
+  transform: translateY(-900px) rotateX(-45deg) rotateY(25deg) scale(0.6) !important;
+  opacity: 0;
+}
+
+.falling-from-space-3 {
+  transform: translateY(-1000px) rotateX(60deg) rotateY(40deg) scale(0.55) !important;
+  opacity: 0;
+}
+
+/* Stacking Formation in Space */
+.stacked-floating-1 {
+  transform: translateZ(40px) translateY(0px) rotateX(4deg) rotateY(-4deg);
+  opacity: 1;
+  animation: floatSpaceCard1 6s ease-in-out infinite alternate;
+}
+
+.stacked-floating-2 {
+  transform: translateZ(-15px) translateY(-36px) translateX(30px) rotateX(8deg) rotateY(-14deg) rotate(-3deg);
+  opacity: 0.94;
+  animation: floatSpaceCard2 7s ease-in-out infinite alternate;
+}
+
+.stacked-floating-3 {
+  transform: translateZ(-50px) translateY(42px) translateX(-35px) rotateX(-8deg) rotateY(14deg) rotate(4deg);
+  opacity: 0.88;
+  animation: floatSpaceCard3 8s ease-in-out infinite alternate;
+}
+
+/* Disappearing One by One on Down-Scroll (Adding Back on Up-Scroll) */
+.scroll-disappeared-1 {
+  transform: translateY(-200px) rotateX(30deg) scale(0.65) !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.scroll-disappeared-2 {
+  transform: translateY(-240px) translateX(80px) rotateX(-25deg) scale(0.6) !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.scroll-disappeared-3 {
+  transform: translateY(-260px) translateX(-80px) rotateX(40deg) scale(0.55) !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Floating Animations */
+@keyframes floatSpaceCard1 {
+  0% { transform: translateZ(40px) translateY(-5px) rotateX(5deg) rotateY(-5deg); }
+  100% { transform: translateZ(40px) translateY(6px) rotateX(-2deg) rotateY(-2deg); }
+}
+
+@keyframes floatSpaceCard2 {
+  0% { transform: translateZ(-15px) translateY(-42px) translateX(30px) rotateX(10deg) rotateY(-16deg) rotate(-3deg); }
+  100% { transform: translateZ(-15px) translateY(-30px) translateX(26px) rotateX(6deg) rotateY(-12deg) rotate(-2deg); }
+}
+
+@keyframes floatSpaceCard3 {
+  0% { transform: translateZ(-50px) translateY(48px) translateX(-35px) rotateX(-10deg) rotateY(16deg) rotate(4deg); }
+  100% { transform: translateZ(-50px) translateY(36px) translateX(-30px) rotateX(-6deg) rotateY(12deg) rotate(3deg); }
+}
+
+/* Space Card Bodies (Zero Box Outline on Wrapper) */
+.space-card-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  user-select: none;
+}
+
+@media (max-width: 640px) {
+  .space-card-body {
+    padding: 16px 18px;
+    border-radius: 14px;
+  }
+}
+
+/* Skin 1: Matte Obsidian Black with Purple Rim (Hero Foreground) */
+.skin-matte-black-hero {
+  background: linear-gradient(145deg, #13131b 0%, #09090e 55%, #030305 100%) !important;
+  border: 1.5px solid rgba(168, 85, 247, 0.7) !important;
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.9),
+    -8px 0 26px rgba(168, 85, 247, 0.5),
+    8px 0 26px rgba(168, 85, 247, 0.5),
+    0 0 45px rgba(168, 85, 247, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Skin 2: Translucent Cyber Emerald Glass */
+.skin-cyber-emerald {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(8, 28, 18, 0.88) 60%, rgba(4, 16, 10, 0.96) 100%) !important;
+  backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(93, 214, 44, 0.5) !important;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    0 0 35px rgba(93, 214, 44, 0.25) !important;
+}
+
+/* Skin 3: Deep Royal Cosmic Violet */
+.skin-cosmic-violet {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.25) 0%, rgba(26, 14, 46, 0.9) 60%, rgba(12, 6, 24, 0.98) 100%) !important;
+  backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(192, 132, 252, 0.5) !important;
+  box-shadow: 
+    0 22px 55px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(168, 85, 247, 0.3) !important;
+}
+
+.card-gloss-shimmer {
+  position: absolute;
+  top: -60%;
+  left: -20%;
+  width: 140%;
+  height: 120%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+
+.space-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.space-bank-logo {
+  font-family: 'Navera', var(--font-sans), sans-serif;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+/* EMV Chips */
+.space-emv-chip {
+  position: relative;
+  width: 44px;
+  height: 32px;
+  border-radius: 7px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 2px 8px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  margin: 5px 0;
+}
+
+@media (max-width: 640px) {
+  .space-emv-chip {
+    width: 36px;
+    height: 26px;
+  }
+}
+
+.chip-brass-hero {
+  background: linear-gradient(135deg, #fde047 0%, #d97706 50%, #92400e 100%);
+  border: 1px solid #fbbf24;
+}
+
+.chip-silver-variant {
+  background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 50%, #64748b 100%);
+  border: 1px solid #cbd5e1;
+}
+
+.chip-gold-variant {
+  background: linear-gradient(135deg, #fef08a 0%, #ca8a04 50%, #78350f 100%);
+  border: 1px solid #eab308;
+}
+
+.chip-inner-h {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateY(-50%);
+}
+
+.chip-inner-v {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
+}
+
+.chip-inner-box {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+}
+
+/* XXXX-XXXX-XXXX Number Formatting */
+.space-card-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 900;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  margin: 4px 0;
+}
+
+@media (max-width: 640px) {
+  .space-card-number {
+    font-size: 1.05rem;
+    gap: 6px;
+  }
+}
+
+.num-hyphen {
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+.space-card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.space-meta-label {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.space-meta-val {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.space-cvv-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid;
+  padding: 2px 7px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================================================
+   22. OPEN CANVAS HIGHLIGHTS & STATS (RESTORED TEXTS WITHOUT BOXES)
+   ========================================================================== */
+.hero-open-highlights-strip {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin: 22px 0 28px;
+  flex-wrap: wrap;
+}
+
+.open-highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.open-highlight-text b {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.open-highlight-text span {
+  display: block;
+  font-size: 0.76rem;
+  color: #94a3b8;
+}
+
+/* Open Authority Stats Section */
+.authority-stats-open-section {
+  padding: 36px 0 28px;
+  border-top: 1px solid rgba(168, 85, 247, 0.25);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+  margin: 24px 0 44px;
+}
+
+.authority-stats-open-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .authority-stats-open-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .authority-stats-open-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.open-stat-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.open-stat-num {
+  font-family: var(--font-mono);
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.open-stat-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.open-stat-desc {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.bottom-open-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5dd62c;
+  margin-bottom: 8px;
+  text-shadow: 0 0 14px rgba(93, 214, 44, 0.45);
 }
