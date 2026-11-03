@@ -79,18 +79,18 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #0b0716; /* Deep rich cosmic obsidian-purple */
+  background-color: #0d081c; /* Deep rich cosmic obsidian-purple */
   color: #f8f8f8;
   line-height: 1.6;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(168, 85, 247, 0.36) 0px, transparent 65%),
-    radial-gradient(circle 900px at 15% 25%, rgba(147, 51, 234, 0.32) 0px, transparent 65%),
-    radial-gradient(circle 900px at 85% 45%, rgba(168, 85, 247, 0.32) 0px, transparent 65%),
-    radial-gradient(circle 900px at 18% 70%, rgba(139, 92, 246, 0.32) 0px, transparent 65%),
-    radial-gradient(circle 900px at 82% 90%, rgba(168, 85, 247, 0.34) 0px, transparent 65%),
-    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(126, 34, 206, 0.38) 0px, transparent 65%),
-    radial-gradient(circle 600px at 50% 50%, rgba(192, 132, 252, 0.18) 0px, transparent 75%);
+    radial-gradient(ellipse 120% 70% at 50% 0%, rgba(168, 85, 247, 0.44) 0px, transparent 65%),
+    radial-gradient(circle 900px at 15% 25%, rgba(147, 51, 234, 0.40) 0px, transparent 65%),
+    radial-gradient(circle 900px at 85% 40%, rgba(168, 85, 247, 0.42) 0px, transparent 65%),
+    radial-gradient(circle 950px at 18% 60%, rgba(139, 92, 246, 0.40) 0px, transparent 65%),
+    radial-gradient(circle 950px at 82% 80%, rgba(168, 85, 247, 0.42) 0px, transparent 65%),
+    radial-gradient(ellipse 110% 60% at 50% 100%, rgba(126, 34, 206, 0.46) 0px, transparent 65%),
+    radial-gradient(circle 700px at 50% 50%, rgba(192, 132, 252, 0.24) 0px, transparent 75%);
   background-size: 100% 100%;
   background-attachment: fixed;
   min-height: 100vh;
@@ -8637,74 +8637,94 @@ input[type="range"]::-webkit-slider-thumb,
   transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Falling from Space on Load */
-.falling-from-space-1 {
-  transform: translateY(-800px) rotateX(45deg) rotateY(-20deg) scale(0.65) !important;
-  opacity: 0;
+/* ==========================================================================
+   SKY-FALL LOAD ANIMATION & CONTINUOUS 3D FLOATING FORMATION
+   When website opens, three cards fall from the sky one by one:
+   Card 3 drops first (0.12s), Card 2 drops second (0.42s), Card 1 drops third (0.72s).
+   Once stacked in space, they continuously float with gentle 3D hover.
+   Cards stay permanently visible and do NOT disappear on scroll.
+   ========================================================================== */
+
+@keyframes fallFromSky3 {
+  0% {
+    transform: translateY(-900px) rotateX(60deg) rotateY(30deg) scale(0.55);
+    opacity: 0;
+  }
+  65% {
+    opacity: 0.88;
+  }
+  100% {
+    transform: translateZ(-50px) translateY(42px) translateX(-35px) rotateX(-8deg) rotateY(14deg) rotate(4deg);
+    opacity: 0.88;
+  }
 }
 
-.falling-from-space-2 {
-  transform: translateY(-900px) rotateX(-45deg) rotateY(25deg) scale(0.6) !important;
-  opacity: 0;
+@keyframes fallFromSky2 {
+  0% {
+    transform: translateY(-950px) rotateX(-50deg) rotateY(-25deg) scale(0.6);
+    opacity: 0;
+  }
+  65% {
+    opacity: 0.94;
+  }
+  100% {
+    transform: translateZ(-15px) translateY(-36px) translateX(30px) rotateX(8deg) rotateY(-14deg) rotate(-3deg);
+    opacity: 0.94;
+  }
 }
 
-.falling-from-space-3 {
-  transform: translateY(-1000px) rotateX(60deg) rotateY(40deg) scale(0.55) !important;
-  opacity: 0;
+@keyframes fallFromSky1 {
+  0% {
+    transform: translateY(-1050px) rotateX(45deg) rotateY(-15deg) scale(0.65);
+    opacity: 0;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateZ(40px) translateY(0px) rotateX(4deg) rotateY(-4deg);
+    opacity: 1;
+  }
 }
 
-/* Stacking Formation in Space */
-.stacked-floating-1 {
-  transform: translateZ(40px) translateY(0px) rotateX(4deg) rotateY(-4deg);
-  opacity: 1;
-  animation: floatSpaceCard1 6s ease-in-out infinite alternate;
-}
-
-.stacked-floating-2 {
-  transform: translateZ(-15px) translateY(-36px) translateX(30px) rotateX(8deg) rotateY(-14deg) rotate(-3deg);
-  opacity: 0.94;
-  animation: floatSpaceCard2 7s ease-in-out infinite alternate;
-}
-
-.stacked-floating-3 {
-  transform: translateZ(-50px) translateY(42px) translateX(-35px) rotateX(-8deg) rotateY(14deg) rotate(4deg);
-  opacity: 0.88;
-  animation: floatSpaceCard3 8s ease-in-out infinite alternate;
-}
-
-/* Disappearing One by One on Down-Scroll (Adding Back on Up-Scroll) */
-.scroll-disappeared-1 {
-  transform: translateY(-200px) rotateX(30deg) scale(0.65) !important;
-  opacity: 0 !important;
-  pointer-events: none;
-}
-
-.scroll-disappeared-2 {
-  transform: translateY(-240px) translateX(80px) rotateX(-25deg) scale(0.6) !important;
-  opacity: 0 !important;
-  pointer-events: none;
-}
-
-.scroll-disappeared-3 {
-  transform: translateY(-260px) translateX(-80px) rotateX(40deg) scale(0.55) !important;
-  opacity: 0 !important;
-  pointer-events: none;
-}
-
-/* Floating Animations */
+/* Floating Animations (Gentle continuous oscillation once landed) */
 @keyframes floatSpaceCard1 {
-  0% { transform: translateZ(40px) translateY(-5px) rotateX(5deg) rotateY(-5deg); }
-  100% { transform: translateZ(40px) translateY(6px) rotateX(-2deg) rotateY(-2deg); }
+  0% { transform: translateZ(40px) translateY(-6px) rotateX(5deg) rotateY(-5deg); }
+  100% { transform: translateZ(40px) translateY(7px) rotateX(-2deg) rotateY(-2deg); }
 }
 
 @keyframes floatSpaceCard2 {
   0% { transform: translateZ(-15px) translateY(-42px) translateX(30px) rotateX(10deg) rotateY(-16deg) rotate(-3deg); }
-  100% { transform: translateZ(-15px) translateY(-30px) translateX(26px) rotateX(6deg) rotateY(-12deg) rotate(-2deg); }
+  100% { transform: translateZ(-15px) translateY(-28px) translateX(26px) rotateX(6deg) rotateY(-12deg) rotate(-2deg); }
 }
 
 @keyframes floatSpaceCard3 {
   0% { transform: translateZ(-50px) translateY(48px) translateX(-35px) rotateX(-10deg) rotateY(16deg) rotate(4deg); }
-  100% { transform: translateZ(-50px) translateY(36px) translateX(-30px) rotateX(-6deg) rotateY(12deg) rotate(3deg); }
+  100% { transform: translateZ(-50px) translateY(34px) translateX(-30px) rotateX(-6deg) rotateY(12deg) rotate(3deg); }
+}
+
+.fall-from-sky-3 {
+  animation: 
+    fallFromSky3 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.12s backwards,
+    floatSpaceCard3 8s ease-in-out infinite 1.3s alternate;
+  transform: translateZ(-50px) translateY(42px) translateX(-35px) rotateX(-8deg) rotateY(14deg) rotate(4deg);
+  opacity: 0.88;
+}
+
+.fall-from-sky-2 {
+  animation: 
+    fallFromSky2 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.42s backwards,
+    floatSpaceCard2 7s ease-in-out infinite 1.6s alternate;
+  transform: translateZ(-15px) translateY(-36px) translateX(30px) rotateX(8deg) rotateY(-14deg) rotate(-3deg);
+  opacity: 0.94;
+}
+
+.fall-from-sky-1 {
+  animation: 
+    fallFromSky1 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.72s backwards,
+    floatSpaceCard1 6s ease-in-out infinite 1.9s alternate;
+  transform: translateZ(40px) translateY(0px) rotateX(4deg) rotateY(-4deg);
+  opacity: 1;
 }
 
 /* Space Card Bodies (Zero Box Outline on Wrapper) */
@@ -9000,3 +9020,51 @@ input[type="range"]::-webkit-slider-thumb,
   margin-bottom: 8px;
   text-shadow: 0 0 14px rgba(93, 214, 44, 0.45);
 }
+
+/* ==========================================================================
+   23. ABOUT PAGE SPACING & AGENT ARCHITECTURE ANIMATIONS
+   ========================================================================== */
+
+/* Spacing between About FinRisk top stats and Core Mission */
+.about-section-spacer {
+  height: 72px;
+  width: 100%;
+  clear: both;
+}
+
+@media (max-width: 768px) {
+  .about-section-spacer {
+    height: 48px;
+  }
+}
+
+/* Autonomous Multi-Agent Architecture Transitions & Animations */
+.architecture-animated-section {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.architecture-card-transition {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.architecture-card-transition:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(168, 85, 247, 0.6) !important;
+  box-shadow: 0 14px 32px rgba(168, 85, 247, 0.28) !important;
+}
+
+.agent-panel-animated {
+  animation: fadeInArchitecturePanel 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInArchitecturePanel {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

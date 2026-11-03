@@ -1,19 +1,5 @@
 import React, { useState } from 'react';
-import {
-  ShieldCheck,
-  Cpu,
-  BookOpen,
-  Scale,
-  Award,
-  CheckCircle2,
-  Activity,
-  Zap,
-  ArrowRight,
-  Lock,
-  Layers,
-  Sparkles,
-  Terminal,
-} from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const AgentArchitectureFlow: React.FC = () => {
   const [selectedLayer, setSelectedLayer] = useState<number>(2);
@@ -23,11 +9,7 @@ export const AgentArchitectureFlow: React.FC = () => {
       layer: 1,
       name: 'KYC & Identity Verification Agent',
       role: 'Profile Integrity & Anomaly Screening',
-      badge: 'Layer 1: Ingestion Gate',
-      latency: '142ms',
       status: 'VERIFIED',
-      icon: <ShieldCheck size={22} className="text-neonlime" />,
-      colorGlow: 'rgba(93, 214, 44, 0.25)',
       description:
         'Validates applicant income consistency, sanity-checks revolving debt ratios, and scans for synthetic identity anomalies before model execution.',
       inputs: ['Declared Monthly Income', 'Current Debt Obligations', 'Employment Tenure', 'Bureau File ID'],
@@ -37,11 +19,7 @@ export const AgentArchitectureFlow: React.FC = () => {
       layer: 2,
       name: 'Quantitative ML Risk Engine',
       role: 'Empirical Default Probability & SHAP Vectors',
-      badge: 'Layer 2: Quantitative Engine',
-      latency: '218ms',
       status: 'CALIBRATED',
-      icon: <Cpu size={22} className="text-neonlime" />,
-      colorGlow: 'rgba(93, 214, 44, 0.35)',
       description:
         'Executes LightGBM model calibrated with Optuna on historical loan outcomes. Calculates 1-Year Probability of Default (PD), Basel Expected Loss, and SHAP explainability vectors.',
       inputs: ['Cleaned Feature Tensor', 'FICO Bureau Score', 'DTI Leverage Ratio', 'Loan-to-Income Multiple'],
@@ -51,11 +29,7 @@ export const AgentArchitectureFlow: React.FC = () => {
       layer: 3,
       name: 'Regulatory Policy Reconciliation Agent',
       role: 'Statutory Policy Reconciliation & Adverse Reasons',
-      badge: 'Layer 3: Legal Knowledge Base',
-      latency: '184ms',
       status: 'COMPLIANT',
-      icon: <BookOpen size={22} className="text-neonlime" />,
-      colorGlow: 'rgba(93, 214, 44, 0.25)',
       description:
         'Retrieves exact statutory citations from ECOA Regulation B (12 CFR § 1002.9) and FCRA § 615. Automatically maps negative SHAP vectors into compliant, plain-English reason codes.',
       inputs: ['SHAP Negative Vector Weights', 'Prudential Underwriting Policy Guidelines', 'DTI Ceiling Thresholds'],
@@ -65,11 +39,7 @@ export const AgentArchitectureFlow: React.FC = () => {
       layer: 4,
       name: 'Fair Lending & Macro Stress Agent',
       role: 'Disparate Impact & CCAR Macro Resilience',
-      badge: 'Layer 4: Bias & Stress Audit',
-      latency: '195ms',
       status: 'RESILIENT',
-      icon: <Scale size={22} className="text-neonlime" />,
-      colorGlow: 'rgba(93, 214, 44, 0.3)',
       description:
         'Computes the Four-Fifths Adverse Impact Ratio (AIR >= 0.80) across protected demographics to guarantee non-bias. Simulates Federal Reserve CCAR +300 bps macroeconomic rate shock.',
       inputs: ['Demographic Selection Rates', 'CCAR Macro Shocks (+300 bps)', 'Unemployment Spike Scenarios'],
@@ -79,11 +49,7 @@ export const AgentArchitectureFlow: React.FC = () => {
       layer: 5,
       name: 'Credit Committee Orchestrator',
       role: 'Final Synthesis, RAROC Pricing & Memo',
-      badge: 'Layer 5: Decision Orchestration',
-      latency: '125ms',
       status: 'DECISION_ISSUED',
-      icon: <Award size={22} className="text-neonlime" />,
-      colorGlow: 'rgba(93, 214, 44, 0.4)',
       description:
         'Aggregates all upstream agent telemetry from the decision workflow. Yields binding credit verdict, calibrates risk-adjusted APR (RAROC), and writes the executive credit memorandum.',
       inputs: ['Multi-Stage Pipeline Telemetry', 'Risk Appetite Boundaries', 'Cost of Capital Benchmarks'],
@@ -94,7 +60,7 @@ export const AgentArchitectureFlow: React.FC = () => {
   const currentAgent = agentLayers.find((a) => a.layer === selectedLayer) || agentLayers[1];
 
   return (
-    <div className="agent-architecture-container reveal-on-scroll">
+    <div className="agent-architecture-container reveal-on-scroll architecture-animated-section">
       {/* Container Header */}
       <div className="agent-flow-header">
         <h2 className="agent-main-title">
@@ -107,7 +73,7 @@ export const AgentArchitectureFlow: React.FC = () => {
         </p>
       </div>
 
-      {/* 5-Step Floating Frosted Glass Flow Boxes */}
+      {/* 5-Step Floating Flow Boxes (Clean, Icon-Free, Latency-Free) */}
       <div className="agent-flow-track-wrapper">
         <div className="agent-flow-track-line" />
         <div className="agent-boxes-grid">
@@ -117,20 +83,12 @@ export const AgentArchitectureFlow: React.FC = () => {
               <div
                 key={agent.layer}
                 onClick={() => setSelectedLayer(agent.layer)}
-                className={`agent-glass-box ${isSelected ? 'active-layer-box' : ''}`}
+                className={`agent-glass-box architecture-card-transition ${
+                  isSelected ? 'active-layer-box' : ''
+                }`}
               >
-                {/* Top Badge & Live Pulse */}
-                <div className="box-top-row">
-                  <span className="box-layer-pill">{agent.badge}</span>
-                  <div className="box-live-indicator">
-                    <span className="live-glow-dot" />
-                    <span className="box-latency-text">{agent.latency}</span>
-                  </div>
-                </div>
-
-                {/* Box Icon & Title */}
+                {/* Box Title & Role (No Icons, No Latency, No Layer Badge) */}
                 <div className="box-hero-content">
-                  <div className="box-icon-wrap">{agent.icon}</div>
                   <h4 className="box-agent-name">{agent.name}</h4>
                   <span className="box-role-tag">{agent.role}</span>
                 </div>
@@ -151,24 +109,20 @@ export const AgentArchitectureFlow: React.FC = () => {
         </div>
       </div>
 
-      {/* Deep-Dive Inspection Panel for Selected Layer */}
-      <div className="agent-detail-glass-panel">
+      {/* Deep-Dive Inspection Panel for Selected Agent (No Layer Label, No Icons) */}
+      <div className="agent-detail-glass-panel agent-panel-animated" key={currentAgent.layer}>
         <div className="panel-header-row">
           <div className="panel-title-group">
-            <div className="panel-layer-tag">
-              <span>Selected Inspection: Layer {currentAgent.layer}</span>
-            </div>
             <h3 className="panel-agent-headline">{currentAgent.name}</h3>
           </div>
         </div>
 
         <p className="panel-description-text">{currentAgent.description}</p>
 
-        {/* Inputs vs Outputs Multi-Compartment Bento */}
+        {/* Inputs vs Outputs Multi-Compartment */}
         <div className="panel-io-grid">
           <div className="io-sub-card io-inputs-card">
             <div className="io-card-title">
-              <Terminal size={15} className="text-slate-400" />
               <span>Key Ingestion Parameters (Inputs)</span>
             </div>
             <ul className="io-list">
@@ -183,7 +137,6 @@ export const AgentArchitectureFlow: React.FC = () => {
 
           <div className="io-sub-card io-outputs-card">
             <div className="io-card-title">
-              <Zap size={15} className="text-neonlime" />
               <span>Verified Decision Telemetry (Outputs)</span>
             </div>
             <ul className="io-list">
@@ -200,4 +153,3 @@ export const AgentArchitectureFlow: React.FC = () => {
     </div>
   );
 };
-

@@ -1,37 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Wifi } from 'lucide-react';
 
 export const FloatingCardsShowcase: React.FC = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const [hasLanded, setHasLanded] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    // Entrance animation: cards fall gracefully from outer space then stack
-    const timer = setTimeout(() => {
-      setHasLanded(true);
-    }, 120);
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setMousePos({ x, y });
+  };
 
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0 });
+  };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  // Scroll effect: Down-scroll disappears cards one by one; Up-scroll adds them back one by one!
-  // Card 3 disappears first (scrollY >= 90)
-  // Card 2 disappears second (scrollY >= 200)
-  // Card 1 disappears third (scrollY >= 330)
-  const isCard3Active = scrollY < 90;
-  const isCard2Active = scrollY < 200;
-  const isCard1Active = scrollY < 330;
+  // Subtle interactive 3D parallax tilt
+  const tiltX = -mousePos.y * 14;
+  const tiltY = mousePos.x * 18;
 
   return (
-    <div className="cards-pure-space-viewport">
+    <div
+      className="cards-pure-space-viewport"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* Infinite Cosmic Atmospheric Ambient Glow */}
       <div className="space-purple-radial-core" />
       <div className="space-purple-radial-wide" />
@@ -43,19 +36,16 @@ export const FloatingCardsShowcase: React.FC = () => {
       <div className="space-star star-pos-4">✦</div>
 
       {/* 3D Falling & Stacking Stage in Open Space (Zero Box Borders) */}
-      <div className="cards-space-3d-stage">
+      <div
+        className="cards-space-3d-stage"
+        style={{
+          transform: `perspective(1200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
+        }}
+      >
         {/* =========================================================
-            CARD 3: Deep Royal Cosmic Violet Card (Back Layer)
+            CARD 3: Deep Royal Cosmic Violet Card (Falls 1st from Sky)
             ========================================================= */}
-        <div
-          className={`space-card-wrapper card-layer-3 ${
-            !hasLanded
-              ? 'falling-from-space-3'
-              : isCard3Active
-              ? 'stacked-floating-3'
-              : 'scroll-disappeared-3'
-          }`}
-        >
+        <div className="space-card-wrapper card-layer-3 fall-from-sky-3">
           <div className="space-card-body skin-cosmic-violet">
             <div className="space-card-header">
               <span className="space-bank-logo text-purple-200">FinRisk</span>
@@ -68,25 +58,25 @@ export const FloatingCardsShowcase: React.FC = () => {
               <div className="chip-inner-v" />
             </div>
 
-            {/* XXXX-XXXX-XXXX Number (As Requested) */}
+            {/* ZZZZ-XXXX-YYYY Number (Using X, Y, Z Variables) */}
             <div className="space-card-number text-purple-200">
-              <span>XXXX</span>
+              <span>ZZZZ</span>
               <span className="num-hyphen">-</span>
               <span>XXXX</span>
               <span className="num-hyphen">-</span>
-              <span>XXXX</span>
+              <span>YYYY</span>
             </div>
 
-            {/* Expiration XX/XX & Written CVV: XXX */}
+            {/* Expiration ZZ/XX & Written CVV: ZXY */}
             <div className="space-card-footer text-purple-300/90">
               <div>
                 <span className="space-meta-label text-purple-400">EXPIRES</span>
-                <span className="space-meta-val font-mono">XX/XX</span>
+                <span className="space-meta-val font-mono">ZZ/XX</span>
               </div>
               <div className="text-right">
                 <span className="space-meta-label text-purple-400">CVV</span>
                 <span className="space-cvv-pill bg-purple-900/60 border-purple-500/50 text-purple-200">
-                  XXX
+                  ZXY
                 </span>
               </div>
             </div>
@@ -94,17 +84,9 @@ export const FloatingCardsShowcase: React.FC = () => {
         </div>
 
         {/* =========================================================
-            CARD 2: Translucent Cyber Emerald Glass Card (Middle Layer)
+            CARD 2: Translucent Cyber Emerald Glass (Falls 2nd from Sky)
             ========================================================= */}
-        <div
-          className={`space-card-wrapper card-layer-2 ${
-            !hasLanded
-              ? 'falling-from-space-2'
-              : isCard2Active
-              ? 'stacked-floating-2'
-              : 'scroll-disappeared-2'
-          }`}
-        >
+        <div className="space-card-wrapper card-layer-2 fall-from-sky-2">
           <div className="space-card-body skin-cyber-emerald">
             <div className="space-card-header">
               <span className="space-bank-logo text-emerald-100">FinRisk</span>
@@ -117,25 +99,25 @@ export const FloatingCardsShowcase: React.FC = () => {
               <div className="chip-inner-v" />
             </div>
 
-            {/* XXXX-XXXX-XXXX Number */}
+            {/* YYYY-ZZZZ-XXXX Number (Using X, Y, Z Variables) */}
             <div className="space-card-number text-emerald-200">
-              <span>XXXX</span>
+              <span>YYYY</span>
               <span className="num-hyphen">-</span>
-              <span>XXXX</span>
+              <span>ZZZZ</span>
               <span className="num-hyphen">-</span>
               <span>XXXX</span>
             </div>
 
-            {/* Expiration XX/XX & Written CVV: XXX */}
+            {/* Expiration YY/ZZ & Written CVV: YZX */}
             <div className="space-card-footer text-emerald-300/90">
               <div>
                 <span className="space-meta-label text-emerald-400">EXPIRES</span>
-                <span className="space-meta-val font-mono">XX/XX</span>
+                <span className="space-meta-val font-mono">YY/ZZ</span>
               </div>
               <div className="text-right">
                 <span className="space-meta-label text-emerald-400">CVV</span>
                 <span className="space-cvv-pill bg-emerald-950/70 border-emerald-500/50 text-neonlime">
-                  XXX
+                  YZX
                 </span>
               </div>
             </div>
@@ -143,17 +125,9 @@ export const FloatingCardsShowcase: React.FC = () => {
         </div>
 
         {/* =========================================================
-            CARD 1: Matte Obsidian Black with Gold & Emerald Text (Front Layer)
+            CARD 1: Matte Obsidian Black Hero (Falls 3rd from Sky)
             ========================================================= */}
-        <div
-          className={`space-card-wrapper card-layer-1 ${
-            !hasLanded
-              ? 'falling-from-space-1'
-              : isCard1Active
-              ? 'stacked-floating-1'
-              : 'scroll-disappeared-1'
-          }`}
-        >
+        <div className="space-card-wrapper card-layer-1 fall-from-sky-1">
           <div className="space-card-body skin-matte-black-hero">
             {/* Elegant Gloss Reflection Sheen */}
             <div className="card-gloss-shimmer" />
@@ -173,26 +147,26 @@ export const FloatingCardsShowcase: React.FC = () => {
               <div className="chip-inner-box" />
             </div>
 
-            {/* XXXX-XXXX-XXXX in Metallic Gold & Green Gradient */}
+            {/* XXXX-YYYY-ZZZZ in Metallic Gold & Green Gradient */}
             <div className="space-card-number number-gradient-gold-green">
               <span>XXXX</span>
               <span className="num-hyphen">-</span>
-              <span>XXXX</span>
+              <span>YYYY</span>
               <span className="num-hyphen">-</span>
-              <span>XXXX</span>
+              <span>ZZZZ</span>
             </div>
 
-            {/* Expiry XX/XX & Written CVV: XXX */}
+            {/* Expiry XX/YY & Written CVV: XYZ */}
             <div className="space-card-footer">
               <div>
                 <span className="space-meta-label text-zinc-400">EXPIRES</span>
-                <span className="space-meta-val font-mono text-zinc-200">XX/XX</span>
+                <span className="space-meta-val font-mono text-zinc-200">XX/YY</span>
               </div>
               <div className="text-right">
                 <span className="space-meta-label text-zinc-400">SECURITY CODE</span>
                 <div className="space-cvv-pill bg-zinc-900/80 border-purple-500/40 text-neonlime font-bold">
                   <span className="text-[9px] text-zinc-400 mr-1">CVV</span>
-                  <span>XXX</span>
+                  <span>XYZ</span>
                 </div>
               </div>
             </div>

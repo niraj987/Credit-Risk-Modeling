@@ -107,6 +107,9 @@ export const AboutPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Elegant Breathing Spacer Between Header/Stats and Core Mission */}
+      <div className="about-section-spacer" />
+
       {/* Core Mission Bento Grid with Scroll Transition */}
       <div className="about-bento-section reveal-on-scroll">
         <div className="section-title-wrap reveal-on-scroll">
@@ -118,9 +121,6 @@ export const AboutPage: React.FC = () => {
           {/* Card 1: Rejection Transparency */}
           <div className="bento-card bento-sky reveal-on-scroll stagger-1">
             <div className="bento-top">
-              <div className="bento-icon-box bg-sky-tint">
-                <ShieldCheck size={24} className="text-sky" />
-              </div>
               <span className="bento-badge">Borrower Sovereignty</span>
             </div>
             <h3>Eliminating the "Black Box" Rejection</h3>
@@ -137,9 +137,6 @@ export const AboutPage: React.FC = () => {
           {/* Card 2: Actuarial Rigor */}
           <div className="bento-card bento-emerald reveal-on-scroll stagger-2">
             <div className="bento-top">
-              <div className="bento-icon-box bg-emerald-tint">
-                <Scale size={24} className="text-emerald-400" />
-              </div>
               <span className="bento-badge">Basel III & IV Solvency</span>
             </div>
             <h3>Actuarial Precision, Not Arbitrary Markups</h3>
@@ -156,9 +153,6 @@ export const AboutPage: React.FC = () => {
           {/* Card 3: Non-Bias */}
           <div className="bento-card bento-rose reveal-on-scroll stagger-3">
             <div className="bento-top">
-              <div className="bento-icon-box bg-rose-tint">
-                <Lock size={24} className="text-rose" />
-              </div>
               <span className="bento-badge">Equal Credit Opportunity</span>
             </div>
             <h3>Proactive Algorithmic Non-Discrimination</h3>
@@ -175,9 +169,6 @@ export const AboutPage: React.FC = () => {
           {/* Card 4: Action Plan */}
           <div className="bento-card bento-amber reveal-on-scroll stagger-4">
             <div className="bento-top">
-              <div className="bento-icon-box bg-amber-tint">
-                <Award size={24} className="text-amber" />
-              </div>
               <span className="bento-badge">Empowerment Blueprint</span>
             </div>
             <h3>Counterfactual Improvement Roadmaps</h3>

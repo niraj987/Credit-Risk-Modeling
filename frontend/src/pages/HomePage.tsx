@@ -142,10 +142,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             to qualify for the lowest possible monthly payments.
           </p>
 
-          {/* Open Value Highlights Strip (Box-Free Canvas Layout) */}
+          {/* Open Value Highlights Strip (Pure Clean Typography, Zero Icons) */}
           <div className="hero-open-highlights-strip">
             <div className="open-highlight-item">
-              <ShieldCheck size={18} className="text-neonlime flex-shrink-0" />
               <div className="open-highlight-text">
                 <b>Zero Bureau Impact</b>
                 <span>100% Soft Inquiry Safe</span>
@@ -153,7 +152,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
 
             <div className="open-highlight-item">
-              <Clock size={18} className="text-sky flex-shrink-0" />
               <div className="open-highlight-text">
                 <b>Instant Decision</b>
                 <span>Automated Committee</span>
@@ -161,7 +159,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
 
             <div className="open-highlight-item">
-              <Lock size={18} className="text-purple-400 flex-shrink-0" />
               <div className="open-highlight-text">
                 <b>Full Transparency</b>
                 <span>12 CFR § 1002.9 Citations</span>
