@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AgentArchitectureFlow } from '../components/AgentArchitectureFlow';
+import { FloatingCardsShowcase } from '../components/FloatingCardsShowcase';
 import {
   ArrowRight,
   ShieldCheck,
@@ -25,28 +26,11 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
-  // Hero Interactive Simulator State
-  const [simScore, setSimScore] = useState<number>(740);
-  const [simIncome, setSimIncome] = useState<number>(850000);
-  const [simLoan, setSimLoan] = useState<number>(400000);
-  const [simTenure, setSimTenure] = useState<number>(36);
-
   // Active Agent in Interactive Bento Layer
   const [selectedAgent, setSelectedAgent] = useState<number>(2);
 
   // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  // Dynamic calculations based on simulator sliders
-  const simDTI = Math.min(0.85, (simLoan / simTenure) / (simIncome / 12));
-  const simRate = simScore >= 750 ? 9.25 : simScore >= 680 ? 13.5 : 21.0;
-  const simMonthlyRate = simRate / 100 / 12;
-  const simEmi = Math.round(
-    (simLoan * simMonthlyRate * Math.pow(1 + simMonthlyRate, simTenure)) /
-    (Math.pow(1 + simMonthlyRate, simTenure) - 1)
-  );
-  const simStatus = simScore >= 720 && simDTI <= 0.45 ? 'APPROVED' : simScore >= 650 ? 'CONDITIONAL' : 'SUBPRIME_REVIEW';
-  const maxQualifyingLoan = Math.round((simIncome * 0.45) * (simTenure / 1.15));
 
   const agents = [
     {
@@ -210,160 +194,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Right Hero Column: Executive Live Qualification & Repayment Simulator */}
+        {/* Right Hero Column: 3D Floating Credit Cards Showcase */}
         <div className="hero-interactive-frame">
-          <div className="simulator-widget-card">
-            <div className="sim-header">
-              <div>
-                <h3 className="sim-title">Live Qualification & Repayment Sizing</h3>
-                <p className="sim-sub">Slide values to see instant qualification & repayment breakdown</p>
-              </div>
-              <span className={`sim-status-badge badge-${simStatus.toLowerCase()}`}>
-                {simStatus === 'APPROVED' ? 'Prime Tier Eligible' : simStatus === 'CONDITIONAL' ? 'Near-Prime' : 'Subprime Review'}
-              </span>
-            </div>
-
-            {/* Sliders Grid */}
-            <div className="sim-sliders-grid">
-              {/* Score Slider */}
-              <div className="sim-slider-row">
-                <div className="sim-label-bar">
-                  <span>Credit Score (CIBIL / Experian)</span>
-                  <b className="text-sky font-mono">{simScore}</b>
-                </div>
-                <input
-                  type="range"
-                  min={300}
-                  max={850}
-                  value={simScore}
-                  onChange={(e) => setSimScore(Number(e.target.value))}
-                  className="sim-range-slider range-sky"
-                />
-                <div className="sim-ticks">
-                  <span>300 (Subprime)</span>
-                  <span>700 (Good)</span>
-                  <span>850 (Exceptional)</span>
-                </div>
-              </div>
-
-              {/* Annual Income */}
-              <div className="sim-slider-row">
-                <div className="sim-label-bar">
-                  <span>Gross Annual Income (₹)</span>
-                  <b className="text-emerald font-mono">₹{simIncome.toLocaleString('en-IN')}</b>
-                </div>
-                <input
-                  type="range"
-                  min={200000}
-                  max={3000000}
-                  step={50000}
-                  value={simIncome}
-                  onChange={(e) => setSimIncome(Number(e.target.value))}
-                  className="sim-range-slider range-emerald"
-                />
-              </div>
-
-              {/* Loan Amount */}
-              <div className="sim-slider-row">
-                <div className="sim-label-bar">
-                  <span>Requested Loan Amount (₹)</span>
-                  <b className="text-coffee font-mono">₹{simLoan.toLocaleString('en-IN')}</b>
-                </div>
-                <input
-                  type="range"
-                  min={50000}
-                  max={2500000}
-                  step={25000}
-                  value={simLoan}
-                  onChange={(e) => setSimLoan(Number(e.target.value))}
-                  className="sim-range-slider range-coffee"
-                />
-              </div>
-
-              {/* Repayment Tenure Selector */}
-              <div className="sim-slider-row">
-                <div className="sim-label-bar">
-                  <span>Repayment Tenure</span>
-                  <b className="text-sky font-mono">{simTenure} Months ({simTenure / 12} Yrs)</b>
-                </div>
-                <div className="flex gap-2 pt-1">
-                  {[12, 24, 36, 48, 60].map((t) => (
-                    <button
-                      key={t}
-                      type="button"
-                      onClick={() => setSimTenure(t)}
-                      className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all border ${
-                        simTenure === t
-                          ? 'bg-neonlime text-black border-neonlime shadow-sm font-extrabold'
-                          : 'bg-zinc-800/80 text-zinc-200 border-zinc-700 hover:border-neonlime/40 hover:bg-zinc-700'
-                      }`}
-                    >
-                      {t}m
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Debt-to-Income Balance Meter */}
-              <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-700/80 mt-1">
-                <div className="flex items-center justify-between text-xs mb-1.5">
-                  <span className="font-bold text-zinc-200">
-                    Debt-to-Income (DTI) Capacity
-                  </span>
-                  <span className={`font-mono font-bold ${
-                    simDTI <= 0.35 ? 'text-neonlime' : simDTI <= 0.45 ? 'text-amber-400' : 'text-rose-400'
-                  }`}>
-                    {(simDTI * 100).toFixed(1)}% {simDTI <= 0.35 ? '(Healthy)' : simDTI <= 0.45 ? '(Moderate)' : '(Stretched)'}
-                  </span>
-                </div>
-                <div className="w-full h-2 bg-zinc-700 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all duration-300 ${
-                      simDTI <= 0.35 ? 'bg-neonlime' : simDTI <= 0.45 ? 'bg-amber-400' : 'bg-rose-500'
-                    }`}
-                    style={{ width: `${Math.min(100, (simDTI / 0.65) * 100)}%` }}
-                  />
-                </div>
-                <span className="text-[11px] text-zinc-400 mt-1 block">
-                  {simDTI <= 0.35
-                    ? 'Healthy monthly cash flow enables instant Prime Tier approval with minimal interest.'
-                    : simDTI <= 0.45
-                    ? 'Near-Prime debt service. Lengthening tenure or paying down small debts lowers rates.'
-                    : 'Debt obligation exceeds 45% ceiling. Consider reducing loan principal.'}
-                </span>
-              </div>
-            </div>
-
-            {/* Dynamic Live Result Bar */}
-            <div className="sim-result-strip">
-              <div className="sim-metric-cell">
-                <span className="sim-m-lbl">Monthly EMI</span>
-                <span className="sim-m-val text-sky">₹{simEmi.toLocaleString('en-IN')}/mo</span>
-                <span className="sim-m-sub">{simTenure} Mo Tenure</span>
-              </div>
-
-              <div className="sim-metric-cell">
-                <span className="sim-m-lbl">Estimated APR</span>
-                <span className="sim-m-val text-coffee">{simRate}%</span>
-                <span className="sim-m-sub">Risk-Adjusted</span>
-              </div>
-
-              <div className="sim-metric-cell">
-                <span className="sim-m-lbl">Max Pre-Approval</span>
-                <span className="sim-m-val text-emerald">₹{maxQualifyingLoan.toLocaleString('en-IN')}</span>
-                <span className="sim-m-sub">Based on Income</span>
-              </div>
-            </div>
-
-            {/* Direct Verification CTA */}
-            <button
-              onClick={() => onNavigate('eligibility')}
-              className="sim-verify-btn"
-            >
-              <span>Run Pre-Qualification With These Values</span>
-              <ArrowRight size={16} />
-            </button>
-          </div>
+          <FloatingCardsShowcase />
         </div>
       </section>
 

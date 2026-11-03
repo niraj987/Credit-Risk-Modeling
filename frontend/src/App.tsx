@@ -151,9 +151,10 @@ export const App: React.FC = () => {
       {/* Scroll Progress Bar at Very Top of Screen */}
       <div className="scroll-progress-line" style={{ width: `${scrollProgress}%` }} />
 
-      {/* Top Header Navigation with Ultra-Glass Effect - Clean 7 Options Layout */}
-      <header className="navbar glass-header">
-        <div className="navbar-left">
+      {/* Top Header Navigation Wrapper */}
+      <header className="header-outer-container">
+        {/* Isolated FinRisk Brand on Left (Outside the Glass Box) */}
+        <div className="header-isolated-brand">
           <div
             className="brand-logo"
             onClick={() => {
@@ -162,31 +163,30 @@ export const App: React.FC = () => {
             }}
             style={{ cursor: 'pointer' }}
           >
-            <div className="brand-text">
-              <h1 className="brand-title-navera">FinRisk</h1>
-            </div>
+            <h1 className="brand-title-navera">FinRisk</h1>
           </div>
         </div>
 
-        {/* Desktop Nav Links - 6 Focused Clean Options Without Icons */}
-        <nav className="navbar-center desktop-nav">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                setActivePage(item.id);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className={`nav-link ${activePage === item.id ? 'active' : ''}`}
-            >
-              <span>{item.label}</span>
-              {activePage === item.id && <span className="nav-active-glow-dot" />}
-            </button>
-          ))}
-        </nav>
+        {/* Compact Floating Glass Box - Sized strictly to Header Options */}
+        <div className="navbar-options-glass-box">
+          {/* Desktop Nav Links - 6 Focused Clean Options Without Icons */}
+          <nav className="desktop-nav">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActivePage(item.id);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className={`nav-link ${activePage === item.id ? 'active' : ''}`}
+              >
+                <span>{item.label}</span>
+                {activePage === item.id && <span className="nav-active-glow-dot" />}
+              </button>
+            ))}
+          </nav>
 
-        {/* 7th Option: Professional Executive Menu Control Box */}
-        <div className="navbar-right">
+          {/* Quick Credit Memo Button */}
           {results && (
             <button
               onClick={() => setIsMemoOpen(true)}
@@ -197,6 +197,7 @@ export const App: React.FC = () => {
             </button>
           )}
 
+          {/* 7th Option: Professional Executive Menu Control Box */}
           <button
             className={`pro-menu-box ${mobileMenuOpen ? 'active' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

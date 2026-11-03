@@ -163,12 +163,8 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
   return (
     <div className="history-page-container">
       {/* Header */}
-      <div className="page-header-wrap">
+      <div className="page-header-wrap mb-8">
         <h1>Underwriting Audit Trail & Application History</h1>
-        <p>
-          Every evaluated loan application is securely persisted with ACID guarantees across our SQLite WAL database
-          and browser IndexedDB engine, ensuring complete auditability, instant recall, and zero-latency data sovereignty.
-        </p>
       </div>
 
       {/* Interactive Analytics Strip */}
