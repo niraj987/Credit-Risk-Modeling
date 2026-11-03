@@ -225,6 +225,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <AgentArchitectureFlow />
       </section>
 
+      {/* Elegant Vertical Section Spacer */}
+      <div className="home-section-spacer" />
+
       {/* Comparison: Traditional Bank vs. Our Modern Autonomous Committee */}
       <section className="comparison-section">
         <div className="section-title-wrap">
@@ -311,6 +314,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      {/* Elegant Vertical Section Spacer */}
+      <div className="home-section-spacer" />
 
       {/* Interactive FAQ Section */}
       <section className="faq-section">

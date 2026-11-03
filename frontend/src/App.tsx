@@ -345,21 +345,18 @@ export const App: React.FC = () => {
             </div>
 
             <div className="footer-links-group">
-              <span className="footer-links-title">Open Source</span>
-              <a
-                href="https://github.com/niraj987/Credit-Risk-Modeling"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub Repository
-              </a>
-              <span className="version-pill">Version 2.3.0 • Production</span>
+              <span className="footer-links-title">Legal & Security</span>
+              <span className="text-xs text-slate-300 font-medium">Strict Proprietary License</span>
+              <span className="version-pill">All Rights Reserved</span>
             </div>
           </div>
 
-          <div className="footer-bottom-row text-center flex justify-center py-4">
-            <p className="copyright-text text-center mx-auto text-slate-400 font-medium text-sm">
-              © 2026 FinRisk AI
+          <div className="footer-bottom-row text-center flex flex-col items-center justify-center py-4 gap-1">
+            <p className="copyright-text text-center mx-auto text-slate-200 font-semibold text-sm">
+              © 2026 FinRisk AI. All Rights Reserved.
+            </p>
+            <p className="text-xs text-slate-400 text-center font-normal max-w-xl">
+              Proprietary and confidential software. Unauthorized copying, reverse engineering, redistribution, or duplication of this code, algorithms, and platform is strictly prohibited.
             </p>
           </div>
         </div>

@@ -77,3 +77,4 @@ export const BackgroundGiantCreditCard: React.FC = () => {
     </div>
   );
 };
+

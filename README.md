@@ -4,7 +4,7 @@
 [![LangGraph](https://img.shields.io/badge/Orchestrator-LangGraph-orange.svg)](https://github.com/langchain-ai/langgraph)
 [![LightGBM](https://img.shields.io/badge/ML%20Engine-LightGBM-green.svg)](https://lightgbm.readthedocs.io/)
 [![Regulatory Compliance](https://img.shields.io/badge/Compliance-Basel%20III%20%7C%20ECOA%20%7C%20FCRA-purple.svg)](https://www.consumerfinance.gov/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary%20All%20Rights%20Reserved-red.svg)](LICENSE)
 
 > **An End-to-End Enterprise Underwriting System featuring 5 Collaborative Multi-Agent Working Layers, LangGraph State Orchestration, Regulatory RAG, Basel III/IV Expected Loss Quantification, and CCAR Macroeconomic Stress Testing.**
 
@@ -215,5 +215,6 @@ $$\text{Adverse Impact Ratio (AIR)} = \frac{\text{Approval Rate}_{\text{Protecte
 
 ---
 
-##  License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 📄 License & Proprietary Copyright
+Copyright © 2026 FinRisk AI. All Rights Reserved.
+This project, software, and codebase is strictly proprietary and confidential. Unauthorized copying, cloning, reverse engineering, redistribution, or modification of this code and platform is strictly prohibited. See the [LICENSE](LICENSE) file for legal details.
