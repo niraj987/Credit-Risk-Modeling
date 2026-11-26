@@ -117,7 +117,6 @@ export const AgentTelemetry: React.FC<AgentTelemetryProps> = ({
 
               <div className="telemetry-body-content">
                 <div className="telemetry-title">{layer.name}</div>
-                <span className="telemetry-sub">{layer.sub}</span>
 
                 <div className="telemetry-status-row">
                   <span
