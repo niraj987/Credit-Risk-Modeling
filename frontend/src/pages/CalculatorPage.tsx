@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calculator, ArrowRight, IndianRupee, Calendar, Percent, CheckCircle } from 'lucide-react';
+import { TextMarquee } from '../components/TextMarquee';
 
 interface CalculatorPageProps {
   onNavigate: (page: string) => void;
@@ -64,6 +65,42 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate }) =>
           underwriting tier directly impacts lifetime borrowing costs.
         </p>
       </div>
+
+      <TextMarquee
+        phrases={[
+          'Prime 9.25% APR',
+          'Near-Prime 13.5%',
+          'Subprime 21.0%',
+          'Principal + Interest',
+          'Zero Hidden Fees',
+          'Month-by-Month Amortization',
+        ]}
+      />
+
+      {/* Open explainer — full-width reading, no extra card */}
+      <section className="open-feature reveal-on-scroll">
+        <div className="open-feature-copy">
+          <span className="story-kicker">How the maths works</span>
+          <h2>Every rupee of your EMI, explained</h2>
+          <p>
+            A loan is two numbers moving in opposite directions. Each monthly instalment first pays the
+            interest owed on the balance still outstanding, and only the remainder reduces what you actually
+            borrowed. Early in the term interest dominates the payment; later, principal does.
+          </p>
+          <ul className="open-feature-list">
+            <li><b>Principal</b> — the amount you borrow. It never changes, but the share of each EMI that clears it grows every month.</li>
+            <li><b>Interest</b> — the price of borrowing, charged on the remaining balance. A higher APR compounds across the whole tenure.</li>
+            <li><b>Tenure</b> — stretching the term lowers the monthly EMI but raises total interest. This page lets you watch both move at once.</li>
+          </ul>
+        </div>
+        <figure className="open-feature-figure">
+          <img
+            src="/images/calc-growth.jpg"
+            alt="Calculator, amortization report and a rising chart on a desk"
+            loading="lazy"
+          />
+        </figure>
+      </section>
 
       <div className="calc-main-grid">
         {/* Left Inputs Card */}

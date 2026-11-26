@@ -315,6 +315,11 @@ export const App: React.FC = () => {
 
       {/* Clean Professional Footer */}
       <footer className="site-footer">
+        {/* Oversized animated company name in the footer background */}
+        <div className="footer-wordmark" aria-hidden="true">
+          <span className="footer-wordmark-text">FinRisk</span>
+        </div>
+
         <div className="footer-container">
           <div className="footer-top-row">
             <div className="footer-brand">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { AgentArchitectureFlow } from '../components/AgentArchitectureFlow';
+import { TextMarquee } from '../components/TextMarquee';
 import {
   ShieldCheck,
   Cpu,
@@ -19,6 +20,53 @@ import {
 } from 'lucide-react';
 
 export const AboutPage: React.FC = () => {
+  const story = [
+    {
+      index: '01',
+      kicker: 'Borrower Sovereignty',
+      title: 'Eliminating the "Black Box" Rejection',
+      body:
+        'Traditional banking algorithms reject applicants without actionable explanation, triggering anxiety and confusion. We translate machine learning SHAP attribution vectors into transparent, statutory reason codes so borrowers know exactly where they stand.',
+      note: 'Mandatory top-4 reason code breakdown under Federal Regulation B.',
+      img: '/images/about-mission.jpg',
+      alt: 'A credit team reviewing financial charts together',
+      caption: 'Every decision is explained, not just issued',
+    },
+    {
+      index: '02',
+      kicker: 'Basel III & IV Solvency',
+      title: 'Actuarial Precision, Not Arbitrary Markups',
+      body:
+        'Rather than inflated lender profit margins, every interest rate is mathematically calibrated against 1-Year Default Probability (PD) and Basel Expected Loss formulas, ensuring fair and risk-aligned borrowing costs.',
+      note: 'Formula: Expected Loss = PD × Exposure at Default × Loss Given Default.',
+      img: '/images/about-data.jpg',
+      alt: 'Dark data wall of risk charts and node graphs',
+      caption: 'Calibrated risk, measured in the open',
+    },
+    {
+      index: '03',
+      kicker: 'Equal Credit Opportunity',
+      title: 'Proactive Algorithmic Non-Discrimination',
+      body:
+        'AI credit systems can inadvertently amplify societal disparities. Our compliance layer actively executes the Four-Fifths Adverse Impact Ratio test to prove non-bias before any credit offer is finalized.',
+      note: 'Adverse Impact Ratio maintained above 0.80 benchmark threshold.',
+      img: '/images/law-library.jpg',
+      alt: 'Scales of justice in a law library',
+      caption: 'Fairness tested, not assumed',
+    },
+    {
+      index: '04',
+      kicker: 'Empowerment Blueprint',
+      title: 'Counterfactual Improvement Roadmaps',
+      body:
+        'When a loan is conditionally approved or rejected, our system calculates the shortest financial path to prime qualification—showing the exact debt balance to pay down or tenure adjustment needed.',
+      note: 'Actionable steps to lower APR by up to 1.50% and unlock higher limits.',
+      img: '/images/borrower-mobile.jpg',
+      alt: 'A borrower reviewing an offer on a phone',
+      caption: 'A path forward after every verdict',
+    },
+  ];
+
   const deepDives = [
     {
       category: 'GOVERNANCE & AUDITABILITY',
@@ -80,116 +128,86 @@ export const AboutPage: React.FC = () => {
         </p>
       </div>
 
-      {/* High-Impact Stat Highlights with Scroll Transition */}
+      <TextMarquee
+        phrases={[
+          'Transparent Credit',
+          'Five Agent Layers',
+          'Basel III / IV',
+          '12 CFR § 1002.9',
+          'Auditable By Design',
+          'Built For Borrowers',
+        ]}
+      />
+
+      {/* Open stat band — no tiles */}
       <div className="about-stats-grid reveal-on-scroll">
-        <div className="about-stat-card reveal-on-scroll stagger-1">
+        <div className="about-stat-card">
           <span className="stat-num text-emerald-400">0 Score Impact</span>
           <span className="stat-label">100% Soft Inquiry Simulation</span>
           <p className="stat-desc">Zero credit bureau inquiries — test your true credit terms without penalty.</p>
         </div>
 
-        <div className="about-stat-card reveal-on-scroll stagger-2">
+        <div className="about-stat-card">
           <span className="stat-num text-sky">12 CFR § 1002.9</span>
           <span className="stat-label">Mandatory Adverse Action Rules</span>
           <p className="stat-desc">Full legal disclosure of the top financial factors behind every decision.</p>
         </div>
 
-        <div className="about-stat-card reveal-on-scroll stagger-3">
+        <div className="about-stat-card">
           <span className="stat-num text-amber">80% Four-Fifths</span>
           <span className="stat-label">Fair Lending Non-Bias Standard</span>
           <p className="stat-desc">Continuous disparate impact testing to eliminate algorithmic discrimination.</p>
         </div>
 
-        <div className="about-stat-card reveal-on-scroll stagger-4">
+        <div className="about-stat-card">
           <span className="stat-num text-sky-400">5 Autonomous Layers</span>
           <span className="stat-label">Multi-Stage Agent Pipeline</span>
           <p className="stat-desc">Deterministic separation of duties across specialized financial AI agents.</p>
         </div>
       </div>
 
-      {/* Elegant Breathing Spacer Between Header/Stats and Core Mission */}
-      <div className="about-section-spacer" />
-
-      {/* Core Mission Bento Grid with Scroll Transition */}
-      <div className="about-bento-section reveal-on-scroll">
+      {/* Core mission written across the page, alternating with imagery */}
+      <section className="about-story reveal-on-scroll">
         <div className="section-title-wrap reveal-on-scroll">
           <h2>Core Mission: Transparent & Equitable Credit</h2>
           <p>Overcoming the legacy banking flaws that leave everyday borrowers disempowered.</p>
         </div>
 
-        <div className="about-bento-grid">
-          {/* Card 1: Rejection Transparency */}
-          <div className="bento-card bento-sky reveal-on-scroll stagger-1">
-            <div className="bento-top">
-              <span className="bento-badge">Borrower Sovereignty</span>
+        {story.map((row, idx) => (
+          <article key={row.index} className={`story-row ${idx % 2 === 1 ? 'reverse' : ''}`}>
+            <div className="story-copy">
+              <span className="story-index">{row.index}</span>
+              <span className="story-kicker">{row.kicker}</span>
+              <h3>{row.title}</h3>
+              <p>{row.body}</p>
+              <div className="story-note">
+                <CheckCircle2 size={15} className="text-sky" />
+                <span>{row.note}</span>
+              </div>
             </div>
-            <h3>Eliminating the "Black Box" Rejection</h3>
-            <p>
-              Traditional banking algorithms reject applicants without actionable explanation, triggering anxiety and confusion.
-              We translate machine learning SHAP attribution vectors into transparent, statutory reason codes so borrowers know exactly where they stand.
-            </p>
-            <div className="bento-footer-highlight">
-              <CheckCircle2 size={15} className="text-sky" />
-              <span>Mandatory top-4 reason code breakdown under Federal Regulation B.</span>
-            </div>
-          </div>
 
-          {/* Card 2: Actuarial Rigor */}
-          <div className="bento-card bento-emerald reveal-on-scroll stagger-2">
-            <div className="bento-top">
-              <span className="bento-badge">Basel III & IV Solvency</span>
-            </div>
-            <h3>Actuarial Precision, Not Arbitrary Markups</h3>
-            <p>
-              Rather than inflated lender profit margins, every interest rate is mathematically calibrated against
-              1-Year Default Probability (PD) and Basel Expected Loss formulas, ensuring fair and risk-aligned borrowing costs.
-            </p>
-            <div className="bento-footer-highlight">
-              <CheckCircle2 size={15} className="text-emerald-400" />
-              <span>Formula: Expected Loss = PD × Exposure at Default × Loss Given Default.</span>
-            </div>
-          </div>
-
-          {/* Card 3: Non-Bias */}
-          <div className="bento-card bento-rose reveal-on-scroll stagger-3">
-            <div className="bento-top">
-              <span className="bento-badge">Equal Credit Opportunity</span>
-            </div>
-            <h3>Proactive Algorithmic Non-Discrimination</h3>
-            <p>
-              AI credit systems can inadvertently amplify societal disparities. Our compliance layer actively executes
-              the Four-Fifths Adverse Impact Ratio test to prove non-bias before any credit offer is finalized.
-            </p>
-            <div className="bento-footer-highlight">
-              <CheckCircle2 size={15} className="text-rose" />
-              <span>Adverse Impact Ratio maintained above 0.80 benchmark threshold.</span>
-            </div>
-          </div>
-
-          {/* Card 4: Action Plan */}
-          <div className="bento-card bento-amber reveal-on-scroll stagger-4">
-            <div className="bento-top">
-              <span className="bento-badge">Empowerment Blueprint</span>
-            </div>
-            <h3>Counterfactual Improvement Roadmaps</h3>
-            <p>
-              When a loan is conditionally approved or rejected, our system calculates the shortest financial path
-              to prime qualification—showing the exact debt balance to pay down or tenure adjustment needed.
-            </p>
-            <div className="bento-footer-highlight">
-              <CheckCircle2 size={15} className="text-amber" />
-              <span>Actionable steps to lower APR by up to 1.50% and unlock higher limits.</span>
-            </div>
-          </div>
-        </div>
-      </div>
+            <figure className="story-figure">
+              <img src={row.img} alt={row.alt} loading="lazy" />
+              <figcaption>{row.caption}</figcaption>
+            </figure>
+          </article>
+        ))}
+      </section>
 
       {/* Autonomous Multi-Agent Architecture */}
       <section className="architecture-showcase-section my-10 reveal-on-scroll">
         <AgentArchitectureFlow />
       </section>
 
-      {/* Technical & Compliance Deep Dives: High-Hierarchy Modern Cards */}
+      <figure className="about-banner reveal-on-scroll">
+        <img
+          src="/images/compliance-desk.jpg"
+          alt="Regulatory documents, seal and magnifying glass on a desk"
+          loading="lazy"
+        />
+      </figure>
+
+      {/* Technical & Compliance Deep Dives: open editorial, no cards */}
       <div className="faq-section reveal-on-scroll">
         <div className="section-title-wrap">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
@@ -203,21 +221,17 @@ export const AboutPage: React.FC = () => {
         <div className="deep-dives-grid">
           {deepDives.map((item, idx) => (
             <div key={idx} className={`deep-dive-card reveal-on-scroll stagger-${(idx % 4) + 1}`}>
-              {/* Top Row: Category Tag */}
               <div className="deep-dive-top-bar">
                 <span className="deep-dive-category-chip">{item.category}</span>
               </div>
 
-              {/* Bold Question Header */}
               <h3 className="deep-dive-question">{item.q}</h3>
 
-              {/* Executive Takeaway Box */}
               <div className="deep-dive-takeaway-box">
                 <div className="takeaway-indicator" />
                 <p className="takeaway-text">{item.takeaway}</p>
               </div>
 
-              {/* Structured Point Breakdown */}
               <div className="deep-dive-points-list">
                 {item.points.map((pt, pIdx) => (
                   <div key={pIdx} className="deep-dive-point-item">

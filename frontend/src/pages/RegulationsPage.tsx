@@ -23,6 +23,7 @@ import {
   FileCheck,
 } from 'lucide-react';
 import { searchRAG, POPULAR_TOPICS_DATABASE, StructuredRAGHit } from '../services/api';
+import { TextMarquee } from '../components/TextMarquee';
 
 export const RegulationsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -149,6 +150,42 @@ export const RegulationsPage: React.FC = () => {
           mandatory adverse action disclosures, and Basel capital frameworks legally protect you against unfair or opaque lending practices.
         </p>
       </div>
+
+      <TextMarquee
+        phrases={[
+          'ECOA 1974',
+          'FCRA § 615',
+          'TILA APR Disclosure',
+          'Four-Fifths Rule',
+          'GLBA Privacy',
+          'Basel III / IV',
+        ]}
+      />
+
+      {/* Open editorial: the law as a borrower shield, with imagery */}
+      <section className="open-feature reveal-on-scroll">
+        <div className="open-feature-copy">
+          <span className="story-kicker">The legal shield</span>
+          <h2>Written rules, not lender discretion</h2>
+          <p>
+            Credit regulation exists because lending is asymmetric: the lender holds the model, the data and
+            the paperwork. Statutes rebalance that relationship by forcing disclosure, prohibiting
+            discrimination, and defining exactly what a lender owes you when it says no.
+          </p>
+          <ul className="open-feature-list">
+            <li><b>ECOA / Regulation B</b> — a written explanation of the principal reasons behind any adverse decision.</li>
+            <li><b>FCRA § 615</b> — the right to know which bureau supplied your file, and to dispute errors.</li>
+            <li><b>TILA</b> — the APR, finance charge and schedule stated plainly before you sign.</li>
+          </ul>
+        </div>
+        <figure className="open-feature-figure">
+          <img
+            src="/images/law-library.jpg"
+            alt="Brass scales of justice in a law library"
+            loading="lazy"
+          />
+        </figure>
+      </section>
 
       {/* Plain-English Explainer Written Directly on the Webpage (No Container Box) */}
       <div className="rights-matter-open-section reveal-on-scroll">
@@ -321,6 +358,31 @@ export const RegulationsPage: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Open editorial: what a signature actually commits you to */}
+      <section className="open-feature reverse reveal-on-scroll">
+        <div className="open-feature-copy">
+          <span className="story-kicker">Before you sign</span>
+          <h2>What the paperwork commits you to</h2>
+          <p>
+            A loan agreement is enforceable the moment you sign it, so the protections above matter most in
+            the minutes before. Read the APR rather than the headline rate, check the total interest across
+            the full tenure, and confirm the prepayment terms.
+          </p>
+          <ul className="open-feature-list">
+            <li><b>APR, not rate</b> — the annualised cost including fees. This is the number to compare between offers.</li>
+            <li><b>Total cost of credit</b> — principal plus interest over the full term, not just the monthly EMI.</li>
+            <li><b>Prepayment and penalties</b> — whether closing the loan early costs you anything.</li>
+          </ul>
+        </div>
+        <figure className="open-feature-figure">
+          <img
+            src="/images/law-signing.jpg"
+            alt="A hand signing a loan agreement with a fountain pen"
+            loading="lazy"
+          />
+        </figure>
+      </section>
 
       {/* Interactive Category Filter Bar */}
       <div className="pillar-filter-bar reveal-on-scroll">
