@@ -202,7 +202,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
         <div className="audit-metric-card">
           <div className="metric-header-row">
             <span className="metric-title">Mean Bureau Score</span>
-            <Sparkles size={16} className="text-purple-400" />
+            <Sparkles size={16} className="text-sky-400" />
           </div>
           <div className="metric-big-num text-sky">{avgScore}</div>
           <span className="metric-footer-text">Avg 1-Year PD: <b>{avgPD}%</b></span>
@@ -611,7 +611,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                   </div>
 
                   <div className="cert-agent-row">
-                    <Scale size={18} className="text-purple-400" />
+                    <Scale size={18} className="text-sky-400" />
                     <div className="c-ag-body">
                       <b>Layer 4: Fair Lending & Stress Agent</b>
                       <p>Four-Fifths Rule adverse impact ratio: 0.94 (&gt;0.80). Simulated CCAR macroeconomic shock passed.</p>

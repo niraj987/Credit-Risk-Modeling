@@ -48,8 +48,8 @@ export const FloatingCardsShowcase: React.FC = () => {
         <div className="space-card-wrapper card-layer-3 fall-from-sky-3">
           <div className="space-card-body skin-cosmic-violet">
             <div className="space-card-header">
-              <span className="space-bank-logo text-purple-200">FinRisk</span>
-              <Wifi size={18} className="text-purple-300 rotate-90" />
+              <span className="space-bank-logo text-sky-200">FinRisk</span>
+              <Wifi size={18} className="text-sky-300 rotate-90" />
             </div>
 
             {/* Brass EMV Chip */}
@@ -59,7 +59,7 @@ export const FloatingCardsShowcase: React.FC = () => {
             </div>
 
             {/* ZZZZ-XXXX-YYYY Number (Using X, Y, Z Variables) */}
-            <div className="space-card-number text-purple-200">
+            <div className="space-card-number text-sky-200">
               <span>ZZZZ</span>
               <span className="num-hyphen">-</span>
               <span>XXXX</span>
@@ -68,14 +68,14 @@ export const FloatingCardsShowcase: React.FC = () => {
             </div>
 
             {/* Expiration ZZ/XX & Written CVV: ZXY */}
-            <div className="space-card-footer text-purple-300/90">
+            <div className="space-card-footer text-sky-300/90">
               <div>
-                <span className="space-meta-label text-purple-400">EXPIRES</span>
+                <span className="space-meta-label text-sky-400">EXPIRES</span>
                 <span className="space-meta-val font-mono">ZZ/XX</span>
               </div>
               <div className="text-right">
-                <span className="space-meta-label text-purple-400">CVV</span>
-                <span className="space-cvv-pill bg-purple-900/60 border-purple-500/50 text-purple-200">
+                <span className="space-meta-label text-sky-400">CVV</span>
+                <span className="space-cvv-pill bg-slate-900/60 border-sky-500/50 text-sky-200">
                   ZXY
                 </span>
               </div>
@@ -170,7 +170,7 @@ export const FloatingCardsShowcase: React.FC = () => {
               </div>
               <div className="text-right">
                 <span className="space-meta-label text-zinc-400">SECURITY CODE</span>
-                <div className="space-cvv-pill bg-zinc-900/80 border-purple-500/40 text-amber-400 font-bold">
+                <div className="space-cvv-pill bg-zinc-900/80 border-sky-500/40 text-amber-400 font-bold">
                   <span className="text-[9px] text-zinc-400 mr-1">CVV</span>
                   <span>XYZ</span>
                 </div>

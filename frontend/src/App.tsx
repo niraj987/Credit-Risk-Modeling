@@ -37,7 +37,7 @@ import confetti from 'canvas-confetti';
 export const App: React.FC = () => {
   const [activePage, setActivePage] = useState<string>('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { scrollProgress } = useScrollProgress();
+  const { scrollProgress, scrollY } = useScrollProgress();
 
   const [applicant, setApplicant] = useState<ApplicantInput>({
     Age: 32,
@@ -156,7 +156,7 @@ export const App: React.FC = () => {
       <div className="scroll-progress-line" style={{ width: `${scrollProgress}%` }} />
 
       {/* Top Header Navigation Wrapper */}
-      <header className="header-outer-container">
+      <header className={`header-outer-container ${scrollY > 24 ? 'is-scrolled' : ''}`}>
         {/* Isolated FinRisk Brand on Left (Outside the Glass Box) */}
         <div className="header-isolated-brand">
           <div

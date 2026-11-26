@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ApplicantInput, UnderwritingResponse } from '../services/api';
 import { AgentTelemetry } from '../components/AgentTelemetry';
 import { ApplicantForm } from '../components/ApplicantForm';
+import { TextMarquee } from '../components/TextMarquee';
 import {
   FileText,
   Sparkles,
@@ -97,6 +98,41 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
         </p>
       </div>
 
+      <div className="elig-howto-strip">
+          <div className="elig-howto-item">
+            <span className="elig-howto-num">01</span>
+            <div className="elig-howto-copy">
+              <b>Describe your profile</b>
+              <span>Income, loan size, tenure and credit history — no bureau pull happens here.</span>
+            </div>
+          </div>
+          <div className="elig-howto-item">
+            <span className="elig-howto-num">02</span>
+            <div className="elig-howto-copy">
+              <b>Run the committee</b>
+              <span>Five agents score risk, cite regulations and stress-test the loan in about two seconds.</span>
+            </div>
+          </div>
+          <div className="elig-howto-item">
+            <span className="elig-howto-num">03</span>
+            <div className="elig-howto-copy">
+              <b>Read every reason</b>
+              <span>Each figure below is explained in plain English, with the statutory rule behind it.</span>
+            </div>
+          </div>
+      </div>
+
+      <TextMarquee
+        phrases={[
+          'Zero Bureau Impact',
+          'Five Working Layers',
+          '2.1 Second Decision',
+          '12 CFR § 1002.9',
+          'Four-Fifths Rule',
+          'Plain-English Reasons',
+        ]}
+      />
+
       <div className="eligibility-grid">
         {/* Left Column: Form + Borrower Empowerment & How It Works Guide */}
         <section className="form-col">
@@ -146,10 +182,22 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             </div>
           </div>
 
+          <div className="elig-step-head">
+            <span className="elig-step-num">01</span>
+            <div>
+              <span className="elig-step-kicker">Step 01 — Your inputs</span>
+              <span className="elig-step-title">Describe the loan you are considering</span>
+            </div>
+          </div>
+
           <div className="card-panel">
             <div className="card-header-bar">
               <h2>Applicant Profile & Sizing</h2>
             </div>
+            <p className="elig-panel-help">
+              Change any field and every number on the right recalculates instantly. Nothing is submitted,
+              reported to a bureau, or shared at this stage.
+            </p>
             <ApplicantForm
               input={applicant}
               onChange={setApplicant}
@@ -161,6 +209,14 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
 
         {/* Right Column: Executive Dashboard, Decision, and Telemetry */}
         <section className="dashboard-col">
+          <div className="elig-step-head">
+            <span className="elig-step-num">02</span>
+            <div>
+              <span className="elig-step-kicker">Step 02 — Your snapshot</span>
+              <span className="elig-step-title">Understand your risk at a glance</span>
+            </div>
+          </div>
+
           {/* Executive Credit Health & Risk Overview Dashboard (Replaces 3D Models) */}
           <div className="executive-risk-dashboard-card">
             <div className="exec-dash-header">
@@ -170,6 +226,12 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 </div>
               </div>
             </div>
+
+            <p className="elig-panel-help">
+              How to read this: the gauge is your one-year probability of default — lower is safer.
+              Green is prime, amber is near-prime and rose is subprime. The bars underneath show how
+              much of your monthly income existing debt already absorbs.
+            </p>
 
             <div className="exec-metrics-composite-grid">
               {/* Default Probability Gauge Panel */}
@@ -326,6 +388,14 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             </div>
           </div>
 
+          <div className="elig-step-head">
+            <span className="elig-step-num">03</span>
+            <div>
+              <span className="elig-step-kicker">Step 03 — The verdict</span>
+              <span className="elig-step-title">Read the committee's decision</span>
+            </div>
+          </div>
+
           <div className="dashboard-hero-grid">
             <div className="decision-hero-card">
               <div className="decision-header">
@@ -368,6 +438,14 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
             </div>
           </div>
 
+          <div className="elig-step-head">
+            <span className="elig-step-num">04</span>
+            <div>
+              <span className="elig-step-kicker">Step 04 — The working</span>
+              <span className="elig-step-title">See what each agent checked</span>
+            </div>
+          </div>
+
           {/* Agent Telemetry Cards */}
           <div className="telemetry-wrapper">
             <div className="telemetry-title-bar">
@@ -375,6 +453,10 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 <h3>Autonomous Working Layers</h3>
               </div>
             </div>
+            <p className="elig-panel-help">
+              Each card below is one working layer. PASSED, COMPLIANT or RESILIENT means that check
+              cleared; the note underneath says exactly what the agent looked at.
+            </p>
             <AgentTelemetry
               logs={results?.agent_logs || []}
               kyc={results?.fraud_kyc_findings}
@@ -383,6 +465,14 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
               fairness={results?.compliance_bias_audit}
               committee={results?.credit_committee_synthesis}
             />
+          </div>
+
+          <div className="elig-step-head">
+            <span className="elig-step-num">05</span>
+            <div>
+              <span className="elig-step-kicker">Step 05 — The evidence</span>
+              <span className="elig-step-title">Explore the proof and your next steps</span>
+            </div>
           </div>
 
           {/* Deep-Dive Analysis Tabs: Glass Effect & Decorative Cards */}
@@ -437,6 +527,11 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
                 </div>
               </button>
             </div>
+
+            <p className="elig-panel-help">
+              Switch between explainability, stress tests, your action plan and the raw audit log.
+              Every tab uses your own numbers — nothing here is a generic sample.
+            </p>
 
             {/* Tab Pane 1: SHAP Explainability & Risk Drivers */}
             <div className="tab-content-area">
@@ -723,6 +818,8 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({
           </div>
         </section>
       </div>
+
+      <hr className="elig-divider" />
 
       {/* Full-Width Horizontal Section: How Our Underwriting Committee Works */}
       <section className="committee-horizontal-section reveal-on-scroll">

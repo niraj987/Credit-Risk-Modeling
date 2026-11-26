@@ -59,7 +59,7 @@ export const AboutPage: React.FC = () => {
     {
       category: 'ENTERPRISE ARCHITECTURE',
       stat: 'Sub-2s Real-Time',
-      statColor: 'text-purple-400',
+      statColor: 'text-sky-400',
       q: 'What architecture and technologies power this platform end-to-end?',
       takeaway: 'High-throughput modern reactive stack engineered for sub-second risk intelligence and high client privacy.',
       points: [
@@ -101,7 +101,7 @@ export const AboutPage: React.FC = () => {
         </div>
 
         <div className="about-stat-card reveal-on-scroll stagger-4">
-          <span className="stat-num text-purple-400">5 Autonomous Layers</span>
+          <span className="stat-num text-sky-400">5 Autonomous Layers</span>
           <span className="stat-label">Multi-Stage Agent Pipeline</span>
           <p className="stat-desc">Deterministic separation of duties across specialized financial AI agents.</p>
         </div>

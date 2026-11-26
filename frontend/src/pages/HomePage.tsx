@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { AgentArchitectureFlow } from '../components/AgentArchitectureFlow';
 import { FloatingCardsShowcase } from '../components/FloatingCardsShowcase';
+import { TextMarquee } from '../components/TextMarquee';
+import { EngineFilm } from '../components/EngineFilm';
 import {
   ArrowRight,
   ShieldCheck,
@@ -191,6 +193,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      {/* Big-type rail scrolling left: the promises behind the engine */}
+      <TextMarquee
+        phrases={[
+          '100% Soft Inquiry',
+          'Zero Bureau Impact',
+          'Five Autonomous Layers',
+          '12 CFR § 1002.9',
+          'Four-Fifths Fair Lending',
+          'SHAP Explainability',
+          '2.1 Second Decisions',
+        ]}
+      />
+
       {/* Authority Stats Strip (Box-Free Open Canvas Layout) */}
       <section className="authority-stats-open-section reveal-on-scroll">
         <div className="authority-stats-open-grid">
@@ -201,7 +216,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="open-stat-column">
-            <span className="open-stat-num text-purple-400">&lt; 2.1 Sec</span>
+            <span className="open-stat-num text-sky-400">&lt; 2.1 Sec</span>
             <span className="open-stat-title">Decision Latency</span>
             <span className="open-stat-desc">Real-time asynchronous multi-agent orchestration</span>
           </div>
@@ -229,7 +244,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <div className="home-section-spacer" />
 
       {/* Comparison: Traditional Bank vs. Our Modern Autonomous Committee */}
-      <section className="comparison-section">
+      <section className="comparison-section reveal-on-scroll">
         <div className="section-title-wrap">
           <div className="section-badge-sky">The Difference</div>
           <h2>Why Borrowers Trust Our Platform</h2>
@@ -239,7 +254,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </p>
         </div>
 
-        <div className="comparison-cards-grid">
+        <div className="comparison-cards-grid stagger-group">
           {/* Traditional Bank Card */}
           <div className="comparison-card traditional-bank-card">
             <div className="comp-card-header">
@@ -318,8 +333,88 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* Elegant Vertical Section Spacer */}
       <div className="home-section-spacer" />
 
+      {/* Inside the engine: silent loop film + image bento */}
+      <section className="media-showcase-section reveal-on-scroll">
+        <div className="section-title-wrap">
+          <div className="section-badge-sky">Inside The Engine</div>
+          <h2>See How Your Decision Is Built</h2>
+          <p>
+            A two-second process made visible. Five working layers, each producing its own evidence,
+            captured in the film below and in the snapshots that follow.
+          </p>
+        </div>
+
+        <EngineFilm />
+
+        <div className="media-grid">
+          <article className="media-image-card">
+            <img
+              className="media-image"
+              src="/images/risk-dashboard.jpg"
+              alt="Credit risk dashboard with a probability-of-default gauge"
+              loading="lazy"
+            />
+            <div className="media-image-body">
+              <span className="media-image-kicker">Layer 02 · Quantitative Risk</span>
+              <h3 className="media-image-title">Risk expressed as plain numbers</h3>
+              <p className="media-image-text">
+                Calibrated probability of default, rating grade and Basel expected loss — the same
+                figures the committee votes on.
+              </p>
+            </div>
+          </article>
+
+          <article className="media-image-card">
+            <img
+              className="media-image"
+              src="/images/compliance-desk.jpg"
+              alt="Legal documents and a magnifying glass on a dark desk"
+              loading="lazy"
+            />
+            <div className="media-image-body">
+              <span className="media-image-kicker">Layer 03 · Statutory Policy</span>
+              <h3 className="media-image-title">Every decision cites the rule</h3>
+              <p className="media-image-text">
+                Adverse reasons are mapped to ECOA Regulation B, so each outcome carries a citation
+                you can verify rather than a black-box score.
+              </p>
+            </div>
+          </article>
+
+          <article className="media-image-card">
+            <img
+              className="media-image"
+              src="/images/borrower-mobile.jpg"
+              alt="A borrower holding a phone with an approval card on screen"
+              loading="lazy"
+            />
+            <div className="media-image-body">
+              <span className="media-image-kicker">For You · The Borrower</span>
+              <h3 className="media-image-title">An answer you can act on</h3>
+              <p className="media-image-text">
+                A verdict, a rate range and a ranked action plan — without a hard inquiry touching
+                your credit score.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* Big-type rail scrolling right: guarantees in reverse motion */}
+      <TextMarquee
+        reverse
+        phrases={[
+          'Transparent By Design',
+          'No Hidden Markups',
+          'Basel III / IV Aligned',
+          'Explainable AI',
+          'Actionable Roadmap',
+          'Auditable Trail',
+        ]}
+      />
+
       {/* Interactive FAQ Section */}
-      <section className="faq-section">
+      <section className="faq-section reveal-on-scroll">
         <div className="section-title-wrap">
           <div className="section-badge-coffee">Frequently Asked Questions</div>
           <h2>Everything You Need to Know</h2>
@@ -356,7 +451,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* Bottom Conversion Banner */}
-      <section className="bottom-cta-banner">
+      <section className="bottom-cta-banner reveal-on-scroll">
         <div className="bottom-cta-inner">
           <div className="bottom-cta-copy">
             <span className="bottom-open-tag">Zero Risk • Instant Answers</span>

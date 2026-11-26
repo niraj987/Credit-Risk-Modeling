@@ -435,11 +435,11 @@ export const RegulationsPage: React.FC = () => {
               {/* Card 2: Statutory Protection & Creditor Duty */}
               <div className="structured-detail-card card-creditor-duty">
                 <div className="structured-card-header">
-                  <div className="card-header-icon-wrap bg-purple-tint">
-                    <Scale size={18} className="text-purple-400" />
+                  <div className="card-header-icon-wrap bg-sky-tint">
+                    <Scale size={18} className="text-sky-400" />
                   </div>
                   <div>
-                    <span className="card-badge-label text-purple-400">Statutory Compliance Mandate</span>
+                    <span className="card-badge-label text-sky-400">Statutory Compliance Mandate</span>
                     <h4>Statutory Protection & Creditor Duty</h4>
                   </div>
                 </div>

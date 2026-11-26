@@ -66,7 +66,7 @@ export const AgentTelemetry: React.FC<AgentTelemetryProps> = ({
       num: 3,
       name: 'Regulatory RAG Agent',
       sub: 'Statutory Legal Search',
-      icon: <BookOpen size={20} className="text-purple-400" />,
+      icon: <BookOpen size={20} className="text-sky-400" />,
       colorClass: 'telemetry-purple',
       status: rag?.compliance_cleared !== false ? 'COMPLIANT' : 'REVIEW',
       metric: `${rag?.citations?.length || 3} Citations`,
